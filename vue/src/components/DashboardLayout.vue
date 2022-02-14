@@ -68,6 +68,12 @@
     </DisclosurePanel>
   </Disclosure>
 
+  <!-- sidenavlayout -->
+  <div class="absolute">
+    <SideNavLayout/>
+  </div>
+
+  <!-- children view from /router/index.js -->
   <router-view></router-view>
 </template>
 
@@ -75,6 +81,7 @@
 
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
+import SideNavLayout from "./SideNavLayout.vue";
 
 const user = {
   name: 'Alflorence Abuan',
@@ -93,8 +100,10 @@ const navigation = [
 ]
 
 export default {
-  name: "Dashboard",
+  extends: SideNavLayout,
+  name: "DashboardLayout",
   components: {
+    SideNavLayout,
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
