@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="mx-auto py-6 sm:px-6 lg:px-8">
-      <h1>Register Voter</h1>
+      <h1>Update Master List</h1>
     </div>
 
     <div class="px-4 py-6 sm:px-0">
