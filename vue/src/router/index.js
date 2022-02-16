@@ -10,10 +10,16 @@ import Colleges from '../views/webm/Colleges.vue';
 import UpdtMasterList from '../views/webm/UpdtMasterList.vue';
 import VoterView from '../views/voter/VoterView.vue';
 import DashboardLayout from '../components/DashboardLayout.vue';
+import NotFound from '../views/NotFound.vue';
 import store from '../store';
 
 
 const routes = [
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
+  },
   {
     path: '/campaign',
     name: 'Campaign',
@@ -29,7 +35,7 @@ const routes = [
     redirect: '/webm/dashboard',
     component: DashboardLayout,
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     },
     children: [{
         path: '/webm/dashboard',

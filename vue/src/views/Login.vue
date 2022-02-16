@@ -16,7 +16,7 @@
         </div>
         <button class="text-center text-white w-1/3 bg-blue-700 rounded-full h-10 hover:drop-shadow-lg focus:outline-none appearance-none">Login</button>
         <div class="">
-          <p>Checking Elections? <a href="#!" class="font-medium text-black hover:text-blue-500">Click here</a> to go on Campaign Page</p>
+          <p>Checking Elections? <router-link :to="{name: 'Campaign'}" class="font-medium text-black hover:text-blue-500">Click here</router-link> to go on Campaign Page</p>
         </div>
       </form>
     </div>
