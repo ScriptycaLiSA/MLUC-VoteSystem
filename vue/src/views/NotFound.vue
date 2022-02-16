@@ -8,7 +8,7 @@
         This page does not exist
       </div>
       <div class="text-gray-400 font-medium text-sm md:text-xl lg:text-2xl mt-8">
-        The page you are looking for could not be found.
+        The page you are looking for could not be found. Redirect to <router-link :to="{name: 'Login'}">Login</router-link>
       </div>
     </div>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "404NotFound"
+  name: "NotFound"
 }
 </script>
 
