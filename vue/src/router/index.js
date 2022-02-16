@@ -4,6 +4,7 @@ import Login from '../views/Login.vue';
 import Dashboard from '../views/webm/Dashboard.vue';
 import Votes from '../views/webm/Votes.vue';
 import VoterView from '../views/voter/VoterView.vue';
+import Algago from '../views/Almanyak.vue';
 import DefaultLayout from '../components/DefaultLayout.vue';
 import store from '../store';
 
@@ -24,7 +25,7 @@ const routes = [
     redirect: '/webm/dashboard',
     component: DefaultLayout,
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     },
     children: [{
         path: '/webm/dashboard',
@@ -41,6 +42,11 @@ const routes = [
     path: '/voter/voter_view',
     name: 'VoterView',
     component: VoterView
+  },
+  {
+    path: '/aldelapota',
+    name: 'AlManyak',
+    component: Algago
   }
 ];
 

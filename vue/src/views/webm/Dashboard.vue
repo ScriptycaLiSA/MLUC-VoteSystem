@@ -58,7 +58,7 @@
           <nav class="mt-6">
             <a class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100" href="">
               <img class="h-6 w-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABmJLR0QA/wD/AP+gvaeTAAADlElEQVRoge3bTYxlQxTA8V8bo5HMDCOI7vExZswGEdGCYZiFbx2xwCST2A5LFlY2EmlsbIjExkZCQkRiQYiPidC+LYiFZAzx2UMi0cMk3aK1RdWT56q63ffm9nt92/0nN/X6Vp165/S9deqcOt2UcwXewxwWV/k1F3W9bgmbstyMhVVgSNVrAZNVjV2PmTjBA9hYdYIhsBFTgs4/CDYsm4ui4AGMNK7ayjGCLwXdL0wNOCojuCG230fhtrCI7+LnTakBOYPXLHUMPgn3YHNirjtxfkJmEjfV+K7GObqGzD48iFE83Hf/EjyBV3F9Qeb52B6bmXNdlD0r0/817sJf2ILH8QYerah7LYNHY1tUfrTQpvpybMAdJePmcC9mcZ6wZZ5sQAZ/hMP4sHD/AA5hOiHzjnLn9yvOxdZM/1eCsfAKJoSn3hi7BQX3NznpgNgv6L471ZlzWl8Iv9U3V0ipoZF7pQ9h2yAVaZCeH/hzqFoMiDNxRPDmp6UGLOW0RnAtLhA8aaX4dMAch9txPF4QcoFKnCh4xGFnP1Wvt/w3KPqHsif8mJBbzuA5YS9czcziY7yuRvw/LqyD33FGs3oNl9y2dLawfj/Ft4NTZ+XJGbwutn8MSpEG2YX7VXSwbY60XhN0vzzVWSeWnsTT2IuX+u6P4xM8ifsKMtOCT9hVMu925dnSwb6fe7H0L4mxPZuST7iOwRPC+dHF/m3wOTgVOxMyqXv9nIDP5bOl+Tj3LG7Ay3gfly1b60gdg+djW9ym5gttsa9sq/gNT8lnSwfjGPgMLwrbT2OUreHNuFv6xGOfkOYVuVF4MoOgNFvK0WanVSs9XLPkDD4c2y3ady59evw8WzawyHr8JLwaU9pRedgkHC4uCvF/ZYe8R0iih5391Kkt3ZozqmwNP4sr8a70VrOaadMyrE1/MW3G6j6saIzaxbS2UruYNoZvhDRrTZEzeIdw0nFVoq8rpkW6YlqiL0dXTCvQFdNK6LKlfnIG9wpRxwxKkQapVUwbEzziEe06iK9dTPtRODe6BR/gGfy8Ago2ySnCSWrtYto27UwPaxfTHhECgq6Y1mZyXnqr/1kxrfeqt7GYVspaDDweEg4gx1KddQyeFBxEMd0bF2LpqYTMNN5eYt7tuDpzFf+iaEJIU1NcKmxRO1KdXTFtGXTFtEhXTBsSXXrYT1dMi3TFtBZdC7itqrE9dgpBQ1v+FW8a15QZ9DejWB72kNvQTQAAAABJRU5ErkJggg=="/>
-              <span class="mx-3">Update Master List</span>
+              <span class="mx-1">Update Master List</span>
             </a>
           </nav>
         </div>
@@ -76,6 +76,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
