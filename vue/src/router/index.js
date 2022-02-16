@@ -3,9 +3,13 @@ import Campaign from '../views/Campaign.vue';
 import Login from '../views/Login.vue';
 import Dashboard from '../views/webm/Dashboard.vue';
 import Votes from '../views/webm/Votes.vue';
+import RegVoter from '../views/webm/RegVoter.vue';
+import CreateElec from '../views/webm/CreateElec.vue';
+import Candidates from '../views/webm/Candidates.vue';
+import Colleges from '../views/webm/Colleges.vue';
+import UpdtMasterList from '../views/webm/UpdtMasterList.vue';
 import VoterView from '../views/voter/VoterView.vue';
-import Algago from '../views/Almanyak.vue';
-import DefaultLayout from '../components/DefaultLayout.vue';
+import DashboardLayout from '../components/DashboardLayout.vue';
 import store from '../store';
 
 
@@ -23,9 +27,9 @@ const routes = [
   {
     path: '/',
     redirect: '/webm/dashboard',
-    component: DefaultLayout,
+    component: DashboardLayout,
     meta: {
-      requiresAuth: false
+      requiresAuth: true
     },
     children: [{
         path: '/webm/dashboard',
@@ -36,17 +40,38 @@ const routes = [
         path: '/webm/votes',
         name: 'Votes',
         component: Votes
+      },
+      {
+        path: '/webm/regvoter',
+        name: 'RegVoter',
+        component: RegVoter
+      },
+      {
+        path: '/webm/crt_elec',
+        name: 'CreateElec',
+        component: CreateElec
+      },
+
+      {
+        path: '/webm/candidates',
+        name: 'Candidates',
+        component: Candidates
+      },
+      {
+        path: '/webm/colleges',
+        name: 'Colleges',
+        component: Colleges
+      },
+      {
+        path: '/webm/mstr_updt',
+        name: 'UpdtMasterList',
+        component: UpdtMasterList
       }]
   },
   {
     path: '/voter/voter_view',
     name: 'VoterView',
     component: VoterView
-  },
-  {
-    path: '/aldelapota',
-    name: 'AlManyak',
-    component: Algago
   }
 ];
 
