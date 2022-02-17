@@ -1,6 +1,12 @@
 <template>
+  <div class="relative flex flex-left m-3">
+    <router-link class="hover:bg-gray-400" :to="{name: 'Login'}">
+      <ArrowCircleLeftIcon class="h-6 w-6"/>
+      <p class="text-black"> BACK TO LOGIN</p>
+   </router-link>
+  </div>
   <div class="max-w-screen-xl px-4 mx-auto md:px-8">
-  <div class="mb-10 md:mb-16">
+  <div class="mb-10 md:mb-16 bg-amber-200">
     <h2
       class="
         mb-4
@@ -9,15 +15,13 @@
         text-center text-gray-800
         lg:text-3xl
         md:mb-6
-      "
-    >
-      Our Team Section
+        bg-gray-200
+      ">
+      %college_name | %position_title
     </h2>
 
     <p class="max-w-screen-md mx-auto text-center text-gray-500 md:text-lg">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis
-      perspiciatis omnis aspernatur impedit vel, consectetur laudantium nulla et
-      aliqua
+      These candidates is running for %position_title in the %college_name
     </p>
   </div>
 
@@ -32,9 +36,9 @@
       </div>
 
       <div class="flex flex-col items-center justify-center">
-        <div class="font-bold text-indigo-500 md:text-lg">John Doe</div>
+        <div class="font-bold text-indigo-500 md:text-lg">%candidate_name</div>
         <p class="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
-          Founder / CEO
+          %introduction
         </p>
 
         <div class="flex">
@@ -86,9 +90,9 @@
       </div>
 
       <div class="flex flex-col items-center justify-center">
-        <div class="font-bold text-indigo-500 md:text-lg">John Doe</div>
+        <div class="font-bold text-indigo-500 md:text-lg">%candidate_name</div>
         <p class="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
-          Web Developer
+          %introduction
         </p>
 
         <div class="flex">
@@ -140,9 +144,9 @@
       </div>
 
       <div class="flex flex-col items-center justify-center">
-        <div class="font-bold text-indigo-500 md:text-lg">Scarlet</div>
+        <div class="font-bold text-indigo-500 md:text-lg">%candidate_name</div>
         <p class="mb-3 text-sm text-gray-500 md:text-base md:mb-4">
-          Devops Engineer
+          %introduction
         </p>
 
         <div class="flex">
@@ -189,9 +193,14 @@
 </template>
 
 <script>
-  export default {
-    name: "Campaign"
+import {ArrowCircleLeftIcon} from '@heroicons/vue/outline'
+
+export default {
+  name : 'Campaign',
+  components: {
+    ArrowCircleLeftIcon
   }
+}
 </script>
 
 <style scoped>
