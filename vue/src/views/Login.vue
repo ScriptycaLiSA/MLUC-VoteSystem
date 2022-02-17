@@ -1,8 +1,9 @@
-<template><div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<template>
+  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
     <div>
       <img src="https://www.dmmmsu.edu.ph/wp-content/uploads/2019/06/DMMMSU-Logo-Final.png" alt="dmmmsu_logo" class="mx-auto h-40 w-auto">
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">IMLUC VOTANTE</h2>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">DMMMSU Voting Portal</h2>
       <p class="mt-2 text-center text-sm text-gray-600">
         {{ ' ' }}
 
