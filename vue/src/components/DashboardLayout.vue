@@ -85,11 +85,8 @@
       </div>
     </DisclosurePanel>
   </Disclosure>
-
   <!-- sidenavlayout -->
   <SideNavLayout/>
-
-
 </template>
 
 <script>
