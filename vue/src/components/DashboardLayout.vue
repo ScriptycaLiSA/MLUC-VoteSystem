@@ -87,12 +87,9 @@
   </Disclosure>
 
   <!-- sidenavlayout -->
-  <div class="absolute">
-    <SideNavLayout/>
-  </div>
+  <SideNavLayout/>
 
-  <!-- children view from /router/index.js -->
-  <router-view></router-view>
+
 </template>
 
 <script>

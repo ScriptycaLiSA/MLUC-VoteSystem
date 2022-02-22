@@ -10,6 +10,7 @@ import Colleges from '../views/webm/Colleges.vue';
 import UpdtMasterList from '../views/webm/UpdtMasterList.vue';
 import VoterView from '../views/voter/VoterView.vue';
 import DashboardLayout from '../components/DashboardLayout.vue';
+import SideNavLayout from '../components/SideNavLayout.vue';
 import NotFound from '../views/NotFound.vue';
 import store from '../store';
 

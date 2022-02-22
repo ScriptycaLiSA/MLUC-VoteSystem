@@ -1,8 +1,7 @@
 <template>
-  <div class="flex h-screen bg-slate-200">
+  <div class="relative flex min-h-screen">
     <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
          class="fixed z-20 inset-0 bg-slate-200 opacity-50 transition-opacity lg:hidden"></div>
-
     <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
          class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-teal-500 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
 
@@ -79,7 +78,10 @@
         </nav>
       </div>
     </div>
+    <!-- children view from /router/index.js -->
+    <router-view></router-view>
   </div>
+
 </template>
 <script>
 export default {
