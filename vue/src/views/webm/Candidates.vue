@@ -1,9 +1,9 @@
 <template>
-  <main>
-    <div class="flex py-2 ">
-      <h1 class="dont-mono font-semi-bold text-4xl font-normal leading-normal mt-0 mb-2 text-blueGray-800">Create Candidate</h1>
-    </div>
-    <div class="flex-1 px-24">
+  <main class="bg-slate-100 shadow-xl px-3 min-w-full min-h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+    <div class="bg-slate-100 shadow-xl px-24">
+      <div class="py-5 ">
+        <h1 class="font-bold text-5xl py-3">Manage Candidates</h1>
+      </div>
       <form class="w-full max-w-lg">
         <div class="flex-wrap -mx-2 mb-2">
           <div class="max-w-2xl">
@@ -91,12 +91,99 @@
       </form>
 
     </div>
+
+    <div class="flex flex-col">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Candidates</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">College</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th scope="col" class="relative px-6 py-3">
+                  <span class="sr-only">Edit</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+              <tr v-for="person in people" :key="person.email">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10">
+                      <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
+                    </div>
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-gray-900">
+                        {{ person.name }}
+                      </div>
+                      <div class="text-sm text-gray-500">
+                        {{ person.email }}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ person.id }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ person.college }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
+
+const people = [
+  {
+    name: 'Jubert Abuan',
+    id: '181-0123-2',
+    college: 'CIT',
+    email: 'jubert.abuan@student.dmmmsu.edu.ph',
+    image:
+      'https://scontent.fmnl9-2.fna.fbcdn.net/v/t1.18169-9/206771_142586969142664_1755789_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=de6eea&_nc_eui2=AeE4t0f3pJGXTHjpjG5ph9WJ9bTIc426EvX1tMhzjboS9QryPq_Bvl241_LPZRorLyIVhRpGo5-Vv96QPSTwdT1Y&_nc_ohc=hT1elvw1bbAAX_Nh5L8&tn=24hTZAezjJbmaeFx&_nc_ht=scontent.fmnl9-2.fna&oh=00_AT8quvuXpBw0gwA529sm-rvQjJ2_VIJib65nnJLWSpmo1A&oe=623D518B',
+  },
+  {
+    name: 'Jake Montizon',
+    id: '181-0545-2',
+    college: 'CIT',
+    email: 'jake.montizon@student.dmmmsu.edu.ph',
+    image:
+      'https://scontent.fmnl9-2.fna.fbcdn.net/v/t39.30808-6/274278290_2483554035109514_6700288167609283079_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeH0C9mB26lnWmqHqbgAz4tROflywO_CrMw5-XLA78KszBxubFNFxi5nGQKV4xjU3RtYaT7-dpAoCC4jAIWoldSE&_nc_ohc=_gKXigApTUcAX-UnhbJ&_nc_ht=scontent.fmnl9-2.fna&oh=00_AT8pk1c8U6oFg2QUi9Dr7HkHEmO3Ig84y8-kuWF6T0BqyA&oe=621B5936',
+  },
+  {
+    name: 'Alflorence Abuan',
+    id: '181-0124-2',
+    college: 'CIT',
+    email: 'almanyak@student.dmmmsu.edu.ph',
+    image:
+      'https://scontent.fmnl25-1.fna.fbcdn.net/v/t1.6435-9/188390088_4237818132949817_1445088910336767925_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGientYW3iMPbGyVXOu6cm25yq15sX8_9znKrXmxfz_3KvGnCj5OjJ5vQwhYkHqi0qBnDDRpxETMZqQ8IreMMWf&_nc_ohc=0GAfVenj7PUAX-0t7Ce&_nc_ht=scontent.fmnl25-1.fna&oh=00_AT8X524AreIoB6XoGaoYreJJXZQBr6OUYUHKk-Gf9D7CSg&oe=623CA0AB',
+  },
+  // More people...
+]
+
 export default {
-  name: "Candidates"
+  name: "Candidates",
+  setup(){
+    return{
+      people
+    }
+  }
 }
 </script>
 

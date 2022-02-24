@@ -4,7 +4,7 @@
       <p>DASHBOARD</p>
     </div>
 
-    <div class="bg-white-900 shadow-xl px-4 min-w-screen">
+    <div class="bg-slate-100 shadow-xl px-3 min-h-screen">
       content here
     </div>
   </main>
