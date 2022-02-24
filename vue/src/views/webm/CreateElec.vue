@@ -1,13 +1,11 @@
 <template>
-  <main>
-    <div class="">
-      <h1>Create Elections</h1>
+  <main class="bg-slate-100 shadow-xl px-3 min-h-screen">
+    <div class="font-bold text-5xl py-3">
+      <p>CREATE ELECTIONS</p>
     </div>
 
-    <div class="bg-slate-200 shadow px-4 py-6 min-h-screen">
-      <div>
-        Content goes here
-      </div>
+    <div class="bg-white-900 shadow-xl px-4 min-w-screen">
+      content here
     </div>
   </main>
 </template>
