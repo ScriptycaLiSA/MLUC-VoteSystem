@@ -42,7 +42,7 @@
                        class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100">
             <img class="h-6 w-6"
                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAABmUlEQVRYhe2WzUrDQBSFv7pQxAoKWh9Bt6LoslbElWhbFV9DRSnqSrvyZ6ErfQp/36O6VWrxASpolUK1bVzMDYFI4ySZLIQcuARmzj3nJnPvEIgR4x8iBRSBe+BTogQcAMNRm68ANcDqEO9APkrzthhdAWmgT2IGuJa9FpAzbZ7CefNtD15BOG/AkMkCijhv/hduhbtvsoAHEU1rcDPCLZks4ENEkxrcfuHWdIS7NAtoavIAEn5ydAuoyHNSg2tznk0WcCnPdQ3uhivHCEaAV9TZFjx4O8KpokbXKHKoc7VQo5ZBNWUSmAXuZK8JZE2b21hG3XSdruKWcCLBIlD2MLejDCyYNE4Axy6TF2AU6JUYkzV7vw0c4oxkKJyI6Dewi9OMp6jmHAHOcJpvT7gWcBTWPCtCX8CcrOWBBr8/fQOn+eYlxwKWgpr34HzWTdfeNGoSqhI3wJSLsyW5FaA7SAFrIvBIsLNMAE+isdqJ5HUT2j8V5yLiFxZw4dLyhYqIjAdJFkzgjKZv1CV5IEQBg6JRD6ERI0a0+AG51oK4HStRGQAAAABJRU5ErkJggg=="/>
-            <span class="mx-3">Register Voter</span>
+            <span class="mx-3">Manage Voter</span>
           </router-link>
 
           <router-link :to="{name: 'CreateElec'}"
