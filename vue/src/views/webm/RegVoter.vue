@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="flex py-5 ">
+    <div class="flex py-2 ">
       <h1 class="dont-mono font-semi-bold text-4xl font-normal leading-normal mt-0 mb-2 text-blueGray-800">Register Voter</h1>
     </div>
     <div class="flex-1 px-24">
