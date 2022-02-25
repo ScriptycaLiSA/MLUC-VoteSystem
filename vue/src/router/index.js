@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Campaign from '../views/Campaign.vue';
 import Login from '../views/Login.vue';
+import mainOTP from '../views/mainOTP.vue';
 import Dashboard from '../views/webm/Dashboard.vue';
 import Votes from '../views/webm/Votes.vue';
 import RegVoter from '../views/webm/RegVoter.vue';
@@ -10,7 +11,6 @@ import Colleges from '../views/webm/Colleges.vue';
 import UpdtMasterList from '../views/webm/UpdtMasterList.vue';
 import VoterView from '../views/voter/VoterView.vue';
 import DashboardLayout from '../components/DashboardLayout.vue';
-import SideNavLayout from '../components/SideNavLayout.vue';
 import NotFound from '../views/NotFound.vue';
 import store from '../store';
 
@@ -30,6 +30,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/login/otp',
+    name: 'mainOTP',
+    component: mainOTP
   },
   {
     path: '/',
