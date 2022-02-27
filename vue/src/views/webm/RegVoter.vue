@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-slate-100 shadow-xl px-3 min-w-full min-h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+  <main class="bg-slate-100 shadow-xl px-3 min-w-full min-h-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
     <div class="bg-slate-100 shadow-xl px-24">
       <div class="py-5 ">
         <h1 class="font-bold text-5xl py-3">Manage Voter</h1>

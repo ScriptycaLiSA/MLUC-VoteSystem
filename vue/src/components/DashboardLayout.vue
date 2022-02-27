@@ -78,9 +78,7 @@
             font-medium
             text-gray-400
             hover:text-white hover:bg-gray-400 cursor-pointer
-          "
-        >
-
+          ">Log-out
         </DisclosureButton>
       </div>
     </DisclosurePanel>
@@ -95,7 +93,9 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { BellIcon, MenuIcon, XIcon, LogoutIcon } from '@heroicons/vue/outline'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router';
 import SideNavLayout from "./SideNavLayout.vue";
+import store from "../store";
 
 const adminInfo = {
   name: 'Alflorence Abuan',
@@ -134,6 +134,14 @@ export default {
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
+
+    function logout(){
+      store.commit('logout');
+      router.push({
+        name: 'Login'
+      });
+    }
 
     return {
       adminInfo,
