@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen py-56 px-3 ">
     <div class="container mx-auto">
-      <div class="max-w-sm mx-auto md:max-w-lg rounded-lg shadow-lg md:h-80">
+      <div class="max-w-sm mx-auto md:max-w-lg rounded-lg shadow-slate-500 shadow-2xl md:h-80">
         <div class="w-full">
           <div class="bg-white h-68 py-3 rounded text-center">
             <h1 class="text-2xl font-bold">Two Factor Verification</h1>
@@ -48,9 +48,33 @@ export default {
   }
 }
 document.addEventListener("DOMContentLoaded", function(event) {
-  function OTPInput() {const inputs = document.querySelectorAll('#otp > *[id]');
-    for (let i = 0; i < inputs.length; i++) { inputs[i].addEventListener('keydown', function(event) { if (event.key==="Backspace" ) { inputs[i].value='' ; if (i !==0) inputs[i - 1].focus(); } else { if (i===inputs.length - 1 && inputs[i].value !=='' ) { return true; } else if (event.keyCode> 47 && event.keyCode < 58) { inputs[i].value=event.key; if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode> 64 && event.keyCode < 91) { inputs[i].value=String.fromCharCode(event.keyCode); if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } } }); } } OTPInput(); });
+  function OTPInput(){
+    const inputs = document.querySelectorAll('#otp > *[id]');
+    for (let i = 0; i < inputs.length; i++){
+      inputs[i].addEventListener('keydown', function(event){
+        if(event.key==="Backspace"){
+          inputs[i].value='' ;
+          if (i !==0) inputs[i - 1].focus();
+        }
+        else{
+          if(i===inputs.length - 1 && inputs[i].value !=='' ){
+            return true;
+          }
+          else if(event.keyCode> 47 && event.keyCode < 58) {
+            inputs[i].value=event.key; if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault();
+          }
+          else if (event.keyCode> 64 && event.keyCode < 91) {
+            inputs[i].value=String.fromCharCode(event.keyCode);
+            if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault();
+          }
+        }
+      });
+    }
+  }
 
+  OTPInput();
+
+});
 </script>
 <style scoped>
 

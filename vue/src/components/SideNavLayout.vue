@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="flex items-center justify-right mt-2 ">
+      <div class="flex items-left mt-2 md:items-right lg:items:right">
         <nav class="mt-10">
           <router-link :to="{name: 'Dashboard'}"
                        class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100">

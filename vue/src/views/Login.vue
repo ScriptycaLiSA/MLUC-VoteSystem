@@ -3,11 +3,13 @@
   <div class="max-w-md w-full space-y-8">
     <div>
       <img src="https://www.dmmmsu.edu.ph/wp-content/uploads/2019/06/DMMMSU-Logo-Final.png" alt="dmmmsu_logo" class="mx-auto h-40 w-auto">
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">DMMMSU Voting Portal</h2>
       <p class="mt-2 text-center text-sm text-gray-600">
         {{ ' ' }}
       </p>
     </div>
+
+    <div class="max-w-sm mx-auto md:max-w-lg rounded-lg shadow-slate-700 shadow-2xl md:h-80 px-14">
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">DMMMSU Voting Portal</h2>
     <form class="mt-8 space-y-6" action="#" method="POST">
       <input type="hidden" name="remember" value="true" />
       <div class="rounded-md shadow-sm -space-y-px">
@@ -43,17 +45,26 @@
           Sign in
         </button>
       </div>
-      <div class="">
+      <div class="my-4">
         <p>Checking Elections?
           <router-link :to="{name: 'Campaign'}" class="font-medium text-black font-bold hover:text-blue-500">Click here</router-link> to go on Campaign Page
         </p>
       </div>
     </form>
+    </div>
   </div>
 </div>
 </template>
 <script>
   export default {
+    title(){
+      return `$(this.pageTitle)`
+    },
+    data(){
+      return{
+        pageTitle: 'Login'
+      }
+    },
     name: "Login"
   }
 </script>
