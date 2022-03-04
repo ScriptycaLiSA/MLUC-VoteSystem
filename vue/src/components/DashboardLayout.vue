@@ -52,16 +52,16 @@
       </div>
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5">
-          <div class="flex-shrink-0">
+          <div class="flex-auto grow-0">
             <img class="h-10 w-10 rounded-full" :src="adminInfo.imageUrl" alt="" />
           </div>
-          <div class="ml-3">
+          <div class="flex-auto">
             <div class="text-base font-medium leading-none text-white">{{ adminInfo.name }}</div>
             <div class="text-sm font-medium leading-none text-gray-400">{{ adminInfo.email }}</div>
             <div class="text-sm font-medium leading-none text-gray-400">Organization: {{ adminInfo.organization }}</div>
             <div class="text-sm font-medium leading-none text-gray-400">Role: {{ adminInfo.role }}</div>
           </div>
-          <button type="button" class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+          <button type="button" class="ml-auto bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
           </button>
@@ -98,20 +98,20 @@ import SideNavLayout from "./SideNavLayout.vue";
 import store from "../store";
 
 const adminInfo = {
-  name: 'Alflorence Abuan',
-  email: 'almanyak@dmmmsu.edu.ph',
-  organization: 'MIS',
+  name: 'Eimi Fukada',
+  email: 'fukada.ei@dmmmsu.edu.ph',
+  organization: 'B_Spank',
   role: 'Superadmin',
   imageUrl:
-    'https://scontent.fmnl25-1.fna.fbcdn.net/v/t1.6435-9/188390088_4237818132949817_1445088910336767925_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGientYW3iMPbGyVXOu6cm25yq15sX8_9znKrXmxfz_3KvGnCj5OjJ5vQwhYkHqi0qBnDDRpxETMZqQ8IreMMWf&_nc_ohc=ONQj3ZF4yFkAX8nFzzh&_nc_ht=scontent.fmnl25-1.fna&oh=00_AT-ZGw_igKYHg7pUxmkMaMSAGeyTDUcJFw71FdINgwNr8g&oe=621CFCAB',
+    'https://pbs.twimg.com/media/EfnbOLOVoAE-1Bg?format=jpg&name=900x900'
 }
 const navigation = [
   { name: 'Dashboard', to: {name: 'Dashboard'}, current: false },
   { name: 'Votes', to: {name: 'Votes'}, current: false },
   { name: 'Register Voter', to: {name: 'RegVoter'}, current: false },
+  { name: 'Colleges', to: {name: 'Colleges'}, current: false },
   { name: 'Create Elections', to: {name: 'CreateElec'}, current: false },
-  { name: 'Colleges', to: {name: 'Candidates'}, current: false },
-  { name: 'Candidates', to: {name: 'Colleges'}, current: false },
+  { name: 'Candidates', to: {name: 'Candidates'}, current: false },
   { name: 'Update Master List', to: {name: 'UpdtMasterList'}, current: false }
 ]
 
@@ -147,6 +147,7 @@ export default {
       adminInfo,
       user: computed(() => store.state.user.data),
       navigation,
+      logout
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-slate-100 shadow-xl px-3 min-w-full min-h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+  <div class="bg-slate-100 shadow-xl px-3 min-w-full min-h-full grid grid-cols-1 2xl:grid-cols-2">
     <div class="bg-slate-100 shadow-xl px-24">
       <div class="py-5 ">
         <h1 class="font-bold text-5xl py-3">Manage Candidates</h1>
@@ -89,62 +89,60 @@
           </div>
         </div>
       </form>
-
     </div>
+    <div>
+      <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table left to right</label>
+      <div id="table" class="flex flex-col mx-2">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow-md sm:rounded-lg">
+              <table class="min-w-full">
+                <thead class="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                  <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                    VOTER
+                  </th>
+                  <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                    ID
+                  </th>
+                  <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                    Date created
+                  </th>
+                  <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                    email
+                  </th>
+                  <th scope="col" class="relative py-3 px-6">
+                    <span class="sr-only">Edit</span>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
 
-    <div class="flex flex-col">
-      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table class="min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Candidates</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">College</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                <th scope="col" class="relative px-6 py-3">
-                  <span class="sr-only">Edit</span>
-                </th>
-              </tr>
-              </thead>
-              <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="person in people" :key="person.email">
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
-                    </div>
-                    <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
-                        {{ person.name }}
-                      </div>
-                      <div class="text-sm text-gray-500">
-                        {{ person.email }}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{ person.id }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ person.college }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+                <tr v-for="person in people" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{person.name}}
+                  </td>
+                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    {{person.id}}
+                  </td>
+                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    {{person.college}}
+                  </td>
+                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    {{person.email}}
+                  </td>
+                  <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>

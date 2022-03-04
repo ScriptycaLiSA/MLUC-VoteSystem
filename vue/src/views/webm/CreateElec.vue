@@ -1,11 +1,10 @@
 <template>
-  <main class=" px-3 min-h-screen ">
-    <div class="font-bold text-5xl py-4">
-      <p>CREATE ELECTIONS</p>
-    </div>
-
-    <div class="py-4 px-4 min-w-screen">
-      <form class="w-full max-w-lg">
+  <div class="flex items-left font-bold text-5xl py-4">
+    <p>CREATE ELECTIONS</p>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 px-3 min-h-screen">
+    <div class="py-4 px-4 max-w-lg">
+      <form class="">
         <div class="flex flex-wrap -mx-4 mb-6">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-TElction">
             Election Title:
@@ -73,7 +72,8 @@
     </div>
 
     <div>
-      <div class="flex flex-col">
+      <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table left to right</label>
+      <div id="table" class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-md sm:rounded-lg">
@@ -81,16 +81,16 @@
                 <thead class="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    Name
+                    Election
                   </th>
                   <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    Color
+                    College
                   </th>
                   <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    Category
+                    Starts on
                   </th>
                   <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    Price
+                    date created
                   </th>
                   <th scope="col" class="relative py-3 px-6">
                     <span class="sr-only">Edit</span>
@@ -99,54 +99,18 @@
                 </thead>
                 <tbody>
 
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr v-for="elections in elecEvents" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
+                    {{elections.eventName}}
                   </td>
                   <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    Sliver
+                    {{elections.eventCollege}}
                   </td>
                   <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    Laptop
+                    {{elections.eventDate}}
                   </td>
                   <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    $2999
-                  </td>
-                  <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                  </td>
-                </tr>
-
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple Imac 27"
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    White
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    Desktop Pc
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    $1999
-                  </td>
-                  <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                  </td>
-                </tr>
-
-                <tr class="bg-white dark:bg-gray-800">
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple Magic Mouse 2
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    White
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    Accessories
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    $99
+                    {{elections.eventCreate}}
                   </td>
                   <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                     <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
@@ -160,13 +124,45 @@
       </div>
     </div>
 
-  </main>
+  </div>
 </template>
 
 <script>
+const elecEvents = [
+  {
+    eventName: '2022 SBO Elections',
+    eventCollege: 'CLAW',
+    eventDate: '02/07/2022',
+    eventCreate: '02/03/2022'
+  },
+  {
+    eventName: '2022 SBO Elections',
+    eventCollege: 'CIT',
+    eventDate: '02/07/2022',
+    eventCreate: '02/03/2022'
+  },
+  {
+    eventName: '2022 SBO Elections',
+    eventCollege: 'CTED',
+    eventDate: '02/07/2022',
+    eventCreate: '02/03/2022'
+  },
+  {
+    eventName: '2022 SBO Elections',
+    eventCollege: 'COM',
+    eventDate: '02/07/2022',
+    eventCreate: '02/03/2022'
+  },
+]
 export default {
-  name: "CreateElec"
+  name: "CreateElec",
+  setup(){
+    return{
+      elecEvents
+    }
+  }
 }
+
 </script>
 
 <style scoped>

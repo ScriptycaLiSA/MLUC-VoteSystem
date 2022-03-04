@@ -1,15 +1,14 @@
 <template>
-  <div class="relative flex min-h-screen">
+  <div class="flex min-h-screen">
     <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
          class="fixed z-20 inset-0 bg-slate-200 opacity-50 transition-opacity lg:hidden"></div>
     <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
          class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-teal-500 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
 
-      <div class="flex items-center justify-center mt-10">
+      <div class="flex flex-row items-center justify-center mt-10">
         <div class="flex items-left">
           <div class="relative shadow mx-auto h-24 w-24 -my-12 border-white rounded-full overflow-hidden border-4">
-            <img class="object-cover w-full h-full"
-                 src="https://scontent.fmnl25-1.fna.fbcdn.net/v/t1.6435-9/188390088_4237818132949817_1445088910336767925_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGientYW3iMPbGyVXOu6cm25yq15sX8_9znKrXmxfz_3KvGnCj5OjJ5vQwhYkHqi0qBnDDRpxETMZqQ8IreMMWf&_nc_ohc=ONQj3ZF4yFkAX8nFzzh&_nc_ht=scontent.fmnl25-1.fna&oh=00_AT-ZGw_igKYHg7pUxmkMaMSAGeyTDUcJFw71FdINgwNr8g&oe=621CFCAB">
+            <img class="object-cover w-full h-full" src="https://pbs.twimg.com/media/EfnbOLOVoAE-1Bg?format=jpg&name=900x900"/>
           </div>
         </div>
         <div class="mt-auto">
@@ -22,7 +21,7 @@
         </div>
       </div>
 
-      <div class="flex items-left mt-2 md:items-right lg:items:right">
+      <div class="items-left mt-2 md:items-right lg:items:right">
         <nav class="mt-10">
           <router-link :to="{name: 'Dashboard'}"
                        class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100">
@@ -78,7 +77,7 @@
         </nav>
       </div>
     </div>
-    <div class="mt-2 ml-4">
+    <div class="xl:mx-6 xl:my-6">
       <!-- children view from /router/index.js -->
       <router-view></router-view>
     </div>
@@ -87,12 +86,10 @@
 </template>
 <script>
 const adminInfo = {
-  name: 'Alflorence Abuan',
-  email: 'almanyak@dmmmsu.edu.ph',
-  organization: 'MIS',
+  name: 'Eimi Fukada',
+  email: 'fukada.ei@dmmmsu.edu.ph',
+  organization: 'B_Spank',
   role: 'Superadmin',
-  imageUrl:
-    'https://scontent.fmnl25-1.fna.fbcdn.net/v/t1.6435-9/188390088_4237818132949817_1445088910336767925_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGientYW3iMPbGyVXOu6cm25yq15sX8_9znKrXmxfz_3KvGnCj5OjJ5vQwhYkHqi0qBnDDRpxETMZqQ8IreMMWf&_nc_ohc=ONQj3ZF4yFkAX8nFzzh&_nc_ht=scontent.fmnl25-1.fna&oh=00_AT-ZGw_igKYHg7pUxmkMaMSAGeyTDUcJFw71FdINgwNr8g&oe=621CFCAB',
 }
 
 export default {
