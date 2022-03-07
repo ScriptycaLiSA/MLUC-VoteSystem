@@ -68,6 +68,10 @@
               </table>
             </div>
           </div>
+          <!-- chart here -->
+          <div class="">
+
+          </div>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 items-center">
           <div class="flex flex-cols">
@@ -94,7 +98,7 @@ import DashModal from './toolComponents/dashModal.vue';
 export default {
   name: "Dashboard",
   components: {
-    DashModal
+    DashModal,
   }
 }
 </script>

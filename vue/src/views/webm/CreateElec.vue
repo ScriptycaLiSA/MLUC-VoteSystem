@@ -1,15 +1,16 @@
 <template>
+  <div class="bg-slate-200 shadow-xl 2xl:min-w-full 2xl:px-4 2xl:py-2">
   <div class="flex items-left font-bold text-5xl py-4">
     <p>CREATE ELECTIONS</p>
   </div>
-  <div class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 px-3 min-h-screen">
+  <div class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 px-3 min-w-screen">
     <div class="py-4 px-4 max-w-lg">
       <form class="">
         <div class="flex flex-wrap -mx-4 mb-6">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-TElction">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-election">
             Election Title:
           </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-TElction" type="text" placeholder="Enter Title:" required>
+          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-election" type="text" placeholder="Enter Title:" required>
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
             Select College:
           </label>
@@ -124,6 +125,7 @@
       </div>
     </div>
 
+  </div>
   </div>
 </template>
 

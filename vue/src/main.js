@@ -3,6 +3,7 @@ import store from './store'
 import router from './router'
 import App from './App.vue'
 import './index.css'
+import 'animate.css'
 
 createApp(App)
   .use(store)
