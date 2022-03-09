@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-100 shadow-xl min-h-full px-10">
-    <div class="flex py-5 px-5">
+    <div class="flex px-2">
       <h1 class="font-bold text-5xl py-3 items-left">VOTES</h1>
     </div>
     <div class="flex">

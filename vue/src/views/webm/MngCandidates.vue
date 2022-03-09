@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-100 shadow-xl px-3 min-w-full min-h-full grid grid-cols-1 2xl:grid-cols-2">
-    <div class="bg-slate-100 shadow-xl px-24">
+    <div class="bg-slate-100 shadow-xl px-12">
       <div class="py-5 ">
         <h1 class="font-bold text-5xl py-3">Manage Candidates</h1>
       </div>

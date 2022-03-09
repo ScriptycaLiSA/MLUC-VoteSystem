@@ -21,9 +21,24 @@
       </table>
     </div>
   </div>
+  <div class="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 items-center py-2">
+    <div class="flex flex-cols">
+      <button
+        class="uppercase flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button" data-modal-toggle="defaultModal">
+        refresh button
+      </button>
+      <button
+        class="uppercase flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button" data-modal-toggle="defaultModal">
+        update server
+      </button>
+    </div>
+  </div>
 </template>
 <script>
 import {ref} from 'vue'
+import ViewStat from '../toolComponents/ChartDoughnut.vue'
 
 const loadContData = async () => {
   return new Promise((resolve) => {
@@ -46,16 +61,19 @@ const loadContData = async () => {
           counts: 0
         }
       ])
-    }, 5000)
+    }, 2000)
   })
 }
 
 export default {
+  components: {
+    ViewStat
+  },
   async setup() {
     const loadContData2 = ref(await loadContData())
 
     return {
-      loadContData2
+      loadContData2,
     }
   },
 }

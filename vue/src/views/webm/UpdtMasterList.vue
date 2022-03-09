@@ -3,16 +3,17 @@
     <div class="font-bold text-5xl py-3">
       <p>MASTER LIST UPDATE</p>
     </div>
-
     <suspense>
       <template #default>
         <DataParse/>
       </template>
       <template #fallback>
-        <div class="bg-amber-50 shadow-xl flex flex-cols flex text-2xl px-5 uppercase grid grid-cols-1">
-          getting data from server
-          <div class="-items-center">
-            <img class="animate-spin h-20 w-20 px-2 py-2" src="https://www.svgrepo.com/show/73917/spin.svg"/>
+        <div class="grid grid-cols-2 items-center bg-amber-50 shadow-xl">
+          <div class="flex-grow px-5 uppercase">
+            <p>getting data from server</p>
+          </div>
+          <div class="">
+            <img class="animate-spin h-10 w-10 px-2 py-2" src="https://www.svgrepo.com/show/376217/spinner.svg" alt="stevensupot"/>
           </div>
         </div>
       </template>

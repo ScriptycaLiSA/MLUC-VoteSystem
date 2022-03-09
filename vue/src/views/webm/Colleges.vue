@@ -50,14 +50,16 @@
         </div>
       </div>
 
-      <div>
-        CHART HERE
+      <div class="px-2 py-2">
+        <ViewStats/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ViewStats from './toolComponents/ChartDoughnut.vue'
+
 const colleges = [
   {
     name: 'College of Information Technology',
@@ -99,8 +101,12 @@ const colleges = [
     init: 'CLAW',
     registered: '34',
   }]
+
 export default {
   name: "Colleges",
+  components: {
+    ViewStats
+  },
   setup() {
     return {
       colleges

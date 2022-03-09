@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-slate-100 shadow-xl min-h-screen min-w-full px-2">
-    <div class="font-bold text-5xl">
+  <div class="bg-slate-100 shadow-xl min-h-screen">
+    <div class="flex flex-cols font-bold pl-2 text-5xl">
       <p>DASHBOARD</p>
     </div>
 
-    <div class="">
-      <div class="bg-slate-100 px-2 min-h-screen">
+    <div class="grid grid-cols-1 2xl:grid-cols-2 px-2 py-4">
+      <div class="bg-slate-100 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex items-right"
                for="selectCollege">
           Select College:
@@ -63,14 +63,9 @@
                   </td>
                   <td class="px-4 py-3 text-sm border font-bold text-2xl">64</td>
                 </tr>
-
                 </tbody>
               </table>
             </div>
-          </div>
-          <!-- chart here -->
-          <div class="">
-
           </div>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 items-center">
@@ -88,17 +83,23 @@
           </div>
         </div>
       </div>
+      <!-- chart here -->
+      <div class="py-4">
+        <ViewStats/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import DashModal from './toolComponents/dashModal.vue';
+import ViewStats from "./toolComponents/ChartDoughnut.vue";
 
 export default {
   name: "Dashboard",
   components: {
     DashModal,
+    ViewStats
   }
 }
 </script>

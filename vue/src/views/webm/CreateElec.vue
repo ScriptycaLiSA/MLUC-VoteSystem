@@ -3,7 +3,7 @@
   <div class="flex items-left font-bold text-5xl py-4">
     <p>CREATE ELECTIONS</p>
   </div>
-  <div class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 px-3 min-w-screen">
+  <div class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 px-3 min-w-screen">
     <div class="py-4 px-4 max-w-lg">
       <form class="">
         <div class="flex flex-wrap -mx-4 mb-6">

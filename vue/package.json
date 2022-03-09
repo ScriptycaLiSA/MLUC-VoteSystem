@@ -13,8 +13,9 @@
     "@themesberg/tailwind-datepicker": "^1.1.0",
     "animate.css": "^4.1.1",
     "axios": "^0.26.0",
-    "chart.js": "^2.9.4",
+    "chart.js": "^3.7.1",
     "vue": "^3.2.25",
+    "vue-chart-3": "^3.1.2",
     "vue-router": "^4.0.12",
     "vue3-otp-input": "^0.2.2",
     "vuex": "^4.0.2"
