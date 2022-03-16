@@ -8,15 +8,15 @@
       <div class="flex flex-row items-center justify-center mt-10">
         <div class="flex items-left">
           <div class="relative shadow mx-auto h-24 w-24 -my-12 border-white rounded-full overflow-hidden border-4">
-            <img class="object-cover w-full h-full" src="https://pbs.twimg.com/media/EfnbOLOVoAE-1Bg?format=jpg&name=900x900"/>
+            <img class="object-cover w-full h-full" src="{{user.imageUrl}}"/>
           </div>
         </div>
         <div class="mt-auto">
           <h1 class="text-lg text-center font-semibold">
-            {{adminInfo.role}}
+            {{user.role}}
           </h1>
           <p class="text-sm text-gray-600 text-center">
-            {{adminInfo.organization}} | {{adminInfo.name}}
+            {{user.organization}} | {{user.fname}} {{user.lname}}
           </p>
         </div>
       </div>
@@ -85,19 +85,19 @@
 
 </template>
 <script>
-const adminInfo = {
-  name: 'Eimi Fukada',
-  email: 'fukada.ei@dmmmsu.edu.ph',
-  organization: 'B_Spank',
-  role: 'Superadmin',
-}
+import {useStore} from 'vuex'
+import {computed} from 'vue'
+import {useRouter} from "vue-router";
 
 export default {
   name: 'SideNavLayout',
 
-  setup(){
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+
     return {
-      adminInfo
+      user: computed(() => store.state.user.data),
     }
   }
 }

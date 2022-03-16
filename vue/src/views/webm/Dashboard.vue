@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-100 shadow-xl min-h-screen">
-    <div class="flex flex-cols font-bold pl-2 text-5xl">
+    <div class="flex font-bold pl-2 text-5xl">
       <p>DASHBOARD</p>
     </div>
 
@@ -10,7 +10,7 @@
                for="selectCollege">
           Select College:
         </label>
-        <div class="flex items-right">
+        <div class="items-right">
           <select
             class="border border-gray-300 rounded-full text-gray-600 h-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
             id="selectCollege">
@@ -36,7 +36,7 @@
               <table class="w-full flex-auto">
                 <thead>
                 <tr
-                  class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                  class="text-xs font-medium tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-gray-600">
                   <th class="px-4 py-3">Name</th>
                   <th class="px-4 py-3">Position?</th>
                   <th class="px-4 py-3">Vote counts</th>

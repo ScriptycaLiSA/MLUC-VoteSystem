@@ -13,6 +13,7 @@ import VoterView from '../views/voter/VoterView.vue';
 import DashboardLayout from '../components/DashboardLayout.vue';
 import NotFound from '../views/NotFound.vue';
 import store from '../store';
+import PasswordMaker from '../components/LaravelPasswordMaker.vue';
 
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound
+  },
+  {
+    path: '/password_maker/only/for/admin/ui',
+    name: 'PasswordMaker',
+    component: PasswordMaker
   },
   {
     path: '/campaign',
@@ -41,7 +47,7 @@ const routes = [
     redirect: '/webm/dashboard',
     component: DashboardLayout,
     meta: {
-      requiresAuth: false
+      requiresAuth: true
     },
     children: [{
         path: '/webm/dashboard',
