@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex flex-left m-3">
-    <router-link class="hover:bg-gray-400" :to="{name: 'Login'}">
+    <router-link class="hover:bg-gray-400" :to="{name: 'VoterLogin'}">
       <ArrowCircleLeftIcon class="h-6 w-6"/>
       <p class="text-black"> BACK TO LOGIN</p>
    </router-link>

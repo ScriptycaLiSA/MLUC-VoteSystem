@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVoterModelsTable extends Migration
+class CreateVoterAcctModelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateVoterModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('voter_models', function (Blueprint $table) {
+        Schema::create('voter_acct_models', function (Blueprint $table) {
             $table->id();
-            $table->integer('idNum');
             $table->string('fname');
             $table->string('lname');
-            $table->string('imageUrl');
+            $table->string('email');
+            $table->string('password');
+            $table->string('college');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +31,6 @@ class CreateVoterModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('voter_models');
+        Schema::dropIfExists('voter_acct_models');
     }
 }

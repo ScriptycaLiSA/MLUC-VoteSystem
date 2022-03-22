@@ -44,7 +44,6 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
-
         'admin' => [
             'driver' => 'session',
             'provider' => 'admin',
@@ -52,6 +51,13 @@ return [
         'admin-api' => [
             'driver' => 'token',
             'provider' => 'admin',
+        ],'voter' => [
+            'driver' => 'session',
+            'provider' => 'voter',
+        ],
+        'voter-api' => [
+            'driver' => 'token',
+            'provider' => 'voter',
         ],
     ],
 
@@ -83,7 +89,7 @@ return [
         ],
         'voter' => [
             'driver' => 'eloquent',
-            'model' => App\Models\VoterModel::class,
+            'model' => App\Models\VoterAcctModel::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

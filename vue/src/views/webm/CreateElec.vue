@@ -12,9 +12,10 @@
           </label>
           <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-election" type="text" placeholder="Enter Title:" required>
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
-            Select College:
+            Select College/Event:
           </label>
           <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-College">
+            <option>Campus Elections (MLUC)</option>
             <option>College of Information Technology</option>
             <option>College of Technical Education</option>
             <option>College of Technology</option>

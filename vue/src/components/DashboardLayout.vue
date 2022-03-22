@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="https://www.dmmmsu.edu.ph/wp-content/uploads/2019/06/DMMMSU-Logo-Final.png"
+            <img class="h-8 w-8" src="https://upload.wikimedia.org/wikipedia/en/d/d2/La_Union_State_University.png"
                  alt="DMMMSULogo"/>
           </div>
           <div class="hidden md:block">
@@ -67,7 +67,7 @@
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5">
           <div class="flex-auto grow-0">
-            <img class="h-10 w-10 rounded-full" src="user.imageUrl" alt=""/>
+            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt=""/>
           </div>
           <div class="flex-auto">
             <div class="text-base font-medium leading-none text-white">{{ user.fname }} {{ user.lname }}</div>
@@ -146,13 +146,13 @@ export default {
       store.dispatch('logout')
         .then(() => {
           router.push({
-            name: 'Login'
+            name: 'AdminLogin'
           });
         });
     }
 
     return {
-      user: computed(() => store.state.user.data),
+      user: computed(() => store.state.a.user.data),
       navigation,
       logout
     }

@@ -8,13 +8,14 @@
       <div class="bg-slate-100 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex items-right"
                for="selectCollege">
-          Select College:
+          Select College/Events:
         </label>
         <div class="items-right">
           <select
             class="border border-gray-300 rounded-full text-gray-600 h-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
             id="selectCollege">
             <option disabled>----Choose a college----</option>
+            <option>Campus Elections (MLUC)</option>
             <option>College of Information Technology</option>
             <option>College of Technical Education</option>
             <option>College of Technology</option>

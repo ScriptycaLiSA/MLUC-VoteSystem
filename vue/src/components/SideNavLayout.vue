@@ -8,15 +8,15 @@
       <div class="flex flex-row items-center justify-center mt-10">
         <div class="flex items-left">
           <div class="relative shadow mx-auto h-24 w-24 -my-12 border-white rounded-full overflow-hidden border-4">
-            <img class="object-cover w-full h-full" src="{{user.imageUrl}}"/>
+            <img class="object-cover w-full h-full" src="https://upload.wikimedia.org/wikipedia/en/d/d2/La_Union_State_University.png"/>
           </div>
         </div>
         <div class="mt-auto">
           <h1 class="text-lg text-center font-semibold">
-            {{user.role}}
+            {{users.role}}
           </h1>
           <p class="text-sm text-gray-600 text-center">
-            {{user.organization}} | {{user.fname}} {{user.lname}}
+            {{users.organization}} | {{users.fname}} {{users.lname}}
           </p>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default {
     const router = useRouter();
 
     return {
-      user: computed(() => store.state.user.data),
+      users: computed(() => store.state.a.user.data),
     }
   }
 }

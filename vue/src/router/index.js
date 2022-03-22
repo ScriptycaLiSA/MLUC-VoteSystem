@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Campaign from '../views/Campaign.vue';
-import Login from '../views/Login.vue';
+import AdminLogin from '../views/AdminLogin.vue';
+import VoterLogin from '../views/VoterLogin.vue';
 import mainOTP from '../views/mainOTP.vue';
 import Dashboard from '../views/webm/Dashboard.vue';
 import Votes from '../views/webm/Votes.vue';
@@ -23,19 +24,19 @@ const routes = [
     component: NotFound
   },
   {
-    path: '/password_maker/only/for/admin/ui',
-    name: 'PasswordMaker',
-    component: PasswordMaker
-  },
-  {
     path: '/campaign',
     name: 'Campaign',
     component: Campaign
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: '/voter_login',
+    name: 'VoterLogin',
+    component: VoterLogin
+  },
+  {
+    path: '/admin_login',
+    name: 'AdminLogin',
+    component: AdminLogin
   },
   {
     path: '/login/otp',
@@ -84,13 +85,19 @@ const routes = [
         path: '/webm/mstr_updt',
         name: 'UpdtMasterList',
         component: UpdtMasterList
-      }]
+      },
+    ]
   },
   {
     path: '/voter/voter_view',
     name: 'VoterView',
     component: VoterView
-  }
+  },
+  {
+    path: '/password_maker/only/for/admin/ui',
+    name: 'PasswordMaker',
+    component: PasswordMaker
+  },
 ];
 
 const router = createRouter({
@@ -99,9 +106,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next)=>{
-  if(to.meta.requiresAuth && !store.state.user.token){
-    next({name: 'Login'})
-  } else if(store.state.user.token && (to.name === 'Login')) {
+  //admin
+  if(to.meta.requiresAuth && !store.state.a.user.token){
+    next({name: 'AdminLogin'});
+  } else if(store.state.a.user.token && (to.name === 'AdminLogin')) {
     next({name: 'Dashboard'});
   } else {
     next();
