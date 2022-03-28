@@ -105,11 +105,12 @@
 <script>
 
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
-import {BellIcon, MenuIcon, XIcon, LogoutIcon} from '@heroicons/vue/outline'
+import {BellIcon, LogoutIcon, MenuIcon, XIcon} from '@heroicons/vue/outline'
 import {useStore} from 'vuex'
 import {computed} from 'vue'
 import {useRouter} from 'vue-router';
 import SideNavLayout from "./SideNavLayout.vue";
+import store from '../store'
 
 const navigation = [
   {name: 'Dashboard', to: {name: 'Dashboard'}, current: false},
@@ -152,12 +153,22 @@ export default {
     }
 
     return {
-      user: computed(() => store.state.a.user.data),
       navigation,
       logout
     }
   },
+  data(){
+    return{
+      user: []
+    }
+  },
+  methods: {
+    getAdminData(){
+      this.user = computed(() => store.state.a.user.data);
+    }
+  },
   mounted() {
+    this.getAdminData();
     console.log('This component is mounted');
   }
 }

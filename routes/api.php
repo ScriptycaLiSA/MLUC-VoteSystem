@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SystemServerRecordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -27,9 +28,8 @@ Route::middleware('auth:sanctum')->group(function(){
 //Administration Control
 Route::post('/adminLogin', [AuthController::class, 'adminLogin']); //working
 Route::post('/make_admin', [AuthController::class, 'register']); //working
-Route::post('/voterCreateAcct',[VoterMgmtController::class, 'registerVoterFromStud']);
+Route::post('/update_records', [SystemServerRecordController::class, 'saveRecordsFromOrigin']);
 
 //fetching data from database to requesting destination
 Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
 Route::get('/voterget_all', [VoterMgmtController::class, 'getVoterInfoAll']);
-

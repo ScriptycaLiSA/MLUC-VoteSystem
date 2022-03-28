@@ -1,5 +1,6 @@
 import {createStore} from "vuex";
 import axiosClient from "../axios";
+import axiosOrigin from '../axiosSource';
 
 const adminModule = {
   state: {
@@ -13,42 +14,53 @@ const adminModule = {
   },
   getters: {},
   actions: {
-    getRegisteredVoters({commit}, userLogin){
+    getRegisteredVoters({commit}, userLogin) {
       return axiosClient.get('voterget_all')
-        .then(({data})=>{
-          commit('setDataTableRegStud',data)
+        .then(({data}) => {
+          commit('setDataTableRegStud', data)
           return data;
         })
     },
-    login({commit}, userLogin){
+    login({commit}, userLogin) {
       return axiosClient.post('/adminLogin', userLogin)
         .then(({data}) => {
-          commit('setUser',data);
+          commit('setUser', data);
           return data;
         })
     },
-    logout({commit}, userLogout){
+    logout({commit}, userLogout) {
       return axiosClient.post('/logout', userLogout)
         .then(response => {
           commit('logout');
           return response;
         });
     },
-    register({commit}, userRegister){
+    register({commit}, userRegister) {
       return axiosClient.post('/make_admin', userRegister)
         .then(({data}) => {
           return data;
         })
     },
-    loadStudentSearch({commit}, request){
+    loadStudentSearch({commit}, request) {
       const jsonSearch = JSON.stringify(request.idNum);
-      console.log(jsonSearch);
-      return axiosClient.get('/voterinfo/'+jsonSearch)
-        .then(({data})=>{
+      return axiosClient.get('/voterinfo/' + jsonSearch)
+        .then(({data}) => {
           return data;
-
         })
     },
+    //
+    getAllRecordsSource() {
+      return axiosOrigin.get('/getstudentrecords')
+        .then(({data}) => {
+          return data;
+        });
+    },
+    systemRecordUpdate({commit}, dataArray) {
+      return axiosClient.post('/update_records', dataArray)
+        .then(({data}) => {
+          return data;
+        });
+    }
   },
   mutations: {
     logout: (state) => {
@@ -68,9 +80,7 @@ const adminModule = {
   modules: {}
 }
 
-const voterModule = {
-
-}
+const voterModule = {}
 
 const store = createStore({
   modules: {
