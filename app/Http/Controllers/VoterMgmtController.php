@@ -13,6 +13,7 @@ class VoterMgmtController extends Controller
 {
     use HasFactory;
 
+    //single search of voter record (optional feature)
     public function getVoterInfo($idNum)
     {
         $voter = DB::table('voter_models')->where('idNum', $idNum)->first();
@@ -26,6 +27,7 @@ class VoterMgmtController extends Controller
         ], 200);
     }
 
+    //fetch all registered voters (table:voter_acct_models)
     public function getVoterInfoAll()
     {
         $voterInfo = VoterAcctModel::all();
@@ -40,6 +42,7 @@ class VoterMgmtController extends Controller
         ], 200);
     }
 
+    //registration endpoint from pre-registered table
     public function registerVoterFromStud(Request $request){
         $voterCred = $request->validate([
             'fname'=>'required|string|max:20',

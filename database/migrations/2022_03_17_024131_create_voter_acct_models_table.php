@@ -15,6 +15,7 @@ class CreateVoterAcctModelsTable extends Migration
     {
         Schema::create('voter_acct_models', function (Blueprint $table) {
             $table->id();
+            $table->unique('idNum');
             $table->string('fname');
             $table->string('lname');
             $table->string('email');

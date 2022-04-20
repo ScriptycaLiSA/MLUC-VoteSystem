@@ -18,6 +18,6 @@ class VoterModel extends Model
         'idNum',
         'fname',
         'lname',
-        'imageUrl'
+        'college'
     ]);
 }

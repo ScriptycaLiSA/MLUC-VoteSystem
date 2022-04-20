@@ -19,7 +19,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials)){
             return response([
-                'error' => 'This account is not existing or check your inputs!'
+                'errors' => 'This account is not existing or check your inputs!'
             ], 422);
         }
 
@@ -29,18 +29,16 @@ class AuthController extends Controller
         return response([
             'user' => $user,
             'token' => $token
-        ]);
+        ],200);
     }
 
-    public function logout(){
+    public function logout(Request $request){
         /** var User $user */
-        $user = Auth::user();
-
-        $user->currentAccessToken()->delete();
+        Auth::logout();
 
         return response([
-            'success' => true
-        ], 200);
+            'success'=>true
+        ],200);
     }
 
     public function register(Request $request)

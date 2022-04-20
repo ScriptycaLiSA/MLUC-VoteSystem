@@ -44,21 +44,10 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
-        'admin' => [
+        'voter' => [
             'driver' => 'session',
-            'provider' => 'admin',
-        ],
-        'admin-api' => [
-            'driver' => 'token',
-            'provider' => 'admin',
-        ],'voter' => [
-            'driver' => 'session',
-            'provider' => 'voter',
-        ],
-        'voter-api' => [
-            'driver' => 'token',
-            'provider' => 'voter',
-        ],
+            'provider' => 'voter'
+        ]
     ],
 
     /*
@@ -83,14 +72,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\AdminAcctModel::class,
         ],
-        'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\AdminAcctModel::class,
-        ],
         'voter' => [
             'driver' => 'eloquent',
-            'model' => App\Models\VoterAcctModel::class,
-        ],
+            'model' => \App\Models\VoterAcctModel::class,
+        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
