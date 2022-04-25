@@ -197,9 +197,6 @@ function updateServer(ev) {
   store.dispatch('systemRecordUpdate', data)
     .then(function (res) {
       loadingUpdt.value = false;
-      if (res.response.status === 201) {
-        errorMsg.value = res.response.data.success
-      }
     })
 }
 
