@@ -17,18 +17,18 @@
           <input type="hidden" name="remember" value="true"/>
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
-              <label for="email" class="sr-only">Username</label>
-              <input v-model="userLogin.email" id="email" name="email" type="email" autocomplete="email" required=""
+              <label for="idNum" class="sr-only">Username</label>
+              <input v-model="userLogin.email" id="idNum" name="idNum" type="number" autocomplete="idNum" required=""
                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                     placeholder="Username"/>
+                     placeholder="ID Number"/>
             </div>
-            <div>
+            <!--<div>
               <label for="password" class="sr-only">Password</label>
               <input v-model="userLogin.password" id="password" name="password" type="password"
                      autocomplete="current-password" required=""
                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                      placeholder="Password"/>
-            </div>
+            </div> -->
           </div>
 
           <div>
@@ -53,25 +53,25 @@
               Sign in
             </button>
           </div>
-          <div class="my-4">
-            <p>Checking Elections?
-              <router-link :to="{name: 'Campaign'}" class="font-medium text-black font-bold hover:text-blue-500">Click
-                here
-              </router-link>
-              to go on Campaign Page
-            </p>
-          </div>
-          <div class="my-4">
-            <p>Website administrator?
-              <router-link :to="{name: 'AdminLogin'}" class="font-medium text-black font-bold hover:text-blue-500">Click
-                here
-              </router-link>
-              to redirect in Admins' Login
-            </p>
-          </div>
         </form>
       </div>
     </div>
+  </div>
+  <div class="my-4">
+    <p>Checking Elections?
+      <router-link :to="{name: 'Campaign'}" class="font-medium text-black font-bold hover:text-blue-500">Click
+        here
+      </router-link>
+      to go on Campaign Page
+    </p>
+  </div>
+  <div class="my-4">
+    <p>Website administrator?
+      <router-link :to="{name: 'AdminLogin'}" class="font-medium text-black font-bold hover:text-blue-500">Click
+        here
+      </router-link>
+      to redirect in Admins' Login
+    </p>
   </div>
 </template>
 <script setup>

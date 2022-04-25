@@ -10,12 +10,16 @@ const adminModule = {
     },
     registeredVoters: {
       data: {}
-    }
+    },
+    tempStudentsRecordHold: {
+      loading: false,
+      data: {}
+    },
   },
   getters: {},
   actions: {
     getRegisteredVoters({commit}, userLogin) {
-      return axiosClient.get('voterget_all')
+      return axiosClient.get('/voterget_all')
         .then(({data}) => {
           commit('setDataTableRegStud', data)
           return data;
@@ -49,9 +53,10 @@ const adminModule = {
         })
     },
     //
-    getAllRecordsSource() {
+    getAllRecordsSource({commit}, noData) {
       return axiosOrigin.get('/getstudentrecords')
         .then(({data}) => {
+          commit('parseDataFromOrigin', data)
           return data;
         });
     },
@@ -60,6 +65,12 @@ const adminModule = {
         .then(({data}) => {
           return data;
         });
+    },
+    getMstrDash({commit}, sample){
+      return axiosClient.get('/mstr_dash')
+        .then(({data})=>{
+          return data;
+        })
     }
   },
   mutations: {
@@ -75,7 +86,10 @@ const adminModule = {
     },
     setDataTableRegStud: (state, tableData) => {
       state.registeredVoters.data = tableData.students['id'];
-    }
+    },
+    parseDataFromOrigin: (state, arrayData) => {
+      state.tempStudentsRecordHold.data = arrayData.students['id']
+    },
   },
   modules: {}
 }

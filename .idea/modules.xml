@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../DMMMSU-VoteSystem/.idea/DMMMSU-VoteSystem.iml" filepath="$PROJECT_DIR$/../DMMMSU-VoteSystem/.idea/DMMMSU-VoteSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MLUC-VoteSys-SingleLang/.idea/MLUC-VoteSys-SingleLang.iml" filepath="$PROJECT_DIR$/../MLUC-VoteSys-SingleLang/.idea/MLUC-VoteSys-SingleLang.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/MLUC-VoteSystem.iml" filepath="$PROJECT_DIR$/.idea/MLUC-VoteSystem.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../dmmmsu-voter-api/.idea/dmmmsu-voter-api.iml" filepath="$PROJECT_DIR$/../dmmmsu-voter-api/.idea/dmmmsu-voter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../voting-system/.idea/voting-system.iml" filepath="$PROJECT_DIR$/../voting-system/.idea/voting-system.iml" />
     </modules>
   </component>
 </project>

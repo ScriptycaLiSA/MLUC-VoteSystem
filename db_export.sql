@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `admin_acct_models` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table votesys-mluc.admin_acct_models: ~2 rows (approximately)
 DELETE FROM `admin_acct_models`;
@@ -106,9 +106,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.migrations: ~9 rows (approximately)
+-- Dumping data for table votesys-mluc.migrations: ~10 rows (approximately)
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -120,8 +120,26 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(24, '2022_03_09_060701_create_admin_acct_models_table', 1),
 	(25, '2022_03_12_040503_create_candidate_models_table', 1),
 	(26, '2022_03_15_083230_create_sessions_table', 1),
-	(27, '2022_03_17_024131_create_voter_acct_models_table', 1);
+	(27, '2022_03_17_024131_create_voter_acct_models_table', 1),
+	(28, '2022_03_29_082438_create_mstr_updts_table', 2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+
+-- Dumping structure for table votesys-mluc.mstr_updts
+CREATE TABLE IF NOT EXISTS `mstr_updts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `eventName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table votesys-mluc.mstr_updts: ~3 rows (approximately)
+DELETE FROM `mstr_updts`;
+/*!40000 ALTER TABLE `mstr_updts` DISABLE KEYS */;
+INSERT INTO `mstr_updts` (`id`, `eventName`, `value`) VALUES
+	(1, 'data loaded', 6),
+	(2, 'pre-registered voters', 6),
+	(3, 'registered voters', 3);
+/*!40000 ALTER TABLE `mstr_updts` ENABLE KEYS */;
 
 -- Dumping structure for table votesys-mluc.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
@@ -150,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table votesys-mluc.personal_access_tokens: ~11 rows (approximately)
 DELETE FROM `personal_access_tokens`;
@@ -211,23 +229,29 @@ DELETE FROM `users`;
 -- Dumping structure for table votesys-mluc.voter_acct_models
 CREATE TABLE IF NOT EXISTS `voter_acct_models` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `idNum` bigint(20) unsigned NOT NULL,
   `fname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `college` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_key` (`email`,`idNum`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.voter_acct_models: ~3 rows (approximately)
+-- Dumping data for table votesys-mluc.voter_acct_models: ~6 rows (approximately)
 DELETE FROM `voter_acct_models`;
 /*!40000 ALTER TABLE `voter_acct_models` DISABLE KEYS */;
-INSERT INTO `voter_acct_models` (`id`, `fname`, `lname`, `email`, `password`, `college`, `created_at`, `updated_at`) VALUES
-	(1, 'Steven', 'Sevilla', 'steven.sevilla@student.dmmmsu.edu.ph', '$2y$10$x7JCY8EIvHfdHCRiB3l76Ox52zo3pr8rh0vTCIaK6G7l1puPx/vUa', 'College of Information Technology', '2022-03-22 04:47:44', '2022-03-22 04:47:44'),
-	(2, 'Mark Jansen', 'Ballesteros', 'mark.jansen@student.dmmmsu.edu.ph', '$2y$10$iM2Uwsro7jeT6PFD4nYVrOo.C8bWvGrT2222XU/aiNDV8i2.DgAh2', 'College of Information Technology', '2022-03-22 07:44:54', '2022-03-22 07:44:54'),
-	(3, 'Alflorence', 'Abuan', 'alflorence.abuan@student.dmmmsu.edu.ph', '$2y$10$6DcX4pkQ7Nts/6MWDtDBWeiulsZB/kS/1o4t4JhZ7zBdROamDRxgG', 'College of Information Technology', '2022-03-22 11:21:58', '2022-03-22 11:21:58');
+INSERT INTO `voter_acct_models` (`id`, `idNum`, `fname`, `lname`, `email`, `email_verified_at`, `password`, `college`, `created_at`, `updated_at`) VALUES
+	(1, 0, 'Steven', 'Sevilla', 'steven.sevilla@student.dmmmsu.edu.ph', NULL, '$2y$10$x7JCY8EIvHfdHCRiB3l76Ox52zo3pr8rh0vTCIaK6G7l1puPx/vUa', 'College of Information Technology', '2022-03-22 04:47:44', '2022-03-22 04:47:44'),
+	(2, 0, 'Mark Jansen', 'Ballesteros', 'mark.jansen@student.dmmmsu.edu.ph', NULL, '$2y$10$iM2Uwsro7jeT6PFD4nYVrOo.C8bWvGrT2222XU/aiNDV8i2.DgAh2', 'College of Information Technology', '2022-03-22 07:44:54', '2022-03-22 07:44:54'),
+	(3, 0, 'Alflorence', 'Abuan', 'alflorence.abuan@student.dmmmsu.edu.ph', NULL, '$2y$10$6DcX4pkQ7Nts/6MWDtDBWeiulsZB/kS/1o4t4JhZ7zBdROamDRxgG', 'College of Information Technology', '2022-03-22 11:21:58', '2022-03-22 11:21:58'),
+	(4, 18114722, 'Isidro', 'Prosacco', 'melody35@example.com', '2022-03-31 03:17:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Gutmann Ltd', '2022-03-31 03:17:45', '2022-03-31 03:17:45'),
+	(5, 18176062, 'Nathen', 'Lindgren', 'kzemlak@example.com', '2022-03-31 03:20:30', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Kilback-Jast', '2022-03-31 03:20:30', '2022-03-31 03:20:30'),
+	(6, 18164380, 'Arne', 'Bosco', 'jmcdermott@example.com', '2022-03-31 03:27:00', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Erdman Inc', '2022-03-31 03:27:00', '2022-03-31 03:27:00');
 /*!40000 ALTER TABLE `voter_acct_models` ENABLE KEYS */;
 
 -- Dumping structure for table votesys-mluc.voter_models
@@ -236,16 +260,21 @@ CREATE TABLE IF NOT EXISTS `voter_models` (
   `idNum` bigint(20) NOT NULL,
   `fname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `college` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idNum` (`idNum`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.voter_models: ~3 rows (approximately)
+-- Dumping data for table votesys-mluc.voter_models: ~6 rows (approximately)
 DELETE FROM `voter_models`;
 /*!40000 ALTER TABLE `voter_models` DISABLE KEYS */;
-INSERT INTO `voter_models` (`id`, `idNum`, `fname`, `lname`) VALUES
-	(1, 18105452, 'Jake', 'Montizon'),
-	(2, 18105552, 'Steven', 'Sevilla'),
-	(3, 18119722, 'Mark Jansen', 'Ballesteros');
+INSERT INTO `voter_models` (`id`, `idNum`, `fname`, `lname`, `college`) VALUES
+	(1, 18105452, 'Jake', 'Montizon', 'College Of Information Technology'),
+	(3, 18119722, 'Mark Jansen', 'Ballesteros', 'College Of Information Technology'),
+	(6, 18171342, 'Steven', 'Sevilla', 'College Of Information Technology'),
+	(7, 18169692, 'Alflorence', 'Abuan', 'College Of Information Technology'),
+	(8, 18196962, 'Arnold Erick Mikko', 'Palpal-latoc', 'College Of Information Technology'),
+	(9, 18109992, 'Luz', 'Puot', 'College Of Arts And Sciences');
 /*!40000 ALTER TABLE `voter_models` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -24,13 +24,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'organization',
-        'canMngStd',
-        'canMngCand',
-        'canMngRtt',
-        'canVvto',
-        'canMngRtmt',
-        'canMngUsers'
     ];
 
     /**

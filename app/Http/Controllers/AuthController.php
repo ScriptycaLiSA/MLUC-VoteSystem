@@ -13,34 +13,32 @@ class AuthController extends Controller
     public function adminLogin(Request $request)
     {
         $credentials = $request->validate([
-            'email'   => 'required|email|string|exists:admin_acct_models,email',
+            'email'   => 'required|email|string',
             'password' => 'required'
         ]);
 
         if (!Auth::attempt($credentials)){
             return response([
-                'error' => 'This account is not existing or check your inputs!'
+                'errors' => 'This account is not existing or check your inputs!'
             ], 422);
         }
 
         $user = Auth::user();
-        $token = $user->createToken('main')->plainTextToken;
+        $token = $user->createToken('Auth Token')->plainTextToken;
 
         return response([
             'user' => $user,
             'token' => $token
-        ]);
+        ],200);
     }
 
-    public function logout(){
+    public function logout(Request $request){
         /** var User $user */
-        $user = Auth::user();
-
-        $user->currentAccessToken()->delete();
+        Auth::logout();
 
         return response([
-            'success' => true
-        ], 200);
+            'success'=>true
+        ],200);
     }
 
     public function register(Request $request)
@@ -79,7 +77,7 @@ class AuthController extends Controller
             'canMngUsers' => $data['canMngUsers']
         ]);
 
-        $token = $adminCreateAcct->createToken('main')->plainTextToken;
+        $token = $adminCreateAcct->createToken('Auth Token')->accessToken;
 
         return response([
             'account' => $adminCreateAcct,
