@@ -71,6 +71,12 @@ const adminModule = {
         .then(({data})=>{
           return data;
         })
+    },
+    getCandidateInfo({commit}, mainData){
+      return axiosClient.get('/campaignSite')
+        .then(({data})=>{
+          return data;
+        })
     }
   },
   mutations: {

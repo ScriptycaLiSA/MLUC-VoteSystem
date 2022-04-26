@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.users: ~0 rows (approximately)
+-- Dumping data for table votesys-mluc.users: ~1 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `voter_models` (
   UNIQUE KEY `idNum` (`idNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=40024 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.voter_models: ~10,120 rows (approximately)
+-- Dumping data for table votesys-mluc.voter_models: ~9,999 rows (approximately)
 DELETE FROM `voter_models`;
 /*!40000 ALTER TABLE `voter_models` DISABLE KEYS */;
 INSERT INTO `voter_models` (`id`, `idNum`, `fname`, `lname`, `college`, `created_at`, `updated_at`) VALUES

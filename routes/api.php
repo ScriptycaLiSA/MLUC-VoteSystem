@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\v1\CampaignSiteController;
 use App\Http\Controllers\SystemServerRecordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoterMgmtController;
-use \App\Http\Controllers\VoterAuthController;
+use \App\Http\Controllers\Voter\v1\VoterAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
 Route::get('/voterget_all', [VoterMgmtController::class, 'getVoterInfoAll']);
 //voter controls
 Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
+
+
+Route::get('/campaignSite', [CampaignSiteController::class, 'fetchCandidateData']);

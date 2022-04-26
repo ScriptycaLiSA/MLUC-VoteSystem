@@ -3,7 +3,7 @@
     <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
          class="fixed z-20 inset-0 bg-slate-200 opacity-50 transition-opacity lg:hidden"></div>
     <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-         class="fixed flex-none z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-teal-500 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
+         class="fixed flex-none z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-slate-200 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
 
       <div class="flex flex-row items-center justify-center mt-10">
         <div class="flex items-left">
@@ -28,13 +28,6 @@
             <img class="h-6 w-6"
                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAA+0lEQVR4nO2ZUQqCUBQFD324qLD1ZQvVbdTPy0SSEHrOA2dACoLOMH3FTUTedEkeSaYkz0rPmGQoW63tZ6g4vH6GBvczlg+v3z78E30+v0Rr+3Od2mztIPuXAwabxgC0AI0BaAEaA9ACNAagBWgMQAvQGIAWoDEALUBjAFqAxgC0AI0BaAGaZYCpvPYV926rrSX0/qGHiXuD++mKxLjzy/Y8v05j5L6InBz6Pk/v4/d5eh+/z9P7c53abO0g+/4XoAVoDEAL0BiAFqAxAC1AYwBagMYAtACNAWgBGgPQAjQGoAVoDEAL0Bhg8Z6+z9P7+H2e3sfv8/S+nJIXmkLImDnbzzAAAAAASUVORK5CYII="/>
             <span class="mx-3">Dashboard</span>
-          </router-link>
-
-          <router-link :to="{name: 'Votes'}"
-                       class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100">
-            <img class="h-6 w-6"
-                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAFbklEQVR4nO3bW4xdYxQH8N+Yjoh2pNoatA86gjaq0iCqJOraxi1udUmINB4IkYZIJaSIRFxaBA9CpaTiTlHBg2gR+sBT69Io4l7UvRJttdXjYe2dOe1cztn77H1OZ/gnOzOz97fWt9Z/f5e11renXevRhiMxHXtjLf5pqUVNRDfeQ6XqWosZrTSqWTgQ3+F3XIFDcBZWYzPObp1p5SN1/idM3uHZcLxlCJMwkPMphiwJ9TifYsiRkMX5FEOGhDzOpxj0JDTifIpBS0IRzqcYdCSkzq8Te3wR6MQKQcJJBeksBWU4n6ITn+BrdBSsuxCU6XyKC0XYfHRJ+nOjGc7DNEHAGSX2kRlj8JXynYd5goADSu4nE+ZjK44quZ9p2IBXSu4nM1bhjZL7mIb1YhHsKrmvzFiDF0vUX+38viX2kxuPi9x+nxJ07/TOE5HeRryLEQXqrXZ+bIF6S8G5Ikp7RzEkDCrnU5wjSFghora8SJ1fYxA5nyIdCXlJaJrzbQM8G4XrcapY2AZq2xc6MQx/CTKyYISI8zfg74yyKSr4Ea/hNrFA90J/TnWJt9eNZSLCG4wYjxPxBY7Bz/UKLhJvbXo5djUVxwlfHs4itB6LSzGnNXhMP1Nglz7u7Y49xAHFUMHHGCl82w59EZCuC9vKtKjJSH3pteb1RcB/Cv8T0Me9zeJ4ush4vtUYIWoVdccjH4pj66EwQnbB+6JeUTcuEZHUYuxXglHNwnixBVZwcVbhm8SQqQzya7OoIfaJWvH9aaL29iy+rNF2Z0M3zhc+vJZXSVp+nlmQUc3ETGH7tIEaDWuOLX2iQ6S6m/CnqCY1Hc1e5SfhDpHnbxBZ5o8iZV6JBZpc62/WCOjC7Zgt9uM38QS+T56PE8dcc3C1KLBegz+aZF+/KGINmIRvxBCfLwot/WG0GAUb8TkObaDfutaAWtgTz8tfip6A3/AtDssgd4Se7wr2z9l3IQS0iYJCew7Z4fhInBWOzyHfLSo4q7FbDvlCCJiSKMlTGZon0tDj62zfJub9pyIUP0d8BFHBdTn6L4SAyfKdw3eKof9Cne3bcH/S13IRt2/BQXhJVHN6FTNqoBAC4GDZK8Kzks6PraNttfPzk3sTk78vFVOwgjMz2lAIAV3ilCdrQrRQzN907ZiMJ7FUhKYpqp1fUHXvgeTekWKr/hUPZrShEALyboPLxBkhcabwm1gM14h14Sr9O39vcu/OKn0r8HpGG1pKwCosSX6/KNExRYS/SwQJb+nt/H3Jvbt30LcEH2S0oS4CygqFN+o5Elub/JwhFrYL8YiYFrdgrp43Pwf34Nod9HWKfKHpyDsCnhUnuimeFm/9yj7aDvTmU6zBMxltaOkUmJvIpQFQh/h6ZEcSqp2/qx9d3cnzORltaCkB+ydy1ZWYahJuFWd1abmqP+fhxkQm607UUgLgZZHNjam614GHhENpueqGAXTsleh4Lkf/LSdgonDwVb1ziW6cbODvidpFKWuT+AAzKwohYGqi5JSc8pcl8otk+653V7FTVEQNIQ9OSeSn5pRHz1y+pAEdN4sh/7YIq2thkog+txl4etTCbNsvxLnQIebgwkaU4AKR0GwVW+IsUQ9sT66xOC95tlWEvrMa7HORiEAbrno9Jr4XGFOrYQ2MEvXAdXpq9luTK/37h6TNyAb76hKB06O1GtaT5U0QhY2l4i1VGjItos+pIhIcq+e/RT8SR1iNHsu3idD5dDGdPmtQHyIIqYiMbmc+NO3EU8LWq+oRyJLnXysytF/EXr5cVHVb/Y/O7aKqfAIuF4XV60ROUTgOF3tz9bzdWa4tiW1Ziq+ZKz0pRov0dpx8BcsisUmsISvF7pEJ/wI/mcI3qtzB0AAAAABJRU5ErkJggg=="/>
-            <span class="mx-3">Votes</span>
           </router-link>
 
           <router-link :to="{name: 'RegVoter'}"
