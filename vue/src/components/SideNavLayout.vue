@@ -12,11 +12,11 @@
           </div>
         </div>
         <div class="mt-auto">
-          <h1 class="text-lg text-center font-semibold">
+          <h1 class="text-lg text-center font-semibold uppercase">
             {{users.role}}
           </h1>
           <p class="text-sm text-gray-600 text-center">
-            {{users.organization}} | {{users.fname}} {{users.lname}}
+            {{users.name}}
           </p>
         </div>
       </div>
