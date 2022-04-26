@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\v1\CampaignSiteController;
+use App\Http\Controllers\Admin\v1\CollegeController;
 use App\Http\Controllers\SystemServerRecordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoterMgmtController;
 use \App\Http\Controllers\Voter\v1\VoterAuthController;
+use \App\Http\Controllers\Admin\v1\PartylistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,8 @@ Route::post('/adminLogin', [AuthController::class, 'adminLogin']); //working
 Route::post('/make_admin', [AuthController::class, 'register']); //working
 Route::post('/update_records', [SystemServerRecordController::class, 'saveRecordsFromOrigin']); //working
 Route::get('/mstr_dash', [SystemServerRecordController::class, 'mstrUpdtDash']); //working
+Route::get('/colleges', [CollegeController::class, 'index']);
+Route::get('/partylist', [PartylistController::class, 'index']);
 Route::post('/logout', [AuthController::class, 'logout']); //working
 
 //fetching data from database to requesting destination

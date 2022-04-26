@@ -77,6 +77,18 @@ const adminModule = {
         .then(({data})=>{
           return data;
         })
+    },
+    getCollegesData({commit}, fetched){
+      return axiosClient.get('/colleges')
+        .then(({data})=>{
+          return data;
+        })
+    },
+    getPartylistData({commit}, fetched){
+      return axiosClient.get('/partylist')
+        .then(({data})=>{
+          return data;
+      });
     }
   },
   mutations: {
