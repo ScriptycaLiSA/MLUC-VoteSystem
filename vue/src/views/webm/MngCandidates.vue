@@ -19,7 +19,8 @@
           </label>
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-lastname" type="text" placeholder="Full Name (First Name, Middle Initial, Last Name)" required>
+            id="grid-first-lastname" type="text" placeholder="Full Name (First Name, Middle Initial, Last Name)"
+            required>
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
             College:
           </label>
@@ -60,14 +61,13 @@
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           </div>
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-Position">
-            Running Position
+            Description
           </label>
-          <div class="flex justify-center w-full ">
-            <div class=" mb-4 md:w-96">
+          <div
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
               <textarea
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="Portfolio" rows="3" placeholder="Your Portfolio"></textarea>
-            </div>
+                id="Portfolio" rows="3" placeholder="Why do you want to run for this position"></textarea>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-0.1">
@@ -162,14 +162,14 @@ const people = {
   name: '',
   college: '',
   email: '',
-  partylist:'',
+  partylist: '',
   image: ''
 }
 
 function getSelectData() {
   store.dispatch('getCollegesData')
     .then((response) => {
-      response.success.map(function(obj, i){
+      response.success.map(function (obj, i) {
         colleges.push(obj);
       })
     })
@@ -178,7 +178,7 @@ function getSelectData() {
     })
   store.dispatch('getPartylistData')
     .then((response) => {
-      response.success.map(function(obj, i){
+      response.success.map(function (obj, i) {
         partylist.push(obj);
       })
     })
