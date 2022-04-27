@@ -3,27 +3,6 @@
     <div class="font-bold text-5xl py-3">
       <p>MASTER LIST UPDATE</p>
     </div>
-
-    <Warning v-if="errorMsg">
-      {{errorMsg}}
-      <span
-        @click="errorMsg=''"
-        class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
-         <svg
-           xmlns="http://www.w3.org/2000/svg"
-           class="h-6 w-6"
-           fill="none"
-           viewBox="0 0 24 24"
-           stroke="currentColor"
-         >
-           <path
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             stroke-width="2"
-             d="M6 18L18 6M6 6l12 12"/>
-         </svg>
-       </span>
-    </Warning>
     <div
       class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 items-center">
       <div v-if="mstrLoad" class="flex justify-center text-black">
@@ -51,11 +30,14 @@
       </div>
     </div>
 
-    <Warning v-if="errorMsg">
-      {{errorMsg}}
-      <span
-        @click="errorMsg=''"
-        class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+    <!--File processing area -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-2 items-center py-2">
+
+      <Warning v-if="status">
+        {{success}}
+        <span
+          @click="success=''"
+          class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
          <svg
            xmlns="http://www.w3.org/2000/svg"
            class="h-6 w-6"
@@ -70,11 +52,7 @@
              d="M6 18L18 6M6 6l12 12"/>
          </svg>
        </span>
-    </Warning>
-
-    <!--File processing area -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-2 items-center py-2">
-
+      </Warning>
       <!--btn-->
       <div>
         <h1 class="text-2xl pr-20 py-6">Step 1:</h1>
@@ -143,7 +121,7 @@ const loadingUpdt = ref(false);
 const mstrLoad = computed(() => store.state.a.tempStudentsRecordHold.loading);
 let systemPushServer = [];
 const bodyFormData = new FormData();
-let errorMsg = ref("");
+let status = ref("");
 
 function parseFromOriginal() {
   store.dispatch('getMstrDash')
@@ -198,6 +176,9 @@ function updateServer(ev) {
     .then(function (res) {
       loadingUpdt.value = false;
     })
+    .catch((error)=>{
+
+    })
 }
 
 function onChange(e) {
@@ -217,7 +198,7 @@ export default {
       mstrLoad,
       downloadMasterListFile,
       onChange,
-      errorMsg,
+      status
     }
   },
   data() {
@@ -227,6 +208,7 @@ export default {
       name: '',
       file: '',
       success: '',
+      errorMsg: ''
     }
   },
   method: {},

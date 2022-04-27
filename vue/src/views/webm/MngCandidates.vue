@@ -7,7 +7,9 @@
       <form class="w-full max-w-lg">
         <div class="flex justify-center">
           <div class="mb-3 w-96">
-            <label for="formFileLg" class="form-label inline-block mb-2 text-gray-700">Input Candidate image</label>
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="formFileLg">
+              Image file upload:
+            </label>
             <input class="form-control block w-full px-2 py-1.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="formFileLg" type="file">
           </div>
@@ -21,10 +23,21 @@
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="grid-first-lastname" type="text" placeholder="Full Name (First Name, Middle Initial, Last Name)"
             required>
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-elections">
+            Election:
+          </label>
+          <select v-model="people.election_id"
+                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-elections">
+            <option disabled value="" class="uppercase">-- SELECT ELECTION --</option>
+            <option v-for="(infoCol, index) in elections" :key="index" v-bind:value="infoCol.id">
+              {{ infoCol.name }}
+            </option>
+          </select>
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
             College:
           </label>
-          <select v-model="people.college"
+          <select v-model="people.college_init"
                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-College">
             <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
@@ -52,11 +65,13 @@
           </label>
           <select
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-Position">
-            <option>SBO Mayor</option>
-            <option>SBO Vice-Mayor</option>
-            <option>Secretary</option>
-            <option>Treasurer</option>
+            id="grid-Position"
+            v-model="people.position_id">
+            <option disabled value="" class="uppercase">-- SELECT POSITION --</option>
+
+            <option v-for="(infoCol, index) in positions" :key="index" v-bind:value="infoCol.id">
+              {{ infoCol.name }}
+            </option>
           </select>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           </div>
@@ -92,63 +107,6 @@
         </div>
       </form>
     </div>
-    <div>
-      <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table left
-        to right</label>
-      <div id="table" class="flex flex-col mx-2">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-md sm:rounded-lg">
-              <table class="min-w-full">
-                <thead class="bg-gray-50 dark:bg-gray-700">
-                <tr>
-                  <th scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    candidate
-                  </th>
-                  <th scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    ID
-                  </th>
-                  <th scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    Date created
-                  </th>
-                  <th scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    email
-                  </th>
-                  <th scope="col" class="relative py-3 px-6">
-                    <span class="sr-only">Edit</span>
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <tr v-for="person in people" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ person.name }}
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    {{ person.id }}
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    {{ person.college }}
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    {{ person.email }}
-                  </td>
-                  <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -158,12 +116,17 @@ import store from "../../store";
 
 let colleges = [];
 let partylist = [];
+let elections = [];
+let positions = [];
+
 const people = {
   name: '',
-  college: '',
-  email: '',
-  partylist: '',
-  image: ''
+  college_init: '',
+  election_id: '',
+  partylist_id: '',
+  position_id: '',
+  image: '',
+  description: '',
 }
 
 function getSelectData() {
@@ -185,6 +148,24 @@ function getSelectData() {
     .catch((error) => {
       console.log(error);
     })
+  store.dispatch('getElectionData')
+    .then((response) => {
+      response.success.map(function (obj, i) {
+        elections.push(obj);
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  store.dispatch('getPositionData')
+    .then((response) => {
+      response.success.map(function (obj, i) {
+        positions.push(obj);
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 export default {
@@ -194,7 +175,9 @@ export default {
       people,
       colleges,
       getSelectData,
-      partylist
+      partylist,
+      elections,
+      positions
     }
   },
   method: {},

@@ -10,50 +10,7 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-election">
             Election Title:
           </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-election" type="text" placeholder="Enter Title:" required>
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
-            Select College/Event:
-          </label>
-          <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-College">
-            <option>Campus Elections (MLUC)</option>
-            <option>College of Information Technology</option>
-            <option>College of Technical Education</option>
-            <option>College of Technology</option>
-            <option>College of Engineering</option>
-            <option>College of Management</option>
-            <option>Institute of Criminal Justice Education</option>
-            <option>College of Arts And Sciences</option>
-            <option>College of Arts And Law</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-
-          </div>
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-NumPos">
-            Enter Number of Positions:
-          </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-NumPos" type="number" placeholder="Positions:" required>
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-NamePos">
-            Select Positions:
-          </label>
-          <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-NamePos">
-            <option>College of Information Technology</option>
-            <option>College of Technical Education</option>
-            <option>College of Technology</option>
-            <option>College of Engineering</option>
-            <option>College of Management</option>
-            <option>Institute of Criminal Justice Education</option>
-            <option>College of Arts And Sciences</option>
-            <option>College of Arts And Law</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-
-          </div>
-        </div>
-        <div class="flex flex-wrap -mx-4 mb-6">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-            Enter Password:
-          </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-password" type="password" placeholder="EnterPassword:">
+          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-election" type="text" placeholder="Enter Election Name:" required>
         </div>
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -83,7 +40,7 @@
                 <thead class="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                    Election
+                    Election name
                   </th>
                   <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                     College
@@ -131,32 +88,7 @@
 </template>
 
 <script>
-const elecEvents = [
-  {
-    eventName: '2022 SBO Elections',
-    eventCollege: 'CLAW',
-    eventDate: '02/07/2022',
-    eventCreate: '02/03/2022'
-  },
-  {
-    eventName: '2022 SBO Elections',
-    eventCollege: 'CIT',
-    eventDate: '02/07/2022',
-    eventCreate: '02/03/2022'
-  },
-  {
-    eventName: '2022 SBO Elections',
-    eventCollege: 'CTED',
-    eventDate: '02/07/2022',
-    eventCreate: '02/03/2022'
-  },
-  {
-    eventName: '2022 SBO Elections',
-    eventCollege: 'COM',
-    eventDate: '02/07/2022',
-    eventCreate: '02/03/2022'
-  },
-]
+const elecEvents = []
 export default {
   name: "CreateElec",
   setup(){

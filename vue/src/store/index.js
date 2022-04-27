@@ -1,12 +1,13 @@
 import {createStore} from "vuex";
 import axiosClient from "../axios";
 import axiosOrigin from '../axiosSource';
+import axiosSanctum from '../sanctumAxios'
 
 const adminModule = {
   state: {
     user: {
       data: {},
-      token: sessionStorage.getItem("TOKEN"),
+      token: localStorage.getItem("TOKEN"),
     },
     registeredVoters: {
       data: {}
@@ -25,12 +26,21 @@ const adminModule = {
           return data;
         })
     },
-    login({commit}, userLogin) {
-      return axiosClient.post('/adminLogin', userLogin)
+    getSession({commit}){
+      return axiosClient.get('/user')
         .then(({data}) => {
-          commit('setUser', data);
           return data;
         })
+    },
+    login({commit}, userLogin) {
+      return axiosSanctum.get('/sanctum/csrf-cookie')
+        .then(response => {
+          return axiosClient.post('/adminLogin', userLogin)
+            .then(({data}) => {
+              commit('setUser', data);
+              return data;
+            })
+        });
     },
     logout({commit}, userLogout) {
       return axiosClient.post('/logout', userLogout)
@@ -84,23 +94,35 @@ const adminModule = {
           return data;
         })
     },
+    getElectionData({commit}, fetched){
+      return axiosClient.get('/election_data')
+        .then(({data})=>{
+          return data;
+        })
+    },
     getPartylistData({commit}, fetched){
       return axiosClient.get('/partylist')
         .then(({data})=>{
           return data;
       });
+    },
+    getPositionData({commit}, fetched){
+      return axiosClient.get('/get_positions')
+        .then(({data})=>{
+          return data;
+        });
     }
   },
   mutations: {
     logout: (state) => {
       state.user.token = null;
       state.user.data = {};
-      sessionStorage.removeItem("TOKEN");
+      localStorage.removeItem("TOKEN");
     },
     setUser: (state, userData) => {
       state.user.token = userData.token;
       state.user.data = userData.user;
-      sessionStorage.setItem("TOKEN", userData.token);
+      localStorage.setItem("TOKEN", userData.token);
     },
     setDataTableRegStud: (state, tableData) => {
       state.registeredVoters.data = tableData.students['id'];

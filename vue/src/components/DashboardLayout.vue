@@ -67,12 +67,11 @@
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5">
           <div class="flex-auto grow-0">
-            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt=""/>
+            <img class="h-10 w-10 rounded-full" alt=""/>
           </div>
           <div class="flex-auto">
-            <div class="text-base font-medium leading-none text-white">{{ user.fname }} {{ user.lname }}</div>
+            <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
             <div class="text-sm font-medium leading-none text-gray-400">{{ user.email }}</div>
-            <div class="text-sm font-medium leading-none text-gray-400">Organization: {{ user.organization }}</div>
             <div class="text-sm font-medium leading-none text-gray-400">Role: {{ user.role }}</div>
           </div>
           <button type="button"
@@ -122,6 +121,18 @@ const navigation = [
   {name: 'Update Master List', to: {name: 'UpdtMasterList'}, current: false}
 ]
 
+function getAdminData(){
+  store.dispatch('getSession')
+    .then((response)=>{
+      this.user.name = response.name;
+      this.user.role = response.role;
+      this.user.email = response.email;
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+}
+
 export default {
   extends: SideNavLayout,
   name: "DashboardLayout",
@@ -137,7 +148,7 @@ export default {
     BellIcon,
     MenuIcon,
     XIcon,
-    LogoutIcon
+    LogoutIcon,
   },
   setup() {
     const store = useStore();
@@ -151,10 +162,10 @@ export default {
           });
         });
     }
-
     return {
       navigation,
-      logout
+      logout,
+      getAdminData
     }
   },
   data(){
@@ -162,14 +173,8 @@ export default {
       user: []
     }
   },
-  methods: {
-    getAdminData(){
-      this.user = computed(() => store.state.a.user.data);
-    }
-  },
-  mounted() {
+  mounted(){
     this.getAdminData();
-    console.log('This component is mounted');
   }
 }
 

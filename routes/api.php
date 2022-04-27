@@ -1,14 +1,18 @@
 <?php
 
 use App\Http\Controllers\Admin\v1\CampaignSiteController;
+use App\Http\Controllers\Admin\v1\CandidateControllers;
 use App\Http\Controllers\Admin\v1\CollegeController;
+use App\Http\Controllers\Admin\v1\Election\ElectionController;
+use App\Http\Controllers\Admin\v1\PartylistController;
+use App\Http\Controllers\Admin\v1\Position\PositionController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SystemServerRecordController;
+use App\Http\Controllers\Util;
+use App\Http\Controllers\Voter\v1\VoterAuthController;
+use App\Http\Controllers\VoterMgmtController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\VoterMgmtController;
-use \App\Http\Controllers\Voter\v1\VoterAuthController;
-use \App\Http\Controllers\Admin\v1\PartylistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,21 +25,37 @@ use \App\Http\Controllers\Admin\v1\PartylistController;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
 
 //Admin Login
 Route::post('/adminLogin', [AuthController::class, 'adminLogin']); //working
-//Administration Control
 Route::post('/make_admin', [AuthController::class, 'register']); //working
-Route::post('/update_records', [SystemServerRecordController::class, 'saveRecordsFromOrigin']); //working
-Route::get('/mstr_dash', [SystemServerRecordController::class, 'mstrUpdtDash']); //working
-Route::get('/colleges', [CollegeController::class, 'index']);
-Route::get('/partylist', [PartylistController::class, 'index']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    /*  Administration Control
+    *  This part contains get methods for elections
+    */
+    Route::get('/get_positions', [PositionController::class, 'index']);
+    Route::get('/get_current_election', [Util::class, 'getCurrentElection']);
+    Route::get('/get_election_status', [Util::class, 'getElectionStatus']);
+    Route::get('/election_data', [ElectionController::class, 'search']);
+    Route::get('/candidate_lists', [CandidateControllers::class, 'getRecords']);
+    Route::get('/colleges', [CollegeController::class, 'index']);
+    Route::get('/partylist', [PartylistController::class, 'index']);
+    Route::post('/create_position', '\App\Http\Controllers\Admin\v1\Position\CreatePositionController');
+    Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfoController');
+    Route::get('/start_election', 'App\Http\Controllers\Admin\v1\Election\StartElectionController');
+
+    /*
+     *  An area consists of display functions and updating records
+     */
+    Route::post('/update_records', [SystemServerRecordController::class, 'saveRecordsFromOrigin']); //working
+    Route::get('/mstr_dash', [SystemServerRecordController::class, 'mstrUpdtDash']); //working
+});
+
+
 Route::post('/logout', [AuthController::class, 'logout']); //working
 
 //fetching data from database to requesting destination

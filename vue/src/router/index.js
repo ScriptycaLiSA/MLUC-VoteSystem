@@ -10,6 +10,8 @@ import CreateElec from '../views/webm/CreateElec.vue';
 import Candidates from '../views/webm/MngCandidates.vue';
 import Colleges from '../views/webm/Colleges.vue';
 import UpdtMasterList from '../views/webm/UpdtMasterList.vue';
+import MngPosition from "../views/webm/MngPosition.vue";
+import MngPartylist from "../views/webm/MngPartylist.vue";
 import VoterView from '../views/voter/VoterView.vue';
 import DashboardLayout from '../components/DashboardLayout.vue';
 import NotFound from '../views/NotFound.vue';
@@ -85,6 +87,16 @@ const routes = [
         path: '/webm/mstr_updt',
         name: 'UpdtMasterList',
         component: UpdtMasterList
+      },
+      {
+        path: '/webm/mng_position',
+        name: 'MngPosition',
+        component: MngPosition
+      },
+      {
+        path: '/webm/mng_partylist',
+        name: 'MngPartylist',
+        component: MngPartylist
       },
     ]
   },

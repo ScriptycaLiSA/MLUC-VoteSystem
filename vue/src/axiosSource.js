@@ -5,9 +5,18 @@ const axiosClient = axios.create({
   baseURL: 'http://localhost:8001/api/'
 })
 
-axiosClient.interceptors.request.use(config=>{
-  config.headers.Authorization = `Bearer ${store.state.a.user.token}`
-  return config;
-})
+axiosClient.interceptors.request.use(request => {
+  request.headers.common['Accept'] = 'application/json';
+  request.headers.common['Content-Type'] = 'application/json';
+  return request;
+});
+
+axiosClient.interceptors.response.use(response => {
+    return response;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
 export default axiosClient;
