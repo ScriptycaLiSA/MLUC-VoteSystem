@@ -111,6 +111,12 @@ const adminModule = {
         .then(({data})=>{
           return data;
         });
+    },
+    createElections({commit}, setElection){
+      return axiosClient.post('/create_election', setElection)
+        .then(({data})=>{
+          return data;
+        });
     }
   },
   mutations: {

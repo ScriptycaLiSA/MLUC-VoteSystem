@@ -30,10 +30,19 @@ class ElectionController extends Controller
         $data = $request->only('name');
 
         if(!$data==null){
-            DB::table('election_model')->insert([
+            DB::table('election_models')->insert([
                 'name'=>$data['name'],
             ]);
+            return response([
+                'success'=>[
+                    'message'=>'Election has been inserted!',
+                    'election_name'=>$data
+                ]
+            ],201);
         }
+        return response([
+            'error'=>'Something went wrong. Please try again later!'
+        ],500);
     }
 
     private function hasNoCandidate(){

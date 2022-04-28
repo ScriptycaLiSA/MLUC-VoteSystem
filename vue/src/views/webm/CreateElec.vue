@@ -6,18 +6,20 @@
     <div
       class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 px-3 min-w-screen">
       <div class="py-4 px-4 max-w-lg">
-        <form class="">
+        <form class="" @submit="createElection">
           <div class="flex flex-wrap -mx-4 mb-6">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-election">
               Election Title:
             </label>
             <input
+              v-model="election.name"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-election" type="text" placeholder="Enter Election Name:" required>
           </div>
           <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <button type="button"
+              <button type="submit"
+                      @click=""
                       class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
                 CREATE ELECTION
               </button>
@@ -97,14 +99,32 @@
 </template>
 
 <script>
-const elecEvents = []
+import store from '../../store'
+
+let election = {
+  name: ''
+};
+
+function createElection(ev){
+  ev.preventDefault();
+
+  store.dispatch('createElections', election)
+    .then((response)=>{
+      console.log(response)
+    })
+    .catch((error)=>{
+      console.log(error)
+    });
+}
+
 export default {
   name: "CreateElec",
   setup() {
     return {
-      elecEvents
+      election,
+      createElection
     }
-  }
+  },
 }
 
 </script>

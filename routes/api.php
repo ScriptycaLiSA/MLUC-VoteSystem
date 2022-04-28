@@ -42,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get_election_status', [Util::class, 'getElectionStatus']);
     Route::get('/election_data', [ElectionController::class, 'search']);
     Route::get('/candidate_lists', [CandidateControllers::class, 'getRecords']);
+    Route::post('/create_election', [ElectionController::class, 'createElection']);
     Route::get('/colleges', [CollegeController::class, 'index']);
     Route::get('/partylist', [PartylistController::class, 'index']);
     Route::post('/create_position', '\App\Http\Controllers\Admin\v1\Position\CreatePositionController');
