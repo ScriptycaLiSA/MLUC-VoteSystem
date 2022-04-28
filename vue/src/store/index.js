@@ -117,6 +117,12 @@ const adminModule = {
         .then(({data})=>{
           return data;
         });
+    },
+    createPositionMode({commit}, setPosition){
+      return axiosClient.post('/create_position', setPosition)
+        .then(({data})=>{
+          return data;
+        })
     }
   },
   mutations: {

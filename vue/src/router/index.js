@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import Campaign from '../views/Campaign.vue';
 import AdminLogin from '../views/AdminLogin.vue';
 import VoterLogin from '../views/VoterLogin.vue';
@@ -113,7 +113,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
 })
 

@@ -13,34 +13,27 @@ class CreatePositionController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $this->validateRequest($request);
-        $this->insertPosition($request);
-
-        return response([
-            'status' => 'Position has been inserted'
-        ], 201);
-    }
-
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
-
-    private function validateRequest($request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'election_id' => [
-                Rule::unique('position_models')->where(function ($query) {
-                    $query->where('id', Util::getCurrentElection());
-                })
-            ]
+        $data = $request->validate([
+            'name'=>'required',
+            'election_id'=>'required'
         ]);
-    }
 
-    private function insertPosition($request)
-    {
-        $position = $request->all();
-        $position['election_id'] = Util::getCurrentElection();
-        PositionModel::create($position);
+        if(!$data==null){
+            DB::table('position_models')
+                ->insert([
+                    'name'=>$data['name'],
+                    'election_id'=>$data['election_id']
+                ]);
+
+            return response([
+                'success'=>[
+                    'message'=>'Position has been inserted',
+                    'data'=>$data
+                ]
+            ], 201);
+        }
+        return response([
+            'error'=>'Something went wrong. Please try again later!'
+        ], 500);
     }
 }
