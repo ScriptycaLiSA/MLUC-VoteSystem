@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-100 shadow-xl min-h-full">
-    <div class="flex py-5 px-5">
+    <div class="flex py-5 px-5 ">
       <h1 class="font-bold text-5xl py-3 items-left">Manage Voter</h1>
     </div>
     <form class="px-2 py-2" @submit="searchStudent">
