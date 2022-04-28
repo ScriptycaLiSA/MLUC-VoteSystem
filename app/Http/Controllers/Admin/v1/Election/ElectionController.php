@@ -7,6 +7,7 @@ use App\Http\Controllers\Util;
 use App\Models\Admin\CandidateModel;
 use App\Models\ElectionModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use function response;
 
 class ElectionController extends Controller
@@ -26,7 +27,13 @@ class ElectionController extends Controller
 
     //election creation
     public function createElection(Request $request){
+        $data = $request->only('name');
 
+        if(!$data==null){
+            DB::table('election_model')->insert([
+                'name'=>$data['name'],
+            ]);
+        }
     }
 
     private function hasNoCandidate(){
