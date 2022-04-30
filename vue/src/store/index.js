@@ -101,7 +101,7 @@ const adminModule = {
         })
     },
     getPartylistData({commit}, fetched){
-      return axiosClient.get('/partylist')
+      return axiosClient.get('/partylist_data')
         .then(({data})=>{
           return data;
       });
@@ -120,6 +120,12 @@ const adminModule = {
     },
     createPositionMode({commit}, setPosition){
       return axiosClient.post('/create_position', setPosition)
+        .then(({data})=>{
+          return data;
+        })
+    },
+    addPartylist({commit}, addPartylist){
+      return axiosClient.post('/create_partylist', addPartylist)
         .then(({data})=>{
           return data;
         })

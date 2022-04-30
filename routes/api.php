@@ -37,17 +37,28 @@ Route::middleware('auth:sanctum')->group(function () {
     /*  Administration Control
     *  This part contains get methods for elections
     */
+    //Candidates
+    Route::get('/candidate_lists', [CandidateControllers::class, 'getRecords']);
+
+    //Positions
     Route::get('/get_positions', [PositionController::class, 'index']);
+    Route::post('/create_position', '\App\Http\Controllers\Admin\v1\Position\CreatePositionController');
+
+    //Election
     Route::get('/get_current_election', [Util::class, 'getCurrentElection']);
     Route::get('/get_election_status', [Util::class, 'getElectionStatus']);
-    Route::get('/election_data', [ElectionController::class, 'search']);
-    Route::get('/candidate_lists', [CandidateControllers::class, 'getRecords']);
     Route::post('/create_election', [ElectionController::class, 'createElection']);
-    Route::get('/colleges', [CollegeController::class, 'index']);
-    Route::get('/partylist', [PartylistController::class, 'index']);
-    Route::post('/create_position', '\App\Http\Controllers\Admin\v1\Position\CreatePositionController');
-    Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfoController');
+    Route::get('/election_data', [ElectionController::class, 'search']);
     Route::get('/start_election', 'App\Http\Controllers\Admin\v1\Election\StartElectionController');
+    Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfoController');
+
+    //Colleges
+    Route::get('/colleges', [CollegeController::class, 'index']);
+
+    //Partylist
+    Route::get('/partylist_data', [PartylistController::class, 'index']);
+    Route::post('/create_partylist', [PartylistController::class, 'createPartylist']);
+
 
     /*
      *  An area consists of display functions and updating records

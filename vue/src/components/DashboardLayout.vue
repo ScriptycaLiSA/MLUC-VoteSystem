@@ -113,12 +113,13 @@ import store from '../store'
 
 const navigation = [
   {name: 'Dashboard', to: {name: 'Dashboard'}, current: false},
-  {name: 'Votes', to: {name: 'Votes'}, current: false},
   {name: 'Register Voter', to: {name: 'RegVoter'}, current: false},
   {name: 'Colleges', to: {name: 'Colleges'}, current: false},
   {name: 'Create Elections', to: {name: 'CreateElec'}, current: false},
   {name: 'Candidates', to: {name: 'Candidates'}, current: false},
-  {name: 'Update Master List', to: {name: 'UpdtMasterList'}, current: false}
+  {name: 'Manage Positions', to: {name: 'MngPosition'}, current: false},
+  {name: 'Manage Partylists', to: {name: 'MngPartylist'}, current: false},
+  {name: 'Update Master List', to: {name: 'UpdtMasterList'}, current: false},
 ]
 
 function getAdminData(){
@@ -170,7 +171,7 @@ export default {
   },
   data(){
     return{
-      user: []
+      user: [],
     }
   },
   mounted(){

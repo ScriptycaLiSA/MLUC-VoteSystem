@@ -6,21 +6,24 @@
     </div>
     <div class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 px-3 min-w-screen">
       <div class="py-4 px-4 max-w-lg">
-        <form class="">
+        <form class="" @submit="addPartylist">
           <div class="flex flex-wrap -mx-4 mb-6">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-election">
               Create Partylist
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-election" type="text" placeholder="Partylist Name:" required>
+            <input v-model="partylistData.name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-election" type="text" placeholder="Partylist Name:" required>
           </div>
           <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <button type="button" class="text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
-                Create
+              <button type="submit" class="text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
+                <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Add Partylist
               </button>
-            </div>
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
             </div>
           </div>
         </form>
@@ -85,8 +88,46 @@
 </template>
 
 <script>
+import store from '../../store'
+import {ref} from 'vue'
+
+let loading = ref(false);
+
+let partylistData = {
+  name: ''
+}
+
+function addPartylist(ev){
+  ev.preventDefault();
+
+  loading.value = true;
+
+  store.dispatch('addPartylist', partylistData)
+    .then((response)=>{
+      loading.value = false;
+      this.success = response.success
+    })
+    .catch((error)=>{
+      loading.value = false;
+      this.error = error.error
+    })
+}
+
 export default {
-  name: "MngPartylist"
+  name: "MngPartylist",
+  setup(){
+    return{
+      partylistData,
+      loading,
+      addPartylist
+    }
+  },
+  data(){
+    return{
+      success: '',
+      error: ''
+    }
+  }
 }
 </script>
 

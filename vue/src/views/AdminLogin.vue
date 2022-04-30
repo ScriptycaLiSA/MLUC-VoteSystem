@@ -29,7 +29,7 @@
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">DMMMSU Voting Portal</h2>
         <p class="mt-6 text-center text-md font-normal text-gray-900">Signing in as Administrator</p>
 
-        <form class="mt-8 space-y-6" @submit="adminLogin">
+        <form class="mt-8 space-y-6" @submit.prevent="adminLogin">
           <input type="hidden" name="remember" value="true"/>
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
