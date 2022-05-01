@@ -1,4 +1,6 @@
 <template>
+  <div id="axiosForm">
+    <div class="loader" v-if="loading"></div>
   <div class="bg-slate-100 shadow-xl px-3 min-h-screen">
     <div class="font-bold text-5xl py-3">
       <p>MASTER LIST UPDATE</p>
@@ -109,6 +111,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -124,10 +127,6 @@ const bodyFormData = new FormData();
 let status = ref("");
 
 function parseFromOriginal() {
-  store.dispatch('getMstrDash')
-    .then((response) => {
-      this.mstr_status = response.title;
-    })
   store.dispatch('getAllRecordsSource')
     .then((response) => {
       this.loadContData2 = response.students;
@@ -135,9 +134,16 @@ function parseFromOriginal() {
       this.loadContData2.map(function (obj, i) {
         systemPushServer.push(obj);
       })
+      systemPushServer = []
     })
     .catch((error) => {
       console.log(error);
+    })
+  this.loading = true;
+  store.dispatch('getMstrDash')
+    .then((response) => {
+      this.mstr_status = response.title;
+      this.loading = false;
     })
 }
 
@@ -207,7 +213,9 @@ export default {
       mstr_status: [],
       name: '',
       file: '',
-      success: '',
+      loading: false,
+      success: false,
+      error: false,
       errorMsg: ''
     }
   },
@@ -219,5 +227,22 @@ export default {
 </script>
 
 <style scoped>
+#axiosForm { /* Components Root Element ID */
+  position: relative;
+}
 
+.loader { /* Loader Div Class */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  background-image: url('../../assets/assets.gif');
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 10000000;
+  opacity: 0.6;
+}
 </style>

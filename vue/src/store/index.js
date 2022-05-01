@@ -26,7 +26,7 @@ const adminModule = {
           return data;
         })
     },
-    getSession({commit}){
+    getSession({commit}) {
       return axiosClient.get('/user')
         .then(({data}) => {
           return data;
@@ -76,57 +76,63 @@ const adminModule = {
           return data;
         });
     },
-    getMstrDash({commit}, sample){
+    getMstrDash({commit}, sample) {
       return axiosClient.get('/mstr_dash')
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         })
     },
-    getCandidateInfo({commit}, mainData){
+    getCandidateInfo({commit}, mainData) {
       return axiosClient.get('/campaignSite')
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         })
     },
-    getCollegesData({commit}, fetched){
+    getCollegesData({commit}, fetched) {
       return axiosClient.get('/colleges')
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         })
     },
-    getElectionData({commit}, fetched){
+    getElectionData({commit}, fetched) {
       return axiosClient.get('/election_data')
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         })
     },
-    getPartylistData({commit}, fetched){
+    getPartylistData({commit}, fetched) {
       return axiosClient.get('/partylist_data')
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
-      });
+        });
     },
-    getPositionData({commit}, fetched){
+    getPositionData({commit}, fetched) {
       return axiosClient.get('/get_positions')
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         });
     },
-    createElections({commit}, setElection){
+    createElections({commit}, setElection) {
       return axiosClient.post('/create_election', setElection)
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         });
     },
-    createPositionMode({commit}, setPosition){
-      return axiosClient.post('/create_position', setPosition)
-        .then(({data})=>{
+    deleteElection({commit}, deleteElec) {
+      return axiosClient.post('/delete_election', deleteElec)
+        .then(({data}) => {
           return data;
         })
     },
-    addPartylist({commit}, addPartylist){
+    createPositionMode({commit}, setPosition) {
+      return axiosClient.post('/create_position', setPosition)
+        .then(({data}) => {
+          return data;
+        })
+    },
+    addPartylist({commit}, addPartylist) {
       return axiosClient.post('/create_partylist', addPartylist)
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         })
     }

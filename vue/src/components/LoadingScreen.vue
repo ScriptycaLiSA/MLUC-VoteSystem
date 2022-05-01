@@ -1,31 +1,34 @@
 <template>
-  <div id="loading">
-    <img
-      class="img"
-      src="../assets/assets.gif"
-      alt="loading..."
-      width="200"
-    />
+  <div id="axiosForm">
+    <div id="loader"></div>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Loading"
+  name: "LoadingScreen"
 };
 </script>
-<style>
-#loading {
-  position: absolute;
-  z-index: 1000;
-  background-color: white;
-  height: 100vh;
-  width: 100vw;
-  text-align: center;
-  line-height: 100vh;
-}
-.img {
+
+<style scoped>
+#axiosForm { /* Components Root Element ID */
   position: relative;
-  margin: 20% auto auto;
+}
+
+.loader { /* Loader Div Class */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  background-image: url('../assets/assets.gif');
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 10000000;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
 }
 </style>

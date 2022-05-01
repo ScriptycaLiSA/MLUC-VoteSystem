@@ -78,6 +78,9 @@
         </div>
       </div>
       <div class="xl:mx-6 xl:my-6">
+        <Warning v-if="error">
+          {{errorMsg}}
+        </Warning>
         <!-- children view from /router/index.js -->
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
@@ -94,18 +97,23 @@ import {computed} from 'vue'
 import store from '../store'
 import {useRouter} from "vue-router";
 import router from "../router";
+import Warning from "./Warning.vue";
+
+let errorMsg = ''
 
 function getAdminData() {
   this.loading = true;
   store.dispatch('getSession')
     .then((response) => {
-      this.loading = false;
       this.user.name = response.name;
       this.user.role = response.role;
       this.user.email = response.email;
+      this.loading = false;
     })
     .catch((error) => {
-      console.log(error)
+      errorMsg = error.error
+      this.loading = false;
+      this.error = true;
     })
 }
 
@@ -120,8 +128,12 @@ function logout() {
 
 export default {
   name: 'SideNavLayout',
+  components: {
+    Warning
+  },
   setup() {
     return {
+      errorMsg,
       getAdminData,
       logout
     }

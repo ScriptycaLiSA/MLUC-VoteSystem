@@ -138,21 +138,25 @@ function getSelectData() {
       response.success.map(function (obj, i) {
         colleges.push(obj);
       })
+      colleges = []
       store.dispatch('getPartylistData')
         .then((response) => {
           response.success.map(function (obj, i) {
             partylist.push(obj);
           })
+          partylist = []
           store.dispatch('getElectionData')
             .then((response) => {
               response.success.map(function (obj, i) {
                 elections.push(obj);
               })
+              elections = []
               store.dispatch('getPositionData')
                 .then((response) => {
                   response.success.map(function (obj, i) {
                     positions.push(obj);
                   })
+                  positions = []
                   this.loading = false;
                 })
                 .catch((error) => {

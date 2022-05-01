@@ -45,12 +45,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/create_position', '\App\Http\Controllers\Admin\v1\Position\CreatePositionController');
 
     //Election
-    Route::get('/get_current_election', [Util::class, 'getCurrentElection']);
-    Route::get('/get_election_status', [Util::class, 'getElectionStatus']);
+    //Route::get('/get_current_election', [Util::class, 'getCurrentElection']);
+    //Route::get('/get_election_status', [Util::class, 'getElectionStatus']);
     Route::post('/create_election', [ElectionController::class, 'createElection']);
     Route::get('/election_data', [ElectionController::class, 'search']);
     Route::get('/start_election', 'App\Http\Controllers\Admin\v1\Election\StartElectionController');
     Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfoController');
+    Route::post('/delete_election',[ElectionController::class, 'deleteElection']);
 
     //Colleges
     Route::get('/colleges', [CollegeController::class, 'index']);
