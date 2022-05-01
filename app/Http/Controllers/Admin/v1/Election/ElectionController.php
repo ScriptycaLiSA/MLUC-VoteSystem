@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\v1\Election;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Util;
+use App\Http\Controllers\UtilityElection;
 use App\Models\Admin\CandidateModel;
 use App\Models\ElectionModel;
 use Illuminate\Http\Request;
@@ -24,25 +24,27 @@ class ElectionController extends Controller
         return response([
             'error' => 'Something went wrong. Please try again later'
         ], 500);
+        //please add the number of candidates that participated in election later
     }
 
     //election creation
     public function createElection(Request $request)
     {
-        $data = $request->only('name');
+        $data = $request->only('name','college_init');
 
         if (!$data == null) {
             try{
                 DB::table('election_models')->insert([
                     'name' => $data['name'],
+                    'college_init' => $data['college_init']
                 ]);
                 return response([
-                    'success' => 'Election has been inserted!',
+                    'success' => 'Election has been inserted! Please refresh the page!',
                 ], 201);
             }catch(\Throwable $exception){
                 return response()->json([
-                    'error'=>'Your input might be duplicated. Please check the list of election by refreshing this page!'
-                ], 422);
+                    'error'=>'Something went wrong. Please try again later!'
+                ], 500);
             }
         }
         return response([
@@ -59,11 +61,11 @@ class ElectionController extends Controller
                     ->where('id',$data['id'])
                     ->delete();
                 return response([
-                    'success' => 'Election has been deleted!',
+                    'success' => 'Election has been deleted! Please refresh the page later',
                 ], 200);
             }catch(\Throwable $exception){
                 return response()->json([
-                    'error'=>'Something went wrong. Please restart the page'
+                    'error'=>'Something went wrong. Please refresh the page later'
                 ], 500);
             }
         }

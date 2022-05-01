@@ -19,12 +19,13 @@ CREATE TABLE IF NOT EXISTS `colleges_models` (
   `initials` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `initials` (`initials`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.colleges_models: ~8 rows (approximately)
+-- Dumping data for table votesys-mluc.colleges_models: ~10 rows (approximately)
 DELETE FROM `colleges_models`;
 /*!40000 ALTER TABLE `colleges_models` DISABLE KEYS */;
 INSERT INTO `colleges_models` (`id`, `name`, `initials`) VALUES
+	(8, 'Mid La Union Campus', 'MLUC'),
 	(9, 'College of Information Technology', 'CIT'),
 	(10, 'College of Technical Education', 'CTED'),
 	(11, 'College of Technology', 'COT'),

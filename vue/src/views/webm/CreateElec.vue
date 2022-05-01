@@ -58,6 +58,17 @@
                 v-model="election.name"
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 id="grid-election" type="text" placeholder="Enter Election Name:" required>
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
+                College:
+              </label>
+              <select v-model="election.college_init"
+                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      id="grid-College">
+                <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
+                <option v-for="(infoCol, index) in colleges" :key="index" v-bind:value="infoCol.initials">
+                  {{ infoCol.name }}
+                </option>
+              </select>
             </div>
             <div class="flex flex-wrap -mx-3 mb-2">
               <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -73,9 +84,6 @@
         <div>
           <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table
             left to right</label>
-          <p class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-            Note: "1" in STATUS column means active
-          </p>
           <div id="table" class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -89,7 +97,7 @@
                       </th>
                       <th scope="col"
                           class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                        status
+                        college
                       </th>
                       <th scope="col"
                           class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
@@ -107,29 +115,30 @@
                     </thead>
                     <tbody>
 
-                      <tr v-for="(index, key) in electionData" :key="index.id"
-                          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ index.name }}
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          {{ index.status }}
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          {{ index.start }}
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          {{ index.end }}
-                        </td>
-                        <td class="hidden">
-                          {{ index.id }}
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <button @click="deleteElection(index)" class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
-                            delete
-                          </button>
-                        </td>
-                      </tr>
+                    <tr v-for="(index, key) in electionData" :key="index.id"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ index.name }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.college_init }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.start }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.end }}
+                      </td>
+                      <td class="hidden">
+                        {{ index.id }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        <button @click="deleteElection(index)"
+                                class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
+                          delete
+                        </button>
+                      </td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
@@ -148,8 +157,11 @@ import {ref} from 'vue'
 import store from '../../store'
 import Warning from "../../components/Warning.vue"
 
+let colleges = []
+
 let election = {
-  name: ''
+  name: '',
+  college_init: ''
 };
 
 let electionData = []
@@ -169,11 +181,16 @@ function fetchElection() {
         electionData.push(obj)
       }))
       electionData = []
+      store.dispatch('getCollegesData')
+        .then((response) => {
+          response.success.map(function (obj, i) {
+            colleges.push(obj);
+          })
+          colleges = []
+          this.loading = false;
+        })
     })
     .catch((error) => {
-      this.loading = false;
-    })
-    .finally(() => {
       this.loading = false;
     })
 }
@@ -183,6 +200,7 @@ export default {
   components: {Warning},
   setup() {
     return {
+      colleges,
       errorMsg,
       election,
       electionData,
@@ -216,20 +234,20 @@ export default {
         }).finally(() => {
       })
     },
-    deleteElection(id){
+    deleteElection(id) {
 
       this.loading = true
       store.dispatch('deleteElection', id)
-      .then((response)=>{
-        this.success = true
-        this.loading = false
-        serverResponse.message = response.success
-      })
-      .catch((error)=>{
-        this.error = true
-        this.loading = false
-        errorMsg.message = error.error
-      })
+        .then((response) => {
+          this.success = true
+          this.loading = false
+          serverResponse.message = response.success
+        })
+        .catch((error) => {
+          this.error = true
+          this.loading = false
+          errorMsg.message = error.error
+        })
     }
   },
   mounted() {

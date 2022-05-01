@@ -16,7 +16,7 @@ const data = computed(() => ({
 
   datasets: [
     {
-      label: 'voters',
+      label: 'voter_counts',
       data: dataValues.value,
       backgroundColor: ['#859900','#d33682','#cb4b16']
     }
