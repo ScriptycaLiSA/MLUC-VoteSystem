@@ -9,29 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class PositionController extends Controller
 {
-    public function createPosition(Request $request){
-        $data = $request->only('name');
-
-        if(!$data==null){
-            DB::table('position_models')->insert([
-                'name'=>$data['name'],
-            ]);
-            return response([
-                'success'=>[
-                    'message'=>'Position has been inserted!',
-                    'position_name'=>$data
-                ]
-            ],201);
-        }
-        return response([
-            'error'=>'Something went wrong. Please try again later!'
-        ],500);
-    }
     public function index()
     {
-        $data = PositionModel::all();
+        $data = DB::table('position_models')->get();
 
         if (!$data == null) {
+
             return response([
                 'success' => $data
             ], 200);
@@ -39,5 +22,26 @@ class PositionController extends Controller
         return response([
             'error' => 'Something went wrong. Please try again later!'
         ]);
+    }
+    public function deletePosition(Request $request){
+        $data = $request->only('id');
+
+        if(!$data == null){
+            try{
+                DB::table('position_models')
+                    ->where('id',$data['id'])
+                    ->delete();
+                return response([
+                    'success'=>'Position has been deleted. Please restart the page!'
+                ], 201);
+            }catch(\Throwable $e){
+                return response([
+                    'success'=>'Cannot deleted! Check inputs or please restart the page!'
+                ], 422);
+            }
+        }
+        return response([
+            'error'=>'Something went wrong. Please try again later!'
+        ], 500);
     }
 }

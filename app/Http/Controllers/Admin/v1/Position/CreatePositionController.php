@@ -14,26 +14,28 @@ class CreatePositionController extends Controller
     public function __invoke(Request $request)
     {
         $data = $request->validate([
-            'name'=>'required',
-            'election_id'=>'required'
+            'name' => 'required',
+            'election_id' => 'required'
         ]);
 
-        if(!$data==null){
-            DB::table('position_models')
-                ->insert([
-                    'name'=>$data['name'],
-                    'election_id'=>$data['election_id']
-                ]);
-
-            return response([
-                'success'=>[
-                    'message'=>'Position has been inserted',
-                    'data'=>$data
-                ]
-            ], 201);
+        if (!$data == null) {
+            try {
+                DB::table('position_models')
+                    ->insert([
+                        'name' => $data['name'],
+                        'election_id' => $data['election_id']
+                    ]);
+                return response([
+                    'success' => 'Position has been inserted. Please restart the page!'
+                ], 201);
+            } catch (\Throwable $e) {
+                return response([
+                    'error' => 'Something error in your input. Please try again by refreshing this page!'
+                ], 422);
+            }
         }
         return response([
-            'error'=>'Something went wrong. Please try again later!'
+            'error' => 'Something went wrong. Please try again later!'
         ], 500);
     }
 }

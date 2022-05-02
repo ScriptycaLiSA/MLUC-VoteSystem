@@ -130,6 +130,12 @@ const adminModule = {
           return data;
         })
     },
+    deletePosition({commit}, deletePos){
+      return axiosClient.post('/delete_position', deletePos)
+        .then(({data})=>{
+          return data;
+        })
+    },
     addPartylist({commit}, addPartylist) {
       return axiosClient.post('/create_partylist', addPartylist)
         .then(({data}) => {

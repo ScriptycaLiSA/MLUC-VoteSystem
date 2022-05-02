@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\v1\PartylistController;
 use App\Http\Controllers\Admin\v1\Position\PositionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SystemServerRecordController;
-use App\Http\Controllers\Util;
+use App\Http\Controllers\UtilityElection;
 use App\Http\Controllers\Voter\v1\VoterAuthController;
 use App\Http\Controllers\VoterMgmtController;
 use Illuminate\Http\Request;
@@ -43,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Positions
     Route::get('/get_positions', [PositionController::class, 'index']);
     Route::post('/create_position', '\App\Http\Controllers\Admin\v1\Position\CreatePositionController');
+    Route::post('/delete_position', [PositionController::class, 'deletePosition']);
 
     //Election
     //Route::get('/get_current_election', [Util::class, 'getCurrentElection']);
