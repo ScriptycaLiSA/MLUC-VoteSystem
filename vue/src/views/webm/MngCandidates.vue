@@ -54,7 +54,7 @@
               v-model="people.partylist_id"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-party">
-              <option disabled value="" class="uppercase">-- SELECT PARTYLIST --</option>
+              <option disabled value="" class="uppercase">-- SELECT PARTYLIST (Optional) --</option>
               <option v-for="(infoCol, index) in partylist" :key="index" v-bind:value="infoCol.id">
                 {{ infoCol.name }}
               </option>

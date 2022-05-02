@@ -4,11 +4,10 @@ use App\Http\Controllers\Admin\v1\CampaignSiteController;
 use App\Http\Controllers\Admin\v1\CandidateControllers;
 use App\Http\Controllers\Admin\v1\CollegeController;
 use App\Http\Controllers\Admin\v1\Election\ElectionController;
-use App\Http\Controllers\Admin\v1\PartylistController;
+use App\Http\Controllers\Admin\v1\Partylist\PartylistController;
 use App\Http\Controllers\Admin\v1\Position\PositionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SystemServerRecordController;
-use App\Http\Controllers\UtilityElection;
 use App\Http\Controllers\Voter\v1\VoterAuthController;
 use App\Http\Controllers\VoterMgmtController;
 use Illuminate\Http\Request;
@@ -46,8 +45,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/delete_position', [PositionController::class, 'deletePosition']);
 
     //Election
-    //Route::get('/get_current_election', [Util::class, 'getCurrentElection']);
-    //Route::get('/get_election_status', [Util::class, 'getElectionStatus']);
     Route::post('/create_election', [ElectionController::class, 'createElection']);
     Route::get('/election_data', [ElectionController::class, 'search']);
     Route::get('/start_election', 'App\Http\Controllers\Admin\v1\Election\StartElectionController');
@@ -60,6 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Partylist
     Route::get('/partylist_data', [PartylistController::class, 'index']);
     Route::post('/create_partylist', [PartylistController::class, 'createPartylist']);
+    Route::post('/delete_partylist', [PartylistController::class, 'deletePartylist']);
 
 
     /*

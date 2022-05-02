@@ -100,12 +100,6 @@ const adminModule = {
           return data;
         })
     },
-    getPartylistData({commit}, fetched) {
-      return axiosClient.get('/partylist_data')
-        .then(({data}) => {
-          return data;
-        });
-    },
     getPositionData({commit}, fetched) {
       return axiosClient.get('/get_positions')
         .then(({data}) => {
@@ -136,9 +130,23 @@ const adminModule = {
           return data;
         })
     },
+
+    //Partylist functions
+    getPartylistData({commit}, fetched) {
+      return axiosClient.get('/partylist_data')
+        .then(({data}) => {
+          return data;
+        });
+    },
     addPartylist({commit}, addPartylist) {
       return axiosClient.post('/create_partylist', addPartylist)
         .then(({data}) => {
+          return data;
+        })
+    },
+    deletePartylist({commit}, deleteParty){
+      return axiosClient.post('/delete_partylist', deleteParty)
+        .then(({data})=>{
           return data;
         })
     }
