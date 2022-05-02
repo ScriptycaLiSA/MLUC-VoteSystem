@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `colleges_models` (
   KEY `initials` (`initials`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.colleges_models: ~10 rows (approximately)
+-- Dumping data for table votesys-mluc.colleges_models: ~9 rows (approximately)
 DELETE FROM `colleges_models`;
 /*!40000 ALTER TABLE `colleges_models` DISABLE KEYS */;
 INSERT INTO `colleges_models` (`id`, `name`, `initials`) VALUES
@@ -35,6 +35,28 @@ INSERT INTO `colleges_models` (`id`, `name`, `initials`) VALUES
 	(15, 'College of Arts And Sciences', 'CAS'),
 	(16, 'College of Arts And Law', 'CLAW');
 /*!40000 ALTER TABLE `colleges_models` ENABLE KEYS */;
+
+-- Dumping structure for table votesys-mluc.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table votesys-mluc.users: ~1 rows (approximately)
+DELETE FROM `users`;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(4, 'Jake Montizon', 'admin@email.com', NULL, '$2a$10$nk6OzkcV7XF8.515SCX.S.WE4GdmYRxaRU2nTPTfdRQ097ay8dtXy', 'superadmin', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
