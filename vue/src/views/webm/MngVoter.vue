@@ -5,7 +5,7 @@
     </div>
     <form class="px-2 py-2" @submit="searchStudent">
 
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-2 gap-2  ">
         <input v-model="searchId.idNum" id="idNum" name="idNum" type="number" required=""
                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                placeholder="Enter ID"/>
@@ -23,7 +23,7 @@
       </div>
     </form>
 
-    <div class="grid grid-cols-1 sm:grid-cols-1 2xl:grid-cols-2">
+    <div class="grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-2">
       <form class="px-2 py-2">
         <div class="">
           <input

@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-slate-100 shadow-xl min-h-screen">
+  <div class="bg-slate-100 shadow-xl min-h-screen ">
     <div class="flex font-bold pl-2 text-5xl">
       <p>DASHBOARD</p>
     </div>
 
-    <div class="grid grid-cols-1 2xl:grid-cols-2 px-2 py-4">
+    <div class="grid grid-cols-1 xl:grid-cols-2 px-2 py-4 gap-16">
       <div class="bg-slate-100 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex items-right"
                for="selectCollege">
@@ -31,8 +31,8 @@
                for="dataTable">
           showing the data voting results from current voting event:
         </label>
-        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
-          <div id="dataTable" class="flex w-full mb-8 overflow-hidden rounded-lg shadow-xl my-4">
+        <div>
+          <div id="dataTable" class="flex w-full mb-10 overflow-hidden rounded-lg shadow-xl my-4">
             <div class="w-full overflow-x-auto">
               <table class="w-full flex-auto">
                 <thead>

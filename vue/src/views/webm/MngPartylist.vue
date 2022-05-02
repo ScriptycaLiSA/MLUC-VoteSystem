@@ -29,7 +29,7 @@
         </form>
       </div>
 
-      <div>
+      <div >
         <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table left to right</label>
         <div id="table" class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
