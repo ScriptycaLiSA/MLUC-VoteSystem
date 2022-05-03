@@ -1,8 +1,8 @@
 <template>
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
-    <div class="bg-slate-100 shadow-xl px-3 min-w-full min-h-full grid grid-cols-1 2xl:grid-cols-2">
-      <div class="bg-slate-100 shadow-xl px-12">
+    <div class="bg-slate-100  px-2 min-w-full min-h-full grid grid-cols-1 xl:grid-cols-2">
+      <div class="bg-slate-100  px-12">
         <div class="py-5 ">
           <h1 class="font-bold text-5xl py-3">Manage Candidates</h1>
         </div>
@@ -107,6 +107,69 @@
             </div>
           </div>
         </form>
+      </div>
+      <!--Table-->
+      <div class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
+        <div>
+          <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table
+            left to right</label>
+          <div id="table" class="flex flex-col">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-1">
+              <div class="inline-block py-2 min-w-full sm:px-6 lg:px-2">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                  <table class="min-w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th scope="col"
+                          class="py-2 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        Candidate
+                      </th>
+                      <th scope="col"
+                          class="py-2 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        College
+                      </th>
+                      <th scope="col"
+                          class="py-2 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        Running for
+                      </th>
+                      <th scope="col"
+                          class="py-2 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        Election
+                      </th>
+                      <th scope="col"
+                          class="py-2 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        Date Created
+                      </th>
+                      <th scope="col"
+                          class="py-2 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        Action
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr v-for="(index, key) in savedPartylist" :key="index.id"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ index.name }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.created_at }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        <button @click="deletePartylist(index)"
+                                class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
