@@ -35,7 +35,7 @@ class PartylistController extends Controller
         if(!$data==null){
             try{
                 DB::table('partylist_models')->insert([
-                    'name'=>$data,
+                    'party_name'=>$data['name'],
                 ]);
                 return response([
                     'success'=>'Partylist has been added! Please restart the page!'

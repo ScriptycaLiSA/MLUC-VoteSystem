@@ -124,9 +124,9 @@ const adminModule = {
           return data;
         })
     },
-    deletePosition({commit}, deletePos){
+    deletePosition({commit}, deletePos) {
       return axiosClient.post('/delete_position', deletePos)
-        .then(({data})=>{
+        .then(({data}) => {
           return data;
         })
     },
@@ -144,9 +144,21 @@ const adminModule = {
           return data;
         })
     },
-    deletePartylist({commit}, deleteParty){
+    deletePartylist({commit}, deleteParty) {
       return axiosClient.post('/delete_partylist', deleteParty)
-        .then(({data})=>{
+        .then(({data}) => {
+          return data;
+        })
+    },
+    getSavedCandidates({commit}, getCand) {
+      return axiosClient.get('/get_candidates', getCand)
+        .then(({data}) => {
+          return data;
+        })
+    },
+    createCandidates({commit}, addCand) {
+      return axiosClient.post('/create_candidate', addCand)
+        .then(({data}) => {
           return data;
         })
     }

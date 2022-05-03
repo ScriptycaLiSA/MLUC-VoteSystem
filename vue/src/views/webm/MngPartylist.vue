@@ -97,7 +97,7 @@
                   <tr v-for="(index, key) in savedPartylist" :key="index.id"
                       class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      {{ index.name }}
+                      {{ index.party_name }}
                     </td>
                     <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                       {{ index.created_at }}

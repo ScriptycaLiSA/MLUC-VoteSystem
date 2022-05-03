@@ -2,51 +2,51 @@
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
     <div class="bg-slate-200 shadow-xl 2xl:min-w-full 2xl:px-4 2xl:py-2">
+      <Warning v-if="success">
+        {{ serverResponse.message }}
+        <span
+          @click="success=null"
+          class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+         <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="h-6 w-6"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+         >
+           <path
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             d="M6 18L18 6M6 6l12 12"/>
+         </svg>
+        </span>
+      </Warning>
+      <Warning v-if="error">
+        {{ errorMsg.message }}
+        <span
+          @click="error=null"
+          class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+         <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="h-6 w-6"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+         >
+           <path
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             d="M6 18L18 6M6 6l12 12"/>
+         </svg>
+        </span>
+      </Warning>
       <div class="flex items-left font-bold text-5xl py-4">
         <p>MANAGE POSITION</p>
       </div>
       <div
         class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 px-3 min-w-screen">
-        <Warning v-if="success">
-          {{ serverResponse.message }}
-          <span
-            @click="success=null"
-            class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
-         <svg
-           xmlns="http://www.w3.org/2000/svg"
-           class="h-6 w-6"
-           fill="none"
-           viewBox="0 0 24 24"
-           stroke="currentColor"
-         >
-           <path
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             stroke-width="2"
-             d="M6 18L18 6M6 6l12 12"/>
-         </svg>
-        </span>
-        </Warning>
-        <Warning v-if="error">
-          {{ errorMsg.message }}
-          <span
-            @click="error=null"
-            class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
-         <svg
-           xmlns="http://www.w3.org/2000/svg"
-           class="h-6 w-6"
-           fill="none"
-           viewBox="0 0 24 24"
-           stroke="currentColor"
-         >
-           <path
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             stroke-width="2"
-             d="M6 18L18 6M6 6l12 12"/>
-         </svg>
-        </span>
-        </Warning>
         <div class="py-4 px-4 max-w-lg">
           <form class="" @submit.prevent="createPositionFx">
             <div class="flex flex-wrap -mx-4 mb-6">
@@ -67,7 +67,7 @@
                       id="grid-elections">
                 <option disabled value="" class="uppercase">-- SELECT ELECTION --</option>
                 <option v-for="(infoCol, index) in elections" :key="index" v-bind:value="infoCol.id">
-                  {{ infoCol.name }}
+                  {{ infoCol.elec_name }}
                 </option>
               </select>
             </div>
@@ -115,10 +115,10 @@
                     <tr v-for="(index, key) in savedPositions" :key="key"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ index.name }}
+                        {{ index.pos_name }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{ index.election_id }}
+                        {{ index.elec_name }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         {{ index.created_at }}

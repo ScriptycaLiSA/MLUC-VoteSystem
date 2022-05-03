@@ -6,57 +6,99 @@
         <div class="py-5 ">
           <h1 class="font-bold text-5xl py-3">Manage Candidates</h1>
         </div>
-        <form class="w-full max-w-lg">
+        <Warning v-if="success">
+          {{ serverResponse.message }}
+          <span
+            @click="success=null"
+            class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+         <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="h-6 w-6"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+         >
+           <path
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             d="M6 18L18 6M6 6l12 12"/>
+         </svg>
+        </span>
+        </Warning>
+        <Warning v-if="error">
+          {{ errorMsg.message }}
+          <span
+            @click="error=null"
+            class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+         <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="h-6 w-6"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+         >
+           <path
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             d="M6 18L18 6M6 6l12 12"/>
+         </svg>
+        </span>
+        </Warning>
+
+        <form class="w-full max-w-lg" @submit.prevent="createCandidate">
           <div class="flex justify-center">
+            <img class="h-24 w-24 rounded-full mx-2 my-2" :src="this.imagePreview" alt="img"/>
             <div class="mb-3 w-96">
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="formFileLg">
                 Image file upload:
               </label>
-              <input class="form-control block w-full px-2 py-1.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
+              <input v-on:change="fileHandle" class="form-control block w-full px-2 py-1.5 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="formFileLg" type="file">
             </div>
           </div>
-
           <div class="flex flex-wrap -mx-4 mb-6">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
               Name:
             </label>
             <input
+              v-model="this.name"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-lastname" type="text" placeholder="Full Name (First Name, Middle Initial, Last Name)"
               required>
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-elections">
               Election:
             </label>
-            <select v-model="people.election_id"
+            <select v-model="this.election_id"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-elections">
               <option disabled value="" class="uppercase">-- SELECT ELECTION --</option>
               <option v-for="(infoCol, index) in elections" :key="index" v-bind:value="infoCol.id">
-                {{ infoCol.name }}
+                {{ infoCol.elec_name }}
               </option>
             </select>
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
               College:
             </label>
-            <select v-model="people.college_init"
+            <select v-model="this.college_init"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-College">
               <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
               <option v-for="(infoCol, index) in colleges" :key="index" v-bind:value="infoCol.initials">
-                {{ infoCol.name }}
+                {{ infoCol.coll_name }}
               </option>
             </select>
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-party">
               Partylist:
             </label>
             <select
-              v-model="people.partylist_id"
+              v-model="this.partylist_id"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-party">
               <option disabled value="" class="uppercase">-- SELECT PARTYLIST (Optional) --</option>
               <option v-for="(infoCol, index) in partylist" :key="index" v-bind:value="infoCol.id">
-                {{ infoCol.name }}
+                {{ infoCol.party_name }}
               </option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -67,11 +109,11 @@
             <select
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-Position"
-              v-model="people.position_id">
+              v-model="this.position_id">
               <option disabled value="" class="uppercase">-- SELECT POSITION --</option>
 
               <option v-for="(infoCol, index) in positions" :key="index" v-bind:value="infoCol.id">
-                {{ infoCol.name }}
+                {{ infoCol.pos_name }}
               </option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -82,27 +124,16 @@
             <div
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
               <textarea
+                v-model="this.description"
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="Portfolio" rows="3" placeholder="Why do you want to run for this position"></textarea>
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-0.1">
             <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <button type="button"
+              <button type="submit"
                       class="text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
-                Register
-              </button>
-            </div>
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <button type="button"
-                      class="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 mr-2 mb-2">
-                Update
-              </button>
-            </div>
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <button type="button"
-                      class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                Delete
+                ADD CANDIDATE
               </button>
             </div>
           </div>
@@ -148,16 +179,25 @@
                     </thead>
                     <tbody>
 
-                    <tr v-for="(index, key) in savedPartylist" :key="index.id"
+                    <tr v-for="(index, key) in savedCandidates" :key="index.id"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ index.name }}
+                        {{ index.cand_name }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.college_init }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.pos_name }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.elec_name }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         {{ index.created_at }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        <button @click="deletePartylist(index)"
+                        <button @click=""
                                 class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
                           delete
                         </button>
@@ -176,7 +216,6 @@
 </template>
 
 <script>
-import {ref} from 'vue'
 import store from "../../store";
 import Warning from "../../components/Warning.vue";
 
@@ -185,13 +224,22 @@ let partylist = [];
 let elections = [];
 let positions = [];
 
-const people = {
+let savedCandidates = []
+
+let serverResponse = {
+  message: ''
+}
+let errorMsg = {
+  message: ''
+}
+
+let people = {
   name: '',
   college_init: '',
   election_id: '',
   partylist_id: '',
   position_id: '',
-  image: '',
+  image: null,
   description: '',
 }
 
@@ -221,7 +269,17 @@ function getSelectData() {
                     positions.push(obj);
                   })
                   positions = []
-                  this.loading = false;
+                  store.dispatch('getSavedCandidates')
+                    .then((response) => {
+                      response.success.map((function (obj, i) {
+                        savedCandidates.push(obj)
+                      }))
+                      savedCandidates = []
+                      this.loading = false
+                    })
+                    .catch((error) => {
+                      errorMsg.message = error.error
+                    })
                 })
                 .catch((error) => {
                   console.log(error)
@@ -250,20 +308,65 @@ export default {
       getSelectData,
       partylist,
       elections,
-      positions
+      positions,
+      serverResponse,
+      errorMsg,
+      savedCandidates,
     }
-  },
-  method: {},
-  mounted() {
-    this.getSelectData()
   },
   data() {
     return {
       loading: false,
       success: false,
-      error: false
+      error: false,
+      imagePreview: null,
+      name: '',
+      college_init: '',
+      election_id: '',
+      partylist_id: '',
+      position_id: '',
+      image: {},
+      description: '',
     }
-  }
+  },
+  methods: {
+    fileHandle(e) {
+      this.image = e.target.files[0]
+      let reader = new FileReader()
+
+      reader.readAsDataURL(this.image)
+      reader.onload = (file) => {
+        this.imagePreview = file.target.result
+      }
+    },
+    createCandidate() {
+      this.loading = true
+      let data = new FormData()
+
+      data.append('name', this.name)
+      data.append('college_init', this.college_init)
+      data.append('election_id', this.election_id)
+      data.append('partylist_id', this.partylist_id)
+      data.append('position_id', this.position_id)
+      data.append('image', this.image)
+      data.append('description', this.description)
+
+      store.dispatch('createCandidates', data)
+        .then((response) => {
+          this.loading = false
+          this.success = true
+          serverResponse.message = response.success
+        })
+        .catch((error) => {
+          this.loading = false
+          this.error = false
+          errorMsg.message = error.error
+        })
+    }
+  },
+  mounted() {
+    this.getSelectData()
+  },
 }
 </script>
 

@@ -22,7 +22,7 @@ class CreatePositionController extends Controller
             try {
                 DB::table('position_models')
                     ->insert([
-                        'name' => $data['name'],
+                        'pos_name' => $data['name'],
                         'election_id' => $data['election_id']
                     ]);
                 return response([

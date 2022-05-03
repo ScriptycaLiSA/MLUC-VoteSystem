@@ -196,26 +196,31 @@
 import {ArrowCircleLeftIcon} from '@heroicons/vue/outline'
 import store from '../store'
 
+let candidates = []
+
 export default {
   name: 'Campaign',
   components: {
     ArrowCircleLeftIcon
   },
+  setup(){
+    return{
+      candidates
+    }
+  },
   data() {
     return {
-      candidates: []
     }
   },
   method: {
     getCandidateInfo(){
       store.dispatch('getCandidateInfo')
         .then((response)=>{
-          this.candidates = response.candidates;
+          candidates = response.candidates;
         })
     }
   },
   mounted() {
-    this.getCandidateInfo();
   }
 }
 </script>

@@ -35,7 +35,7 @@ class ElectionController extends Controller
         if (!$data == null) {
             try{
                 DB::table('election_models')->insert([
-                    'name' => $data['name'],
+                    'elec_name' => $data['name'],
                     'college_init' => $data['college_init']
                 ]);
                 return response([

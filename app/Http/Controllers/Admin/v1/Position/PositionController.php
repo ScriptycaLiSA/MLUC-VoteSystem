@@ -11,7 +11,10 @@ class PositionController extends Controller
 {
     public function index()
     {
-        $data = DB::table('position_models')->get();
+        $data = DB::table('position_models')
+            ->join('election_models', 'position_models.election_id', '=', 'election_models.id')
+            ->select('position_models.*', 'election_models.elec_name')
+            ->get();
 
         if (!$data == null) {
 
@@ -23,25 +26,27 @@ class PositionController extends Controller
             'error' => 'Something went wrong. Please try again later!'
         ]);
     }
-    public function deletePosition(Request $request){
+
+    public function deletePosition(Request $request)
+    {
         $data = $request->only('id');
 
-        if(!$data == null){
-            try{
+        if (!$data == null) {
+            try {
                 DB::table('position_models')
-                    ->where('id',$data['id'])
+                    ->where('id', $data['id'])
                     ->delete();
                 return response([
-                    'success'=>'Position has been deleted. Please restart the page!'
+                    'success' => 'Position has been deleted. Please restart the page!'
                 ], 201);
-            }catch(\Throwable $e){
+            } catch (\Throwable $e) {
                 return response([
-                    'success'=>'Cannot deleted! Check inputs or please restart the page!'
+                    'success' => 'Cannot deleted! Check inputs or please restart the page!'
                 ], 422);
             }
         }
         return response([
-            'error'=>'Something went wrong. Please try again later!'
+            'error' => 'Something went wrong. Please try again later!'
         ], 500);
     }
 }

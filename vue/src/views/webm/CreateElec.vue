@@ -66,7 +66,7 @@
                       id="grid-College">
                 <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
                 <option v-for="(infoCol, index) in colleges" :key="index" v-bind:value="infoCol.initials">
-                  {{ infoCol.name }}
+                  {{ infoCol.coll_name }}
                 </option>
               </select>
             </div>
@@ -117,7 +117,7 @@
                     <tr v-for="(index, key) in electionData" :key="index.id"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ index.name }}
+                        {{ index.elec_name }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         {{ index.college_init }}

@@ -49,7 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/create_election', [ElectionController::class, 'createElection']);
     Route::get('/election_data', [ElectionController::class, 'search']);
     Route::get('/start_election', 'App\Http\Controllers\Admin\v1\Election\StartElectionController');
-    Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfoController');
+    Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfo   Controller');
     Route::post('/delete_election', [ElectionController::class, 'deleteElection']);
 
     //Colleges
