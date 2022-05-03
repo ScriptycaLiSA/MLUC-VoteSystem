@@ -178,6 +178,7 @@
 <script>
 import {ref} from 'vue'
 import store from "../../store";
+import Warning from "../../components/Warning.vue";
 
 let colleges = [];
 let partylist = [];
@@ -241,6 +242,7 @@ function getSelectData() {
 
 export default {
   name: "Candidates",
+  components: {Warning},
   setup() {
     return {
       people,

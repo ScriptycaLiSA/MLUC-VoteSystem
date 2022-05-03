@@ -33,11 +33,10 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
-        /** var User $user */
         Auth::logout();
 
         return response([
-            'success'=>true
+            'success'=>'You have successfully logged out. Please log-in again!'
         ],200);
     }
 

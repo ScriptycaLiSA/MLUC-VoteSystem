@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\v1\CampaignSiteController;
-use App\Http\Controllers\Admin\v1\CandidateControllers;
+use App\Http\Controllers\Admin\v1\Candidates\CandidateControllers;
 use App\Http\Controllers\Admin\v1\CollegeController;
 use App\Http\Controllers\Admin\v1\Election\ElectionController;
 use App\Http\Controllers\Admin\v1\Partylist\PartylistController;
@@ -36,8 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
     /*  Administration Control
     *  This part contains get methods for elections
     */
-    //Candidates
-    Route::get('/candidate_lists', [CandidateControllers::class, 'getRecords']);
+    //Candidate functions
+    Route::get('/get_candidates', [CandidateControllers::class, 'getRecords']);
+    Route::post('/create_candidate', [CandidateControllers::class, 'createCandidate']);
 
     //Positions
     Route::get('/get_positions', [PositionController::class, 'index']);
@@ -49,7 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/election_data', [ElectionController::class, 'search']);
     Route::get('/start_election', 'App\Http\Controllers\Admin\v1\Election\StartElectionController');
     Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfoController');
-    Route::post('/delete_election',[ElectionController::class, 'deleteElection']);
+    Route::post('/delete_election', [ElectionController::class, 'deleteElection']);
 
     //Colleges
     Route::get('/colleges', [CollegeController::class, 'index']);
@@ -75,6 +76,5 @@ Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
 Route::get('/voterget_all', [VoterMgmtController::class, 'getVoterInfoAll']);
 //voter controls
 Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
-
 
 Route::get('/campaignSite', [CampaignSiteController::class, 'fetchCandidateData']);
