@@ -4,7 +4,9 @@
     <div class="bg-slate-200 shadow-xl 2xl:min-w-full 2xl:px-4 2xl:py-2">
 
       <div class="flex items-left font-bold text-5xl py-4">
-        <p>CREATE ELECTIONS</p><Warning v-if="error">
+        <p>CREATE ELECTIONS</p>
+      </div>
+      <Warning v-if="error">
         {{ errorMsg.message }}
         <span
           @click="error=null"
@@ -24,11 +26,11 @@
          </svg>
         </span>
       </Warning>
-        <Warning v-if="success">
-          {{ serverResponse.message }}
-          <span
-            @click="success=null"
-            class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+      <Warning v-if="success">
+        {{ serverResponse.message }}
+        <span
+          @click="success=null"
+          class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
          <svg
            xmlns="http://www.w3.org/2000/svg"
            class="h-6 w-6"
@@ -43,9 +45,7 @@
              d="M6 18L18 6M6 6l12 12"/>
          </svg>
         </span>
-        </Warning>
-      </div>
-
+      </Warning>
       <div
         class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 px-3 min-w-screen">
         <div class="py-4 px-4 max-w-lg">
@@ -80,7 +80,6 @@
             </div>
           </form>
         </div>
-
         <div>
           <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table
             left to right</label>

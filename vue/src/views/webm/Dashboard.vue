@@ -8,7 +8,7 @@
       <div class="bg-slate-100 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex items-right"
                for="selectCollege">
-          Select College/Events:
+          Select Elections:
         </label>
         <div class="items-right">
           <select
