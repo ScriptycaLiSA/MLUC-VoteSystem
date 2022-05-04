@@ -9,17 +9,24 @@ use Illuminate\Support\Facades\DB;
 
 class CampaignSiteController extends Controller
 {
-    public function fetchCandidateData(){
+    public function fetchCandidateData()
+    {
+        $header = DB::table('election_models')
+            ->get();
+
         $data = DB::table('candidate_models')
+            ->orderBy('position_id')
             ->join('position_models', 'candidate_models.position_id', '=', 'position_models.id')
             ->join('election_models', 'candidate_models.election_id', '=', 'election_models.id')
-            ->select('candidate_models.*', 'position_models.pos_name', 'election_models.elec_name')
+            ->join('partylist_models', 'candidate_models.partylist_id', '=', 'partylist_models.id')
+            ->select('candidate_models.*', 'position_models.pos_name', 'partylist_models.party_name')
             ->get();
 
         try {
             if (!$data == null) {
                 return response([
-                    'success' => $data
+                    'title' => $header,
+                    'data'=> $data
                 ], 200);
             }
         } catch (\Throwable $e) {

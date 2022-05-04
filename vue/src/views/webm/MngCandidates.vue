@@ -196,8 +196,11 @@
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         {{ index.created_at }}
                       </td>
+                      <td class="hidden">
+                        {{ index.id }}
+                      </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        <button @click=""
+                        <button @click="deleteCandidate(index)"
                                 class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
                           delete
                         </button>
@@ -333,6 +336,14 @@ export default {
     fileHandle(e) {
       this.image = e.target.files[0]
       let reader = new FileReader()
+      let img = this.image
+
+      if(img['size'] > 5120000){
+        alert('The file inserted is too large!')
+      }
+      else{
+        alert('File has inserted!')
+      }
 
       reader.readAsDataURL(this.image)
       reader.onload = (file) => {
@@ -362,6 +373,20 @@ export default {
           this.error = false
           errorMsg.message = error.error
         })
+    },
+    deleteCandidate(id) {
+      this.loading = true
+
+      store.dispatch('deleteCandidate', id)
+        .then((response) => {
+          this.loading = false
+          this.success = true
+          serverResponse.message = response.success
+        }).catch((error) => {
+          this.loading = false
+          this.error = true
+          errorMsg.message = error.error
+      })
     }
   },
   mounted() {

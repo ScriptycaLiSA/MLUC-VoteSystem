@@ -151,7 +151,7 @@ const adminModule = {
         })
     },
     getSavedCandidates({commit}, getCand) {
-      return axiosClient.get('/get_candidates', getCand)
+      return axiosClient.get('/get_candidates')
         .then(({data}) => {
           return data;
         })
@@ -161,7 +161,13 @@ const adminModule = {
         .then(({data}) => {
           return data;
         })
-    }
+    },
+    deleteCandidate({commit}, delCand){
+      return axiosClient.post('/delete_candidate',delCand)
+        .then(({data})=>{
+          return data;
+        })
+    },
   },
   mutations: {
     logout: (state) => {

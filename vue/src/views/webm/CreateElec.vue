@@ -229,12 +229,11 @@ export default {
         .catch((error) => {
           this.loading = false
           this.error = true
-          errorMsg.message = error.error
+          errorMsg.message = error.errors
         }).finally(() => {
       })
     },
     deleteElection(id) {
-
       this.loading = true
       store.dispatch('deleteElection', id)
         .then((response) => {

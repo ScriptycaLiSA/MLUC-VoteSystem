@@ -73,10 +73,4 @@ class ElectionController extends Controller
             'error'=>'Something went wrong. Please restart the page'
         ], 500);
     }
-
-    private function hasNoCandidate()
-    {
-        return CandidateModel::where('election_id', Util::getCurrentElection())->count() < 1;
-    }
-
 }

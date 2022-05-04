@@ -47,13 +47,13 @@ class CandidateControllers extends Controller
             'college_init' => 'required|string',
             'election_id' => 'required',
             'partylist_id' => 'required',
-            'position_id'=>'required',
+            'position_id' => 'required',
             'image' => 'required|mimes:jpg,jpeg,png,gif,svg|max:5120',
             'description' => 'required|string'
         ]);
 
         $image = $request->file('image');
-        $name = time() . '_' . $request->name . '_' . $request->college_init .  '_cand' . '.' . $image->getClientOriginalExtension();
+        $name = time() . '_' . $request->name . '_' . $request->college_init . '_cand' . '.' . $image->getClientOriginalExtension();
         Image::make($image)->save(public_path('img/profile/') . $name);
         $request->merge(['image' => $name]);
 
@@ -65,7 +65,7 @@ class CandidateControllers extends Controller
                     'college_init' => $request->college_init,
                     'election_id' => $request->election_id,
                     'partylist_id' => $request->partylist_id,
-                    'position_id'=> $request->position_id,
+                    'position_id' => $request->position_id,
                     'image' => $name,
                     'description' => $request->description
                 ]);
@@ -80,6 +80,40 @@ class CandidateControllers extends Controller
         }
         return response([
             'error' => 'Something went wrong. Please try again later or reload the page!'
+        ], 500);
+    }
+
+    public function deleteCandidate(Request $request)
+    {
+
+        $data = $request->only('id');
+
+        $testIf = DB::table('candidate_models')
+            ->where('id', '===', $data['id'])
+            ->get();
+
+        if (!$data == null) {
+            try {
+                if ($testIf) {
+                    DB::table('candidate_models')
+                        ->where('id', $data['id'])
+                        ->delete();
+                    return response([
+                        'success' => 'Candidate record has been deleted! Please refresh the page later',
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => 'Something wrong in your inputs. Please refresh the page later'
+                    ], 422);
+                }
+            } catch (\Throwable $exception) {
+                return response()->json([
+                    'error' => 'Something went wrong. Please refresh the page later'
+                ], 500);
+            }
+        }
+        return response([
+            'error' => 'Something went wrong. Please restart the page'
         ], 500);
     }
 }
