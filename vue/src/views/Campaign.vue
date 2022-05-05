@@ -29,8 +29,8 @@
       </div>
 
       <div class="grid gap-8 md:grid-cols-3">
-        <div v-for="(i, keyCnt) in candData" :key="keyCnt">
-          <div class="p-4 shadow">
+        <div v-for="(i, keyCnt) of candData" :key="keyCnt">
+          <div class="p-4 shadow" v-if="candData[keyCnt].election_id === candHeader[key].id">
             <div class="h-48 mb-2 overflow-hidden rounded-lg shadow-lg md:h-80">
               <img
                 :src="getImgInfo(candData[keyCnt].image)"
