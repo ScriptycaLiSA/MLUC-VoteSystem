@@ -19,7 +19,8 @@ class CampaignSiteController extends Controller
             ->join('position_models', 'candidate_models.position_id', '=', 'position_models.id')
             ->join('election_models', 'candidate_models.election_id', '=', 'election_models.id')
             ->join('partylist_models', 'candidate_models.partylist_id', '=', 'partylist_models.id')
-            ->select('candidate_models.*', 'position_models.pos_name', 'partylist_models.party_name')
+            ->join('colleges_models', 'candidate_models.college_init', '=', 'colleges_models.initials')
+            ->select('candidate_models.*', 'position_models.pos_name', 'partylist_models.party_name', 'colleges_models.coll_name')
             ->orderBy('candidate_models.position_id')
             ->get();
 
