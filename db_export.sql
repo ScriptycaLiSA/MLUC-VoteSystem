@@ -14,11 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Dumping database structure for votesys-mluc
-CREATE DATABASE IF NOT EXISTS `votesys-mluc` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `votesys-mluc`;
-
 -- Dumping structure for table votesys-mluc.admin_acct_models
 CREATE TABLE IF NOT EXISTS `admin_acct_models` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -63,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `candidate_models` (
   CONSTRAINT `FK_candidate_models_election_models` FOREIGN KEY (`election_id`) REFERENCES `election_models` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_candidate_models_partylist_models` FOREIGN KEY (`partylist_id`) REFERENCES `partylist_models` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_candidate_models_position_models` FOREIGN KEY (`position_id`) REFERENCES `position_models` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -88,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `election_models` (
   PRIMARY KEY (`id`),
   KEY `college_init` (`college_init`),
   CONSTRAINT `FK_election_models_colleges_models` FOREIGN KEY (`college_init`) REFERENCES `colleges_models` (`initials`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -134,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `partylist_models` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`party_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -162,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -176,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `position_models` (
   PRIMARY KEY (`id`),
   KEY `election_id` (`election_id`),
   CONSTRAINT `FK_position_models_election_models` FOREIGN KEY (`election_id`) REFERENCES `election_models` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -199,6 +194,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'user.png',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
