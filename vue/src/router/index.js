@@ -18,6 +18,8 @@ import NotFound from '../views/NotFound.vue';
 import store from '../store';
 import PasswordMaker from '../components/LaravelPasswordMaker.vue';
 import VoterCreate from "../views/VoterCreate.vue";
+import VoterDashboardLayout from "../components/voterLayout/VoterDashboardLayout.vue";
+import VoterSideNavLayout from "../components/voterLayout/VoterSideNavLayout.vue";
 
 
 const routes = [
@@ -54,10 +56,10 @@ const routes = [
       requiresAuth: true
     },
     children: [{
-        path: '/webm/dashboard',
-        name: 'Dashboard',
-        component: Dashboard
-      },
+      path: '/webm/dashboard',
+      name: 'Dashboard',
+      component: Dashboard
+    },
       {
         path: '/webm/votes',
         name: 'Votes',
@@ -99,12 +101,12 @@ const routes = [
         name: 'MngPartylist',
         component: MngPartylist
       },
+      {
+        path: '/voter/create_acct',
+        name: 'VoterCreate',
+        component: VoterCreate
+      },
     ]
-  },
-  {
-    path: '/voter/voter_view',
-    name: 'VoterView',
-    component: VoterView
   },
   {
     path: '/password_maker/only/for/admin/ui',
@@ -116,6 +118,19 @@ const routes = [
     name: 'VoterCreate',
     component: VoterCreate
   },
+  {
+    path: '/voter',
+    redirect: '/voter/voter_index',
+    component: VoterDashboardLayout,
+    meta: {
+      requiresAuth: false
+    },
+    children: [{
+      path: '/voter/voter_index',
+      name: 'VoterDashboardLayout',
+      component: VoterDashboardLayout
+    }],
+  }
 ];
 
 const router = createRouter({
@@ -123,11 +138,11 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next)=>{
+router.beforeEach((to, from, next) => {
   //admin
-  if(to.meta.requiresAuth && !store.state.a.user.token){
+  if (to.meta.requiresAuth && !store.state.a.user.token) {
     next({name: 'AdminLogin'});
-  } else if(store.state.a.user.token && (to.name === 'AdminLogin')) {
+  } else if (store.state.a.user.token && (to.name === 'AdminLogin')) {
     next({name: 'Dashboard'});
   } else {
     next();
