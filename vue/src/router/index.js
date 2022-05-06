@@ -19,7 +19,7 @@ import store from '../store';
 import PasswordMaker from '../components/LaravelPasswordMaker.vue';
 import VoterCreate from "../views/VoterCreate.vue";
 import VoterDashboardLayout from "../components/voterLayout/VoterDashboardLayout.vue";
-import VoterSideNavLayout from "../components/voterLayout/VoterSideNavLayout.vue";
+import VoterIndex from "../views/voter/voterUtility/VoterIndex.vue";
 
 
 const routes = [
@@ -127,8 +127,8 @@ const routes = [
     },
     children: [{
       path: '/voter/voter_index',
-      name: 'VoterDashboardLayout',
-      component: VoterDashboardLayout
+      name: 'VoterIndex',
+      component: VoterIndex
     }],
   }
 ];
