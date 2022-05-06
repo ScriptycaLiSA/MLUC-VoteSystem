@@ -55,29 +55,40 @@ import store from '../store'
 
 let candData = []
 
-function getCandidateInfo(imgCnt) {
+function getCandidateInfo() {
   this.loading = true
 
   store.dispatch('getCandidateInfo')
-    .then((response) => {
+    .then((response) => {this.error = false
       response.data.map((function (obj, i) {
         candData.push(obj)
+
       }))
+
+    if(candData<1){this.error = true}
       this.loading = false
 
       candData = []
     })
     .catch((error) => {
-      this.loading = false
-      this.error = true
+
+
+        this.error = true
+        this.loading = true
+
     })
 
 }
 
 function getImgInfo(string){
-  console.log(string)
-  return "http://localhost:8000/api/image_search/"+string
-}
+
+
+  if(candData.length <1){
+    this.error = true
+  }
+
+    return "http://localhost:8000/api/image_search/" + string
+  }
 
 export default {
   name: 'Campaign',
