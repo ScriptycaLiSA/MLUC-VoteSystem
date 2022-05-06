@@ -53,7 +53,7 @@ const routes = [
     redirect: '/webm/dashboard',
     component: DashboardLayout,
     meta: {
-      requiresAuth: true
+      requiresAuthAdmin: true
     },
     children: [{
       path: '/webm/dashboard',
@@ -104,7 +104,7 @@ const routes = [
       {
         path: '/voter/create_acct',
         name: 'VoterCreate',
-        component: VoterCreate
+        component: VoterCreate,
       },
     ]
   },
@@ -119,11 +119,11 @@ const routes = [
     component: VoterCreate
   },
   {
-    path: '/voter',
+    path: '/voter_login',
     redirect: '/voter/voter_index',
     component: VoterDashboardLayout,
     meta: {
-      requiresAuth: false
+      requiresAuthVoter: true
     },
     children: [{
       path: '/voter/voter_index',
@@ -140,8 +140,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   //admin
-  if (to.meta.requiresAuth && !store.state.a.user.token) {
+  if (to.meta.requiresAuthAdmin && !store.state.a.user.token) {
     next({name: 'AdminLogin'});
+  } else if (to.meta.requiresAuthVoter && !store.state.b.user.token) {
+    next({name: 'VoterLogin'});
+  } else if (store.state.b.user.token && (to.name === 'VoterLogin')) {
+    next({name: 'VoterIndex'});
   } else if (store.state.a.user.token && (to.name === 'AdminLogin')) {
     next({name: 'Dashboard'});
   } else {

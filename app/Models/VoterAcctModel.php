@@ -32,6 +32,7 @@ class VoterAcctModel extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'remember_token'
     ];
 
     /**

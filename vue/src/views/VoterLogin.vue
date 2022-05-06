@@ -8,6 +8,26 @@
 
         </p>
       </div>
+      <Warning v-if="errorMsg">
+        {{ errorMsg }}
+        <span
+          @click="errorMsg=''"
+          class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+         <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="h-6 w-6"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+         >
+           <path
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             d="M6 18L18 6M6 6l12 12"/>
+         </svg>
+       </span>
+      </Warning>
 
       <div class="max-w-sm mx-auto md:max-w-lg rounded-lg shadow-slate-700 shadow-2xl md:h-80 px-14">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">DMMMSU Voting Portal</h2>
@@ -18,9 +38,11 @@
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
               <label for="idNum" class="sr-only">Username</label>
-              <input v-model="userLogin.email" id="idNum" name="idNum" type="number" autocomplete="idNum" required=""
+              <input v-model="userLogin.idNum" id="idNum" name="idNum" type="number" autocomplete="idNum" required=""
                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                     placeholder="ID Number"/>
+                     placeholder="ID Number"
+
+              />
             </div>
             <div>
               <label for="password" class="sr-only">Password</label>
@@ -78,15 +100,19 @@
 import store from '../store'
 import {useRouter} from 'vue-router';
 import {ref} from 'vue';
+import Warning from "../components/Warning.vue";
 
 const router = useRouter();
 
-const userLogin = {
-  email: '',
-  password: ''
-}
 
 const loading = ref(false);
+let errorMsg = ref("");
+
+
+const userLogin = {
+  idNum: '',
+  password: ''
+}
 
 function login(ev) {
   ev.preventDefault();
@@ -94,16 +120,18 @@ function login(ev) {
   loading.value = true;
   let errorMsg = ref("");
 
-  store.dispatch('login', userLogin)
+  store.dispatch('voterLogin', userLogin)
     .then(() => {
       loading.value = false;
       router.push({
-        name: 'VoterView'
+        name: 'VoterIndex'
       });
     })
     .catch((err) => {
       loading.value = false;
-      errorMsg.value = err.response.data.error;
+      if (err.response.status === 422) {
+        errorMsg.value = err.response.data.errors
+      }
     })
 }
 </script>

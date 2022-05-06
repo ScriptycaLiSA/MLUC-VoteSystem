@@ -24,7 +24,7 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $token = $user->createToken('main')->plainTextToken;
+        $token = $user->createToken('main',['access-admin'])->plainTextToken;
 
         return response([
             'user' => $user,

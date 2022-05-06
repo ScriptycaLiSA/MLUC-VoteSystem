@@ -105,6 +105,7 @@ function adminLogin(ev) {
 
   store.dispatch('login', acctLogin)
     .then(() => {
+      alert('You have successfully logged in. Redirecting...')
       loading.value = false;
       router.push({
         name: 'Dashboard'

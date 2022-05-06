@@ -10,7 +10,7 @@
         <div class="flex flex-row items-center justify-center mt-10">
           <div class="flex items-left">
             <div class="mt-8 text-center">
-              <img src="https://upload.wikimedia.org/wikipedia/en/d/d2/La_Union_State_University.png" alt=""
+              <img :src="getMyImg(user.image)" alt="admin"
                    class="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28">
               <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.name }}</h5>
               <span class="hidden text-gray-400 lg:block uppercase">{{ user.role }}</span>
@@ -91,6 +91,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import {useStore} from 'vuex'
 import {computed} from 'vue'
@@ -101,6 +102,10 @@ import Warning from "./Warning.vue";
 
 let errorMsg = ''
 
+function getMyImg(string){
+  return "http://localhost:8000/api/image_search/"+string
+}
+
 function getAdminData() {
   this.loading = true;
   store.dispatch('getSession')
@@ -108,6 +113,7 @@ function getAdminData() {
       this.user.name = response.name;
       this.user.role = response.role;
       this.user.email = response.email;
+      this.user.image = response.image
       this.loading = false;
     })
     .catch((error) => {
@@ -123,19 +129,22 @@ function logout() {
       router.push({
         name: 'AdminLogin'
       });
+
+      alert('Successfully logged out!')
     });
 }
 
 export default {
   name: 'SideNavLayout',
   components: {
-    Warning
+    Warning,
   },
   setup() {
     return {
       errorMsg,
       getAdminData,
-      logout
+      logout,
+      getMyImg
     }
   },
   data() {

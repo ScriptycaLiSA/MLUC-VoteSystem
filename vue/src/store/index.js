@@ -190,7 +190,59 @@ const adminModule = {
   modules: {}
 }
 
-const voterModule = {}
+const voterModule = {state: {
+    user: {
+      data: {},
+      token: localStorage.getItem("TOKEN2"),
+    },
+    registeredVoters: {
+      data: {}
+    },
+    tempStudentsRecordHold: {
+      loading: false,
+      data: {}
+    },
+  },
+  getters: {},
+  actions: {
+    getVoterSession({commit}) {
+      return axiosClient.get('/user')
+        .then(({data}) => {
+          return data;
+        })
+    },
+    voterLogin({commit}, userLogin) {
+      return axiosSanctum.get('/sanctum/csrf-cookie')
+        .then(response => {
+          return axiosClient.post('/voterLogin', userLogin)
+            .then(({data}) => {
+              commit('setVoterUser', data);
+              return data;
+            })
+        });
+    },
+    voterLogout({commit}, userLogout) {
+      return axiosClient.post('/voter/voterLogout', userLogout)
+        .then(response => {
+          commit('voterLogout');
+          return response;
+        });
+    },
+  },
+  mutations: {
+    voterLogout: (state) => {
+      state.user.token = null;
+      state.user.data = {};
+      localStorage.removeItem("TOKEN2");
+    },
+    setVoterUser: (state, userData) => {
+      state.user.token = userData.token;
+      state.user.data = userData.user;
+      localStorage.setItem("TOKEN2", userData.token);
+    },
+  },
+  modules: {}
+}
 
 const store = createStore({
   modules: {

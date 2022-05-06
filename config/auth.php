@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\VoterAcctModel;
+
 return [
 
     /*
@@ -46,7 +48,7 @@ return [
         ],
         'voter' => [
             'driver' => 'session',
-            'provider' => 'voter'
+            'provider' => 'voters'
         ]
     ],
 
@@ -72,9 +74,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'voter' => [
+        'voters' => [
             'driver' => 'eloquent',
-            'model' => \App\Models\VoterAcctModel::class,
+            'model' => VoterAcctModel::class,
         ]
         // 'users' => [
         //     'driver' => 'database',
