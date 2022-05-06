@@ -17,6 +17,7 @@ import DashboardLayout from '../components/DashboardLayout.vue';
 import NotFound from '../views/NotFound.vue';
 import store from '../store';
 import PasswordMaker from '../components/LaravelPasswordMaker.vue';
+import VoterCreate from "../views/VoterCreate.vue";
 
 
 const routes = [
@@ -109,6 +110,11 @@ const routes = [
     path: '/password_maker/only/for/admin/ui',
     name: 'PasswordMaker',
     component: PasswordMaker
+  },
+  {
+    path: '/voter/create_acct',
+    name: 'VoterCreate',
+    component: VoterCreate
   },
 ];
 
