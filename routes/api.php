@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\v1\Position\PositionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\SystemServerRecordController;
-use App\Http\Controllers\Voter\v1\VoterAuthController;
+use App\Http\Controllers\VoterAuthController;
 use App\Http\Controllers\VoterMgmtController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/adminLogin', [AuthController::class, 'adminLogin']); //working
 Route::post('/make_admin', [AuthController::class, 'register']); //working
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function () {
     /*  Administration Control
     *  This part contains get methods for elections
     */
@@ -76,9 +76,17 @@ Route::post('/logout', [AuthController::class, 'logout']); //working
 //fetching data from database to requesting destination
 Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
 Route::get('/voterget_all', [VoterMgmtController::class, 'getVoterInfoAll']);
-//voter controls
-Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
 
+//Campaign Site
 Route::get('/image_search/{filename}', [ImgController::class, 'search']);
 Route::get('/campaignSite', [CampaignSiteController::class, 'fetchCandidateData']);
 
+
+//Voter Login
+Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
+
+// voter endpoints
+Route::prefix('voter')->middleware('auth:sanctum')
+    ->group(function () {
+        Route::post('/logout', [VoterAuthController::class, 'voterLogout']);
+    });

@@ -17,7 +17,7 @@ return [
         'SANCTUM_STATEFUL_DOMAINS',
         sprintf(
         '%s%s',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1,mluc-votesys.test,loca.lt',
+        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1,mluc-votesys.test,loca.lt,votesys-mluc.site',
         env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
     ))),
 
@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'guard' => ['web','api'],
+    'guard' => ['web'],
 
     /*
     |--------------------------------------------------------------------------
