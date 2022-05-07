@@ -111,7 +111,7 @@ export default {
       imagePreview: null,
     }
   },
-  method: {},
+  methods: {},
   mounted() {
     this.getCandidateInfo()
     this.getImgInfo()

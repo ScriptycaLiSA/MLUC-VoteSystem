@@ -116,7 +116,7 @@ const navigation = [
   {name: 'Manage Voter', to: {name: 'RegVoter'}, current: false},
   {name: 'Colleges', to: {name: 'Colleges'}, current: false},
   {name: 'Create Elections', to: {name: 'CreateElec'}, current: false},
-  {name: 'Manage Candidates', to: {name: 'Candidates'}, current: false},
+  {name: 'Manage Candidates', to: {name: 'MngCandidates'}, current: false},
   {name: 'Manage Positions', to: {name: 'MngPosition'}, current: false},
   {name: 'Manage Partylists', to: {name: 'MngPartylist'}, current: false},
   {name: 'Update Master List', to: {name: 'UpdtMasterList'}, current: false},

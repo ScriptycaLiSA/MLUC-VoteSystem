@@ -10,6 +10,9 @@
       </div>
       <Warning v-if="errorMsg">
         {{ errorMsg }}
+        <router-link :to="{name: 'VoterCreate'}" class=" text-white text-md hover:text-blue-500">
+          Verify/Register here!
+        </router-link>
         <span
           @click="errorMsg=''"
           class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
@@ -41,7 +44,6 @@
               <input v-model="userLogin.idNum" id="idNum" name="idNum" type="number" autocomplete="idNum" required=""
                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                      placeholder="ID Number"
-
               />
             </div>
             <div>
@@ -108,7 +110,6 @@ const router = useRouter();
 const loading = ref(false);
 let errorMsg = ref("");
 
-
 const userLogin = {
   idNum: '',
   password: ''
@@ -118,7 +119,6 @@ function login(ev) {
   ev.preventDefault();
 
   loading.value = true;
-  let errorMsg = ref("");
 
   store.dispatch('voterLogin', userLogin)
     .then(() => {

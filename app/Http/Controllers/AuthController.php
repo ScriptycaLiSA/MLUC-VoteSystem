@@ -76,7 +76,7 @@ class AuthController extends Controller
             'canMngUsers' => $data['canMngUsers']
         ]);
 
-        $token = $adminCreateAcct->createToken('Auth Token')->accessToken;
+        $token = $adminCreateAcct->createToken('main',['access-admin'])->accessToken;
 
         return response([
             'account' => $adminCreateAcct,

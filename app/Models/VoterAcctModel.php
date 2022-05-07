@@ -21,7 +21,7 @@ class VoterAcctModel extends Authenticatable
         'fname',
         'lname',
         'email',
-        'college',
+        'college_init',
         'password',
     ];
 

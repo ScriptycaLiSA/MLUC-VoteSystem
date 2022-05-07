@@ -85,6 +85,9 @@ Route::get('/campaignSite', [CampaignSiteController::class, 'fetchCandidateData'
 //Voter Login
 Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
 
+Route::post('/voter_create', [VoterAuthController::class, 'voterCreateAcct']);
+Route::get('/colleges_data', [CollegeController::class, 'index']);
+
 // voter endpoints
 Route::prefix('voter')->middleware('auth:sanctum')
     ->group(function () {

@@ -46,6 +46,16 @@ class SystemServerRecordController extends Controller
 
     public function mstrUpdtDash()
     {
+        $dataLoaded = DB::table('voter_models')->count();
+        $preRegisteredVoters = DB::table('voter_models')->count();
+        $registeredVoters = DB::table('voter_acct_models')->count();
+        DB::table('mstr_updts')->upsert([
+            ['id' => 1, 'eventName' => 'data loaded', 'value' => $dataLoaded],
+            ['id' => 2, 'eventName' => 'pre-registered voters', 'value' => $preRegisteredVoters],
+            ['id' => 3, 'eventName' => 'registered voters', 'value' => $registeredVoters]
+        ], ['eventName', 'id'], ['value']
+        );
+
         $eventTitle = DB::table('mstr_updts')->get();
 
         if (!$eventTitle == null) {

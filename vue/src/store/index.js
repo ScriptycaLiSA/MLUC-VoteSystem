@@ -19,19 +19,22 @@ const adminModule = {
   },
   getters: {},
   actions: {
-    getRegisteredVoters({commit}, userLogin) {
+    //getting registered voters
+    getRegisteredVoters({commit}) {
       return axiosClient.get('/voterget_all')
         .then(({data}) => {
           commit('setDataTableRegStud', data)
           return data;
         })
     },
-    getSession({commit}) {
+    //session data when logged in
+    getSession() {
       return axiosClient.get('/user')
         .then(({data}) => {
           return data;
         })
     },
+    //admin login
     login({commit}, userLogin) {
       return axiosSanctum.get('/sanctum/csrf-cookie')
         .then(response => {
@@ -42,6 +45,7 @@ const adminModule = {
             })
         });
     },
+    //admin logout
     logout({commit}, userLogout) {
       return axiosClient.post('/logout', userLogout)
         .then(response => {
@@ -49,12 +53,14 @@ const adminModule = {
           return response;
         });
     },
+    //making admin account
     register({commit}, userRegister) {
       return axiosClient.post('/make_admin', userRegister)
         .then(({data}) => {
           return data;
         })
     },
+    //searching an id of the student
     loadStudentSearch({commit}, request) {
       const jsonSearch = JSON.stringify(request.idNum);
       return axiosClient.get('/voterinfo/' + jsonSearch)
@@ -62,109 +68,123 @@ const adminModule = {
           return data;
         })
     },
-    //
-    getAllRecordsSource({commit}, noData) {
+    //this is being used to gather data from MIS
+    getAllRecordsSource({commit}) {
       return axiosOrigin.get('/getstudentrecords')
         .then(({data}) => {
           commit('parseDataFromOrigin', data)
           return data;
         });
     },
+    //sending a .csv file to the API server
     systemRecordUpdate({commit}, dataArray) {
       return axiosClient.post('/update_records', dataArray)
         .then(({data}) => {
           return data;
         });
     },
-    getMstrDash({commit}, sample) {
+    //geting data for update master dashboard
+    getMstrDash() {
       return axiosClient.get('/mstr_dash')
         .then(({data}) => {
           return data;
         })
     },
-    getCandidateInfo({commit}, mainData) {
+    //campaign site data
+    getCandidateInfo() {
       return axiosClient.get('/campaignSite')
         .then(({data}) => {
           return data;
         })
     },
-    getCollegesData({commit}, fetched) {
+    //getting colleges data for registration
+    getCollegesData() {
       return axiosClient.get('/colleges')
         .then(({data}) => {
           return data;
         })
     },
-    getElectionData({commit}, fetched) {
+    //saved election data
+    getElectionData() {
       return axiosClient.get('/election_data')
         .then(({data}) => {
           return data;
         })
     },
-    getPositionData({commit}, fetched) {
+    //saved positions data
+    getPositionData() {
       return axiosClient.get('/get_positions')
         .then(({data}) => {
           return data;
         });
     },
+    //creating election
     createElections({commit}, setElection) {
       return axiosClient.post('/create_election', setElection)
         .then(({data}) => {
           return data;
         });
     },
+    //deleting election
     deleteElection({commit}, deleteElec) {
       return axiosClient.post('/delete_election', deleteElec)
         .then(({data}) => {
           return data;
         })
     },
+    //creating position
     createPositionMode({commit}, setPosition) {
       return axiosClient.post('/create_position', setPosition)
         .then(({data}) => {
           return data;
         })
     },
+    //deleting position
     deletePosition({commit}, deletePos) {
       return axiosClient.post('/delete_position', deletePos)
         .then(({data}) => {
           return data;
         })
     },
-
     //Partylist functions
-    getPartylistData({commit}, fetched) {
+    getPartylistData() {
       return axiosClient.get('/partylist_data')
         .then(({data}) => {
           return data;
         });
     },
+    //creating partylist
     addPartylist({commit}, addPartylist) {
       return axiosClient.post('/create_partylist', addPartylist)
         .then(({data}) => {
           return data;
         })
     },
+    //deleting partylist
     deletePartylist({commit}, deleteParty) {
       return axiosClient.post('/delete_partylist', deleteParty)
         .then(({data}) => {
           return data;
         })
     },
-    getSavedCandidates({commit}, getCand) {
+    //fetching candidate info
+    getSavedCandidates() {
       return axiosClient.get('/get_candidates')
         .then(({data}) => {
           return data;
         })
     },
+    //creating candidates
     createCandidates({commit}, addCand) {
       return axiosClient.post('/create_candidate', addCand)
         .then(({data}) => {
           return data;
         })
     },
-    deleteCandidate({commit}, delCand){
-      return axiosClient.post('/delete_candidate',delCand)
-        .then(({data})=>{
+    //deleting candidates
+    deleteCandidate({commit}, delCand) {
+      return axiosClient.post('/delete_candidate', delCand)
+        .then(({data}) => {
           return data;
         })
     },
@@ -190,7 +210,8 @@ const adminModule = {
   modules: {}
 }
 
-const voterModule = {state: {
+const voterModule = {
+  state: {
     user: {
       data: {},
       token: localStorage.getItem("TOKEN2"),
@@ -205,12 +226,14 @@ const voterModule = {state: {
   },
   getters: {},
   actions: {
-    getVoterSession({commit}) {
+    //for getting authenticated voter
+    getVoterSession() {
       return axiosClient.get('/user')
         .then(({data}) => {
           return data;
         })
     },
+    //login for voter
     voterLogin({commit}, userLogin) {
       return axiosSanctum.get('/sanctum/csrf-cookie')
         .then(response => {
@@ -221,12 +244,27 @@ const voterModule = {state: {
             })
         });
     },
+    //logout for voter
     voterLogout({commit}, userLogout) {
       return axiosClient.post('/voter/voterLogout', userLogout)
         .then(response => {
           commit('voterLogout');
           return response;
         });
+    },
+    //for creating voter account
+    createVoterAcct({commit},createVoter) {
+      return axiosClient.post('/voter_create', createVoter)
+        .then(response => {
+          return response;
+        })
+    },
+    //display for select data voter register
+    voterGetCollegesData() {
+      return axiosClient.get('/colleges_data')
+        .then(({data}) => {
+          return data;
+        })
     },
   },
   mutations: {

@@ -63,14 +63,14 @@
               Name:
             </label>
             <input
-              v-model="this.name"
+              v-model="name"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-lastname" type="text" placeholder="Full Name (First Name, Middle Initial, Last Name)"
               required>
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-elections">
               Election:
             </label>
-            <select v-model="this.election_id"
+            <select v-model="election_id"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-elections">
               <option disabled value="" class="uppercase">-- SELECT ELECTION --</option>
@@ -81,7 +81,7 @@
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
               College:
             </label>
-            <select v-model="this.college_init"
+            <select v-model="college_init"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-College">
               <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
@@ -93,7 +93,7 @@
               Partylist:
             </label>
             <select
-              v-model="this.partylist_id"
+              v-model="partylist_id"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-party">
               <option disabled value="" class="uppercase">-- SELECT PARTYLIST (Optional) --</option>
@@ -109,7 +109,7 @@
             <select
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-Position"
-              v-model="this.position_id">
+              v-model="position_id">
               <option disabled value="" class="uppercase">-- SELECT POSITION --</option>
 
               <option v-for="(infoCol, index) in positions" :key="index" v-bind:value="infoCol.id">
@@ -124,7 +124,7 @@
             <div
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
               <textarea
-                v-model="this.description"
+                v-model="description"
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="Portfolio" rows="3" placeholder="Why do you want to run for this position"></textarea>
             </div>

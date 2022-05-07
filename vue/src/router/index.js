@@ -7,7 +7,7 @@ import Dashboard from '../views/webm/Dashboard.vue';
 import Votes from '../views/webm/Votes.vue';
 import RegVoter from '../views/webm/MngVoter.vue';
 import CreateElec from '../views/webm/CreateElec.vue';
-import Candidates from '../views/webm/MngCandidates.vue';
+import MngCandidates from '../views/webm/MngCandidates.vue';
 import Colleges from '../views/webm/Colleges.vue';
 import UpdtMasterList from '../views/webm/UpdtMasterList.vue';
 import MngPosition from "../views/webm/MngPosition.vue";
@@ -78,8 +78,8 @@ const routes = [
 
       {
         path: '/webm/candidates',
-        name: 'Candidates',
-        component: Candidates
+        name: 'MngCandidates',
+        component: MngCandidates
       },
       {
         path: '/webm/colleges',

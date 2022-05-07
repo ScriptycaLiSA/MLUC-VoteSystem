@@ -41,7 +41,7 @@
               <span class="mx-3">Colleges</span>
             </router-link>
 
-            <router-link :to="{name: 'Candidates'}"
+            <router-link :to="{name: 'MngCandidates'}"
                          class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
               <span class="mx-3">Manage Candidates</span>
             </router-link>
