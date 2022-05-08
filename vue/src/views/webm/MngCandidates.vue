@@ -221,6 +221,8 @@
 <script>
 import store from "../../store";
 import Warning from "../../components/Warning.vue";
+import {useRoute} from 'vue-router'
+import router from "../../router";
 
 let colleges = [];
 let partylist = [];
@@ -302,9 +304,10 @@ function getSelectData() {
 }
 
 export default {
-  name: "Candidates",
+  name: "MngCandidates",
   components: {Warning},
   setup() {
+    const router = new useRoute()
     return {
       people,
       colleges,
@@ -367,6 +370,9 @@ export default {
           this.loading = false
           this.success = true
           serverResponse.message = response.success
+          router.push({
+            name: 'MngCandidates'
+          })
         })
         .catch((error) => {
           this.loading = false
