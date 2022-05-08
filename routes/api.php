@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\v1\Position\PositionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\SystemServerRecordController;
+use App\Http\Controllers\UtilityElection;
+use App\Http\Controllers\Voter\v1\VotingController;
 use App\Http\Controllers\VoterAuthController;
 use App\Http\Controllers\VoterMgmtController;
 use Illuminate\Http\Request;
@@ -92,6 +94,10 @@ Route::get('/colleges_data', [CollegeController::class, 'index']);
 // voter endpoints
 Route::middleware(['auth:sanctum', 'abilities:access-voter'])
     ->group(function () {
+        //election render if voter is already voted or not/ finding elections in his college
+        Route::get('/view_election', [VotingController::class, 'viewElection']);
+
         Route::get('/voter/user', [VoterAuthController::class, 'getVoterSession']);
         Route::post('/voterLogout', [VoterAuthController::class, 'voterLogout']);
     });
+
