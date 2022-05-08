@@ -30,7 +30,10 @@ class ElectionController extends Controller
     //election creation
     public function createElection(Request $request)
     {
-        $data = $request->only('name','college_init');
+        $data = $request->validate([
+            'name'=>['required','string'],
+            'college_init'=>['required']
+        ]);
 
         if (!$data == null) {
             try{

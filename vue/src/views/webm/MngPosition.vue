@@ -2,6 +2,10 @@
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
     <div class="bg-slate-200 shadow-xl 2xl:min-w-full 2xl:px-4 2xl:py-2">
+
+      <div class="flex items-left font-bold text-5xl py-4">
+        <p>MANAGE POSITION</p>
+      </div>
       <Warning v-if="success">
         {{ serverResponse.message }}
         <span
@@ -42,9 +46,6 @@
          </svg>
         </span>
       </Warning>
-      <div class="flex items-left font-bold text-5xl py-4">
-        <p>MANAGE POSITION</p>
-      </div>
       <div
         class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 px-3 min-w-screen">
         <div class="py-4 px-4 max-w-lg">
@@ -217,11 +218,17 @@ export default {
           this.success = true
           this.loading = false
           serverResponse.message = response.success
+
+          alert(response.success)
+          serverResponse.message = response.success
         })
         .catch((error) => {
           this.error = true
           this.loading = false
           errorMsg.message = error.error
+
+          alert(error.response.data.message)
+          errorMsg.message = error.response.data.message
         })
     },
     deletePosition(id) {

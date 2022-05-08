@@ -221,8 +221,7 @@
 <script>
 import store from "../../store";
 import Warning from "../../components/Warning.vue";
-import {useRoute} from 'vue-router'
-import router from "../../router";
+
 
 let colleges = [];
 let partylist = [];
@@ -307,7 +306,6 @@ export default {
   name: "MngCandidates",
   components: {Warning},
   setup() {
-    const router = new useRoute()
     return {
       people,
       colleges,
@@ -341,10 +339,9 @@ export default {
       let reader = new FileReader()
       let img = this.image
 
-      if(img['size'] > 5120000){
+      if (img['size'] > 5120000) {
         alert('The file inserted is too large!')
-      }
-      else{
+      } else {
         alert('File has inserted!')
       }
 
@@ -369,15 +366,17 @@ export default {
         .then((response) => {
           this.loading = false
           this.success = true
+
+          alert(response.success)
           serverResponse.message = response.success
-          router.push({
-            name: 'MngCandidates'
-          })
+
         })
         .catch((error) => {
           this.loading = false
-          this.error = false
-          errorMsg.message = error.error
+          this.error = true
+
+          alert(error.response.data.message)
+          errorMsg.message = error.response.data.message
         })
     },
     deleteCandidate(id) {
@@ -387,11 +386,16 @@ export default {
         .then((response) => {
           this.loading = false
           this.success = true
+
+          alert(response.success)
           serverResponse.message = response.success
+
         }).catch((error) => {
-          this.loading = false
-          this.error = true
-          errorMsg.message = error.error
+        this.loading = false
+        this.error = true
+
+        alert(error.response.data.message)
+        errorMsg.message = error.response.data.message
       })
     }
   },

@@ -183,11 +183,17 @@ export default {
           this.success = true;
           this.loading = false
           serverResponse.message = response.success
+
+          alert(response.success)
+          serverResponse.message = response.success
         })
         .catch((error) => {
           this.error = true
           this.loading = false
           errorMsg.message = error.error
+
+          alert(error.response.data.message)
+          errorMsg.message = error.response.data.message
         })
     },
     deletePartylist(id) {

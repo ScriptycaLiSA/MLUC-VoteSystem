@@ -223,15 +223,17 @@ export default {
         .then((response) => {
           this.loading = false
           this.success = true;
+
+          alert(response.success)
           serverResponse.message = response.success
-          console.log(serverResponse.message)
         })
         .catch((error) => {
           this.loading = false
           this.error = true
-          errorMsg.message = error.errors
-        }).finally(() => {
-      })
+
+          alert(error.response.data.message)
+          errorMsg.message = error.response.data.message
+        })
     },
     deleteElection(id) {
       this.loading = true
@@ -240,11 +242,17 @@ export default {
           this.success = true
           this.loading = false
           serverResponse.message = response.success
+
+          alert(response.success)
+          serverResponse.message = response.success
         })
         .catch((error) => {
           this.error = true
           this.loading = false
           errorMsg.message = error.error
+
+          alert(error.response.data.message)
+          errorMsg.message = error.response.data.message
         })
     }
   },
