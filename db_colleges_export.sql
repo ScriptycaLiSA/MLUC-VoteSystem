@@ -14,8 +14,27 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping data for table votesys-mluc.colleges_models: ~0 rows (approximately)
+-- Dumping structure for table votesys-mluc.colleges_models
+CREATE TABLE IF NOT EXISTS `colleges_models` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `coll_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `initials` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `initials` (`initials`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table votesys-mluc.colleges_models: ~9 rows (approximately)
 DELETE FROM `colleges_models`;
+INSERT INTO `colleges_models` (`id`, `coll_name`, `initials`) VALUES
+	(8, 'Mid La Union Campus', 'MLUC'),
+	(9, 'College of Information Technology', 'CIT'),
+	(10, 'College of Technical Education', 'CTED'),
+	(11, 'College of Technology', 'COT'),
+	(12, 'College of Engineering', 'COE'),
+	(13, 'College of Management', 'COM'),
+	(14, 'Institute of Criminal Justice Education', 'ICJE'),
+	(15, 'College of Arts And Sciences', 'CAS'),
+	(16, 'College of Arts And Law', 'CLAW');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
