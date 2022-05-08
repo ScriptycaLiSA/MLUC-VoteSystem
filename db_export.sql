@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `admin_acct_models` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `candidate_models` (
   CONSTRAINT `FK_candidate_models_election_models` FOREIGN KEY (`election_id`) REFERENCES `election_models` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_candidate_models_partylist_models` FOREIGN KEY (`partylist_id`) REFERENCES `partylist_models` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_candidate_models_position_models` FOREIGN KEY (`position_id`) REFERENCES `position_models` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -77,13 +77,14 @@ CREATE TABLE IF NOT EXISTS `colleges_models` (
 CREATE TABLE IF NOT EXISTS `election_models` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `college_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint NOT NULL DEFAULT '0',
   `start` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end` datetime DEFAULT NULL,
   `elec_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `college_init` (`college_init`),
   CONSTRAINT `FK_election_models_colleges_models` FOREIGN KEY (`college_init`) REFERENCES `colleges_models` (`initials`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -157,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -170,8 +171,8 @@ CREATE TABLE IF NOT EXISTS `position_models` (
   `election_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `election_id` (`election_id`),
-  CONSTRAINT `FK_position_models_election_models` FOREIGN KEY (`election_id`) REFERENCES `election_models` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `FK_position_models_election_models` FOREIGN KEY (`election_id`) REFERENCES `election_models` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -217,29 +218,54 @@ CREATE TABLE IF NOT EXISTS `voter_acct_models` (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `college_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_key` (`email`,`idNum`) USING BTREE,
   KEY `college_init` (`college_init`),
+  KEY `idNum` (`idNum`),
   CONSTRAINT `FK_voter_acct_models_colleges_models` FOREIGN KEY (`college_init`) REFERENCES `colleges_models` (`initials`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
 -- Dumping structure for table votesys-mluc.voter_models
 CREATE TABLE IF NOT EXISTS `voter_models` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `idNum` bigint NOT NULL,
+  `idNum` int NOT NULL,
   `fname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `lname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `college` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idNum` (`idNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=80020 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `idNum` (`idNum`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=90019 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table votesys-mluc.voting_results
+CREATE TABLE IF NOT EXISTS `voting_results` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `voter_id` bigint unsigned NOT NULL,
+  `position_id` bigint unsigned NOT NULL,
+  `candidate_id` bigint unsigned NOT NULL,
+  `election_id` int unsigned NOT NULL,
+  `isVoted` tinyint NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `position_id` (`position_id`),
+  KEY `candidate_id` (`candidate_id`),
+  KEY `election_id` (`election_id`),
+  KEY `idNum` (`voter_id`) USING BTREE,
+  CONSTRAINT `FK_voting_results_candidate_models` FOREIGN KEY (`candidate_id`) REFERENCES `candidate_models` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `FK_voting_results_election_models` FOREIGN KEY (`election_id`) REFERENCES `election_models` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_voting_results_position_models` FOREIGN KEY (`position_id`) REFERENCES `position_models` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `FK_voting_results_voter_acct_models` FOREIGN KEY (`voter_id`) REFERENCES `voter_acct_models` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Data exporting was unselected.
 
