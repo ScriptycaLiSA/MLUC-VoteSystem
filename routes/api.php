@@ -12,6 +12,7 @@ use App\Http\Controllers\SystemServerRecordController;
 use App\Http\Controllers\VoterAuthController;
 use App\Http\Controllers\VoterMgmtController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -89,7 +90,8 @@ Route::post('/voter_create', [VoterAuthController::class, 'voterCreateAcct']);
 Route::get('/colleges_data', [CollegeController::class, 'index']);
 
 // voter endpoints
-Route::prefix('voter')->middleware('auth:sanctum')
+Route::middleware(['auth:sanctum', 'abilities:access-voter'])
     ->group(function () {
-        Route::post('/logout', [VoterAuthController::class, 'voterLogout']);
+        Route::get('/voter/user', [VoterAuthController::class, 'getVoterSession']);
+        Route::post('/voterLogout', [VoterAuthController::class, 'voterLogout']);
     });

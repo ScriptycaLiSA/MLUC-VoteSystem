@@ -23,7 +23,6 @@ class VoterAuthController extends Controller
             return response([
                 'errors' => 'Wrong inputs.Please try again or register your account.'
             ], 422);
-
         }
 
         $voter = Auth::guard('voter')->user();
@@ -81,5 +80,13 @@ class VoterAuthController extends Controller
                 'errors' => 'You are not authorized or you have been already registered! Please contact MIS.'
             ], 401);
         }
+    }
+
+    //get the voter session
+    public function getVoterSession(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $voterInfo = $request->user();
+
+        return response()->json($voterInfo,200);
     }
 }

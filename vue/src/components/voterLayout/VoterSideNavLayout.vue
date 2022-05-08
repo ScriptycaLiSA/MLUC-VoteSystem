@@ -12,16 +12,16 @@
             <div class="mt-8 text-center">
               <img src="https://upload.wikimedia.org/wikipedia/en/d/d2/La_Union_State_University.png" alt=""
                    class="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28">
-              <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">%VoterName%</h5>
-              <span class="hidden text-gray-400 lg:block uppercase">%V_Id%</span>
-              <span class="hidden text-gray-400 lg:block lowercase">%email%</span>
+              <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.fname }} {{user.lname}}</h5>
+              <span class="hidden text-gray-400 lg:block uppercase">{{user.idNum}} | {{user.college}}</span>
+              <span class="hidden text-gray-400 lg:block lowercase">{{user.email}}</span>
             </div>
           </div>
         </div>
 
         <div
           class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
-          <button @click="logout" class="px-4 py-3 flex items-center space-x-4 rounded-md text-white group">
+          <button @click="voterLogout" class="px-4 py-3 flex items-center space-x-4 rounded-md text-white group">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,12 +33,12 @@
       </div>
       <div class="xl:mx-6 xl:my-6 2xl:md-8">
         <Warning v-if="error">
-          {{errorMsg}}
+          {{ errorMsg.message }}
         </Warning>
         <!-- children view from /router/index.js -->
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
-            <component :is="Component" />
+            <component :is="Component"/>
           </transition>
         </router-view>
       </div>
@@ -47,21 +47,70 @@
 </template>
 <script>
 import Warning from "../Warning.vue";
-let errorMsg = []
-export default{
-  name:'VoterSdeNavLayout',
-  components: {
-    Warning,
-    errorMsg
-  },
-  data(){
-    return{
-      error : false,
-      loading : false
-    }
-  }
+import store from "../../store";
+import router from "../../router";
+
+let errorMsg = {
+  message: ''
 }
 
+function getVoterData() {
+  this.loading = true
+
+  store.dispatch('getVoterSession')
+    .then((response) => {
+      this.user.fname = response.fname
+      this.user.lname = response.lname
+      this.user.idNum = response.idNum
+      this.user.email = response.email
+      this.user.college = response.college_init
+
+      this.loading = false
+    }).catch((error) => {
+  })
+}
+
+function voterLogout() {
+  this.loading = true
+
+  store.dispatch('voterLogout')
+    .then(() => {
+      alert('You have successfully logged out. Redirecting...')
+      this.loading = false
+
+      router.push({
+        name: 'VoterLogin'
+      })
+    }).catch((error) => {
+    alert(error.error)
+  })
+}
+
+export default {
+  name: 'VoterSideNavLayout',
+  components: {
+    Warning,
+  },
+  setup() {
+    return {
+      getVoterData,
+      voterLogout,
+      errorMsg
+    }
+  },
+  data() {
+    return {
+      user: [],
+      loading: false,
+      success: false,
+      error: false,
+    }
+  },
+  methods: {},
+  mounted() {
+    this.getVoterData()
+  }
+}
 </script>
 
 <style scoped>

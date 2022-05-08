@@ -1,4 +1,5 @@
 <template>
+  <div id="axiosForm">
   <div class="bg-slate-100 shadow-xl min-h-screen ">
     <div class="flex font-bold pl-2 text-4xl">
       <p>Election Title:</p>
@@ -198,14 +199,47 @@
       <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
     </form>
   </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "VoterIndex"
+  name: "VoterIndex",
+  components: {},
+  setup(){},
+  data(){
+    return{
+      loading: false,
+      success: false,
+      error: false,
+      errorMsg: '',
+      loadingBtn: false
+    }
+  },
+  methods: {
+  },
+  mounted(){}
 }
 </script>
 
 <style scoped>
+#axiosForm { /* Components Root Element ID */
+  position: relative;
+}
 
+.loader { /* Loader Div Class */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  background-image: url('../../../assets/assets.gif');
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 10000000;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
 </style>

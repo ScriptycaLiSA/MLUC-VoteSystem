@@ -93,10 +93,7 @@
 </template>
 
 <script>
-import {useStore} from 'vuex'
-import {computed} from 'vue'
 import store from '../store'
-import {useRouter} from "vue-router";
 import router from "../router";
 import Warning from "./Warning.vue";
 
@@ -124,6 +121,8 @@ function getAdminData() {
 }
 
 function logout() {
+  this.loading = true
+
   store.dispatch('logout')
     .then(() => {
       router.push({
@@ -131,6 +130,7 @@ function logout() {
       });
 
       alert('Successfully logged out!')
+      this.loading = false
     });
 }
 

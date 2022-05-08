@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\VoterAcctModel;
-
 return [
 
     /*
@@ -76,7 +74,7 @@ return [
         ],
         'voters' => [
             'driver' => 'eloquent',
-            'model' => VoterAcctModel::class,
+            'model' => App\Models\VoterAcctModel::class,
         ]
         // 'users' => [
         //     'driver' => 'database',
@@ -102,6 +100,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'voters' => [
+            'provider' => 'voters',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

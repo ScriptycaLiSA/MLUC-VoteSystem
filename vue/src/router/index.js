@@ -119,7 +119,7 @@ const routes = [
     component: VoterCreate
   },
   {
-    path: '/voter_login',
+    path: '/voter',
     redirect: '/voter/voter_index',
     component: VoterDashboardLayout,
     meta: {

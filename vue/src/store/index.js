@@ -2,6 +2,7 @@ import {createStore} from "vuex";
 import axiosClient from "../axios";
 import axiosOrigin from '../axiosSource';
 import axiosSanctum from '../sanctumAxios'
+import axiosClientVoter from "../axios2";
 
 const adminModule = {
   state: {
@@ -228,7 +229,7 @@ const voterModule = {
   actions: {
     //for getting authenticated voter
     getVoterSession() {
-      return axiosClient.get('/user')
+      return axiosClientVoter.get('/voter/user')
         .then(({data}) => {
           return data;
         })
@@ -237,7 +238,7 @@ const voterModule = {
     voterLogin({commit}, userLogin) {
       return axiosSanctum.get('/sanctum/csrf-cookie')
         .then(response => {
-          return axiosClient.post('/voterLogin', userLogin)
+          return axiosClientVoter.post('/voterLogin', userLogin)
             .then(({data}) => {
               commit('setVoterUser', data);
               return data;
@@ -246,7 +247,7 @@ const voterModule = {
     },
     //logout for voter
     voterLogout({commit}, userLogout) {
-      return axiosClient.post('/voter/voterLogout', userLogout)
+      return axiosClientVoter.post('/voterLogout', userLogout)
         .then(response => {
           commit('voterLogout');
           return response;
@@ -254,14 +255,14 @@ const voterModule = {
     },
     //for creating voter account
     createVoterAcct({commit},createVoter) {
-      return axiosClient.post('/voter_create', createVoter)
+      return axiosClientVoter.post('/voter_create', createVoter)
         .then(response => {
           return response;
         })
     },
     //display for select data voter register
     voterGetCollegesData() {
-      return axiosClient.get('/colleges_data')
+      return axiosClientVoter.get('/colleges_data')
         .then(({data}) => {
           return data;
         })
