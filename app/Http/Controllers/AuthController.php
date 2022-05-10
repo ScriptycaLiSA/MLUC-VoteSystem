@@ -33,7 +33,8 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
-        Auth::logout();
+        Auth::guard('web')->logout();
+        $request->user()->currentAccessToken()->delete();
 
         return response([
             'success'=>'You have successfully logged out. Please log-in again!'

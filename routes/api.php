@@ -71,10 +71,9 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
      */
     Route::post('/update_records', [SystemServerRecordController::class, 'saveRecordsFromOrigin']); //working
     Route::get('/mstr_dash', [SystemServerRecordController::class, 'mstrUpdtDash']); //working
+
+    Route::post('/logout', [AuthController::class, 'logout']); //working
 });
-
-
-Route::post('/logout', [AuthController::class, 'logout']); //working
 
 //fetching data from database to requesting destination
 Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
@@ -95,9 +94,8 @@ Route::get('/colleges_data', [CollegeController::class, 'index']);
 Route::middleware(['auth:sanctum', 'abilities:access-voter'])
     ->group(function () {
         //election render if voter is already voted or not/ finding elections in his college
-        Route::get('/view_election', [VotingController::class, 'viewElection']);
+        Route::post('/view_election', [VotingController::class, 'viewElection']);
 
         Route::get('/voter/user', [VoterAuthController::class, 'getVoterSession']);
         Route::post('/voterLogout', [VoterAuthController::class, 'voterLogout']);
     });
-

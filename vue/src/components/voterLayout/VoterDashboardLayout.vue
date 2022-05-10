@@ -70,9 +70,9 @@
             <img class="h-10 w-10 rounded-full" alt=""/>
           </div>
           <div class="flex-auto">
-            <div class="text-base font-medium leading-none text-white">%V_ID%%</div>
-            <div class="text-sm font-medium leading-none text-gray-400">%V_Name%%</div>
-            <div class="text-sm font-medium leading-none text-gray-400">%Email%</div>
+            <div class="text-base font-medium leading-none text-white">{{user.idNum}}</div>
+            <div class="text-sm font-medium leading-none text-gray-400">{{user.fname}} {{user.lname}}</div>
+            <div class="text-sm font-medium leading-none text-gray-400">{{user.email}}</div>
           </div>
           <button type="button"
                   class="ml-auto bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -111,6 +111,22 @@ import {useRouter} from 'vue-router';
 import VoterSideNavLayout from "./VoterSideNavLayout.vue";
 import store from '../../store'
 
+function getVoterData() {
+  this.loading = true
+
+  store.dispatch('getVoterSession')
+    .then((response) => {
+      this.user.fname = response.fname
+      this.user.lname = response.lname
+      this.user.idNum = response.idNum
+      this.user.email = response.email
+      this.user.college = response.college_init
+
+      this.loading = false
+    }).catch((error) => {
+  })
+}
+
 const navigation = [
   {name: 'Dashboard', to: {name: 'Dashboard'}, current: false},
   {name: 'Register Voter', to: {name: 'RegVoter'}, current: false},
@@ -131,6 +147,19 @@ export default {
     useRouter,
     VoterSideNavLayout,
     store
+  },
+  setup(){
+    return{
+      getVoterData
+    }
+  },
+  data(){
+    return{
+      user: []
+    }
+  },
+  mounted(){
+    this.getVoterData()
   }
 }
 </script>

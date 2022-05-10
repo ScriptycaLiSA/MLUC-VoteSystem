@@ -254,7 +254,7 @@ const voterModule = {
         });
     },
     //for creating voter account
-    createVoterAcct({commit},createVoter) {
+    createVoterAcct({commit}, createVoter) {
       return axiosClientVoter.post('/voter_create', createVoter)
         .then(response => {
           return response;
@@ -267,6 +267,13 @@ const voterModule = {
           return data;
         })
     },
+    //check is the voter is voted or not, or not having an election based in college
+    voterViewBallot({commit}, dataCon) {
+      return axiosClientVoter.post('/view_election', dataCon)
+        .then(response => {
+          return response;
+        })
+    }
   },
   mutations: {
     voterLogout: (state) => {

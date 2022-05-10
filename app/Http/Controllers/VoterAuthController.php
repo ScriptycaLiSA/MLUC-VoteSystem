@@ -38,6 +38,7 @@ class VoterAuthController extends Controller
     public function voterLogout(Request $request)
     {
         Auth::guard('voter')->logout();
+        $request->user()->currentAccessToken()->delete();
 
         return response([
             'success' => 'You have successfully logged out. Please log-in again!'

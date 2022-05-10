@@ -68,7 +68,6 @@ function getCandidateInfo() {
       this.error = false
       response.data.map((function (obj, i) {
         candData.push(obj)
-
       }))
 
       if (candData < 1) {
