@@ -3,9 +3,21 @@
     <div class="loader" v-if="loading"></div>
     <div class="bg-slate-100 shadow-xl min-h-screen ">
       <!-- test div -->
+
       <div class="hidden" v-if="getUserVerify()"></div>
-      <div class="" v-if="getBallot">
-        {{ voterMessage.message }}
+      <div class="text-4xl sm:text-sm md:text-sm px-16 " v-if="getBallot">
+        <table class="border-collapse border border-slate-500 ...">
+          <thead>
+          <tr>
+            <th class="border border-slate-100 text-4xl sm:text-md md:text-8xl px-16"> {{ voterMessage.message }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="border border-slate-100 text-2xl sm:text-md md:text-md" >Please check your results here!</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="" v-else>
