@@ -19,7 +19,7 @@ class VotingController extends Controller
         if(UtilityElection::hasVoted($voterAcct['id'])){
             return response([
                 'message'=> 'You have already voted!'
-            ],200);
+            ],202);
         }
         elseif(UtilityElection::getCollege($voterAcct['college_init'])){
             $ballotList = DB::table('candidate_models')
@@ -29,14 +29,16 @@ class VotingController extends Controller
                 ->orderBy('position_id')
                 ->get();
 
+            $ballotPosition = DB::table('position_models')->get();
+
             return response([
-                'message'=>$ballotList
+                'message'=>$ballotList,
             ],200);
         }
 
         return response([
-            'message'=>'There`s no voting event yet!'
-        ], 200);
+            'message'=>'There`s no voting event in your college as for now...'
+        ], 202);
     }
 
     private function getBallotList(){

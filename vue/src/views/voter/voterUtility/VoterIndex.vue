@@ -5,223 +5,107 @@
       <!-- test div -->
 
       <div class="hidden" v-if="getUserVerify()"></div>
-      <div class="text-4xl sm:text-sm md:text-sm px-16 " v-if="getBallot">
-        <table class="border-collapse border border-slate-500 ...">
-          <thead>
-          <tr>
-            <th class="border border-slate-100 text-4xl sm:text-md md:text-8xl px-16"> {{ voterMessage.message }}</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td class="border border-slate-100 text-2xl sm:text-md md:text-md" >Please check your results here!</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
 
-      <div class="" v-else>
-        <div class="flex font-bold pl-2 text-4xl">
-          <p>Election Title:</p>
-        </div>
-        <div
-          class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1 px-2 min-w-screen">
-          <div class="py-4 px-4 max-w-lg"></div>
-          <div>
-            <label for="table1" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the
-              table
-              left to right</label>
-            <div id="table1" class="flex flex-col mx-4">
-              <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8">
-                  <div class="overflow-hidden shadow-md sm:rounded-lg">
-                    <div class="bg-grey-50 dark:bg-gray-400 px-2 py-3 border-solid border-grey-light border-b">
-                      %Position%
-                    </div>
-                    <table class="min-w-full">
-                      <thead class="bg-gray-50 dark:bg-gray-700">
-                      <tr>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Select
-                        </th>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Profile
-                        </th>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Name
-                        </th>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Partylist
-                        </th>
-                      </tr>
-                      </thead>
-                      <tbody>
+      <div class="text-4xl sm:text-sm md:text-sm px-16 " v-if="ballotData.length > 1">
 
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <div class="relative w-12 h-12">
-                            <img class="rounded-full border border-gray-100 shadow-sm"
-                                 src="https://randomuser.me/api/portraits/women/81.jpg" alt="user image"/>
-                            <div
-                              class="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <label class="form-check-label text-white mb-12">
-                            %MOMO%
-                          </label>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          %Manyak%
-                        </td>
-                        <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        </td>
-                      </tr>
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <div class="relative w-12 h-12">
-                            <img class="rounded-full border w-12 h-12 border-gray-100 shadow-sm"
-                                 src="https://www.bongbongmarcos.com/wp-content/uploads/2022/04/bongbong-marcos.jpeg"
-                                 alt="user image"/>
-                            <div
-                              class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <label class="form-check-label text-white mb-12">
-                            %Bong Bong Marcos%
-                          </label>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          %UniTeam%
-                        </td>
-                        <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
+        <div id="table1" class="flex flex-col mx-4">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8" v-for="(i, k) in ballotPositions" :key="k">
+              <div class="overflow-hidden shadow-md sm:rounded-lg">
+                <div class="bg-grey-50 dark:bg-gray-400 px-2 py-3 border-solid border-grey-light border-b">
+                  {{ i.pos_name }}
                 </div>
-              </div>
-            </div>
-          </div>
+                <table class="min-w-full">
+                  <thead class="bg-gray-50 dark:bg-gray-700">
+                  <tr>
+                    <th scope="col"
+                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                      Select
+                    </th>
+                    <th scope="col"
+                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                      Profile
+                    </th>
+                    <th scope="col"
+                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                      Name
+                    </th>
+                    <th scope="col"
+                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                      Partylist
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
 
-          <div>
-            <label for="table2" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the
-              table
-              left to right</label>
-            <div id="table2" class="flex flex-col mx-4">
-              <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8">
-                  <div class="overflow-hidden shadow-md sm:rounded-lg">
-                    <div class="bg-grey-50 dark:bg-gray-400 px-2 py-3 border-solid border-grey-light border-b">
-                      %Position%
-                    </div>
-                    <table class="min-w-full">
-                      <thead class="bg-gray-50 dark:bg-gray-700">
-                      <tr>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Select
-                        </th>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Profile
-                        </th>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Name
-                        </th>
-                        <th scope="col"
-                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                          Partylist
-                        </th>
-                      </tr>
-                      </thead>
-                      <tbody>
-
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              type="radio" name="flexRadioDefault2" id="flexRadioDefault3" checked>
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <div class="relative w-12 h-12">
-                            <img class="rounded-full border border-gray-100 shadow-sm"
-                                 src="https://randomuser.me/api/portraits/women/81.jpg" alt="user image"/>
-                            <div
-                              class="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <label class="form-check-label text-white mb-12">
-                            %MOMO%
-                          </label>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          %Manyak%
-                        </td>
-                        <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        </td>
-                      </tr>
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              type="radio" name="flexRadioDefault2" id="flexRadioDefault4" checked>
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <div class="relative w-12 h-12">
-                            <img class="rounded-full border w-12 h-12 border-gray-100 shadow-sm"
-                                 src="https://www.bongbongmarcos.com/wp-content/uploads/2022/04/bongbong-marcos.jpeg"
-                                 alt="user image"/>
-                            <div
-                              class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-                          </div>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <label class="form-check-label text-white mb-12">
-                            %Bong Bong Marcos%
-                          </label>
-                        </td>
-                        <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          %UniTeam%
-                        </td>
-                        <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                          type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                      </div>
+                    </td>
+                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <div class="relative w-12 h-12">
+                        <img class="rounded-full border border-gray-100 shadow-sm"
+                             src="https://randomuser.me/api/portraits/women/81.jpg" alt="user image"/>
+                        <div
+                          class="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+                      </div>
+                    </td>
+                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <label class="form-check-label text-white mb-12">
+                        %MOMO%
+                      </label>
+                    </td>
+                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      %Manyak%
+                    </td>
+                    <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    </td>
+                  </tr>
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                          type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                      </div>
+                    </td>
+                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <div class="relative w-12 h-12">
+                        <img class="rounded-full border w-12 h-12 border-gray-100 shadow-sm"
+                             src="https://www.bongbongmarcos.com/wp-content/uploads/2022/04/bongbong-marcos.jpeg"
+                             alt="user image"/>
+                        <div
+                          class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+                      </div>
+                    </td>
+                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <label class="form-check-label text-white mb-12">
+                        %Bong Bong Marcos%
+                      </label>
+                    </td>
+                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      %UniTeam%
+                    </td>
+                    <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
+
       </div>
+
+      <div v-else>
+        <div class="border border-slate-100 text-4xl sm:text-md md:text-8xl px-16">{{ voterMessage.message }}</div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -235,13 +119,27 @@ let userSpec = {
 }
 
 let ballotData = []
+let ballotPositions = []
 
 function getUserVerify() {
+  this.loading = true
+
   store.dispatch('getVoterSession')
     .then((response) => {
       userSpec.id = response.id
       userSpec.college_init = response.college_init
 
+      store.dispatch('getPositionData')
+        .then((response) => {
+          let data = response.success
+
+          data.map(function (obj, i) {
+            ballotPositions.push(obj)
+          })
+          ballotPositions = []
+
+          this.loading = false
+        })
       this.getBallot2()
     })
     .catch((error) => {
@@ -255,7 +153,8 @@ export default {
     return {
       userSpec,
       getUserVerify,
-      ballotData
+      ballotData,
+      ballotPositions
     }
   },
   data() {
@@ -269,25 +168,22 @@ export default {
     }
   },
   methods: {
-    //as a validator for rendering ballots
-    getBallot: function () {
-      store.dispatch('voterViewBallot', userSpec)
-        .then((response) => {
-          return response.message.length > 1
-        })
-    },
+    //as a validator for rendering ballot
     getBallot2() {
-      this.loading = true
       store.dispatch('voterViewBallot', userSpec)
         .then((response) => {
-          this.voterMessage.message = response.data.message
-          console.log(this.voterMessage.message)
+          let data = response.data
 
-          this.loading = false
+          this.voterMessage.message = data.message
+          data.message.map(function (obj, i) {
+            ballotData.push(obj)
+          })
+          ballotData = []
+
         })
     }
   },
-  created() {
+  mounted() {
     this.getUserVerify()
   },
 }

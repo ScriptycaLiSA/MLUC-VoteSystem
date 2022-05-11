@@ -46,7 +46,6 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     Route::post('/delete_candidate', [CandidateControllers::class, 'deleteCandidate']);
 
     //Positions
-    Route::get('/get_positions', [PositionController::class, 'index']);
     Route::post('/create_position', '\App\Http\Controllers\Admin\v1\Position\CreatePositionController');
     Route::post('/delete_position', [PositionController::class, 'deletePosition']);
 
@@ -89,6 +88,7 @@ Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
 
 Route::post('/voter_create', [VoterAuthController::class, 'voterCreateAcct']);
 Route::get('/colleges_data', [CollegeController::class, 'index']);
+Route::get('/get_positions', [PositionController::class, 'index']);
 
 // voter endpoints
 Route::middleware(['auth:sanctum', 'abilities:access-voter'])

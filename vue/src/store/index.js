@@ -217,15 +217,10 @@ const voterModule = {
       data: {},
       token: localStorage.getItem("TOKEN2"),
     },
-    registeredVoters: {
-      data: {}
-    },
-    tempStudentsRecordHold: {
-      loading: false,
-      data: {}
-    },
   },
-  getters: {},
+  getters: {
+
+  },
   actions: {
     //for getting authenticated voter
     getVoterSession() {
@@ -286,6 +281,9 @@ const voterModule = {
       state.user.data = userData.user;
       localStorage.setItem("TOKEN2", userData.token);
     },
+    setBallotStorage: (state, ballotData) =>{
+
+    }
   },
   modules: {}
 }
