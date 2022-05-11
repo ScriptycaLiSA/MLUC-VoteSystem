@@ -268,7 +268,15 @@ const voterModule = {
         .then(response => {
           return response;
         })
-    }
+    },
+    //this is to cast vote from the ballot
+    castVoteFromBallot({commit}, castVoteData) {
+      return axiosClientVoter.post('/cast_vote', castVoteData)
+        .then(response => {
+          return response;
+        })
+
+    },
   },
   mutations: {
     voterLogout: (state) => {

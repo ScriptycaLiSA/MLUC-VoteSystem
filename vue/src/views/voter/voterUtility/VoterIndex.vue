@@ -1,14 +1,12 @@
 <template>
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
-    <div class="bg-slate-100 shadow-xl min-h-screen ">
-      <!-- test div -->
-
+    <div class="bg-slate-100 shadow-xl min-h-screen">
       <div class="hidden" v-if="getUserVerify()"></div>
 
       <div class="text-4xl sm:text-sm md:text-sm px-16 " v-if="ballotData.length > 1">
-        <div class="border border-slate-100 text-4xl sm:text-md px-16 uppercase">election</div>
-        <form>
+        <div class="border border-slate-100 text-4xl sm:text-md px-16 uppercase">election ballot</div>
+        <form @submit.prevent="castVote">
           <div id="table1" class="flex flex-col mx-4" v-for="(i, k) in ballotPositions" :key="k">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8">
@@ -43,16 +41,15 @@
                       <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div class="form-check">
                           <input
+                            v-model="selected.candidate_id"
                             class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="radio" :value="index.id" :id="i.id" :name="i.pos_name">
                         </div>
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        <div class="relative w-12 h-12">
+                        <div class="relative w-14 h-14">
                           <img class="rounded-full border border-gray-100 shadow-sm"
                                :src="getImgInfo(index.image)" alt="user image"/>
-                          <div
-                            class="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400"></div>
                         </div>
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
@@ -73,6 +70,13 @@
               </div>
             </div>
           </div>
+          <!--selected field here /casted vote-->
+          <button
+            type="submit"
+            class="my-2 uppercase flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            cast vote
+          </button>
         </form>
       </div>
 
@@ -91,6 +95,8 @@ let userSpec = {
   id: '',
   college_init: ''
 }
+
+let selected = []
 
 function getImgInfo(string) {
   return "http://localhost:8000/api/image_search/" + string
@@ -133,7 +139,8 @@ export default {
       getUserVerify,
       ballotData,
       ballotPositions,
-      getImgInfo
+      getImgInfo,
+      selected
     }
   },
   data() {
@@ -143,7 +150,8 @@ export default {
       error: false,
       errorMsg: '',
       loadingBtn: false,
-      voterMessage: []
+      voterMessage: [],
+      checkedValue: '',
     }
   },
   methods: {
@@ -160,10 +168,22 @@ export default {
           ballotData = []
 
         })
+    },
+    castVote(){
+      this.loading = true
+
+      store.dispatch('castVoteFromBallot', selected)
+        .then((response)=>{
+          console.log(response)
+        })
+        .catch((error)=>{
+
+        })
     }
   },
   mounted() {
     this.getUserVerify()
+    this.checkedValue = '1'
   },
 }
 </script>

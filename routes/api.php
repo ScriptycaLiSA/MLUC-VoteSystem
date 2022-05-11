@@ -91,11 +91,14 @@ Route::get('/colleges_data', [CollegeController::class, 'index']);
 Route::get('/get_positions', [PositionController::class, 'index']);
 
 // voter endpoints
-Route::middleware(['auth:sanctum', 'abilities:access-voter'])
-    ->group(function () {
-        //election render if voter is already voted or not/ finding elections in his college
-        Route::post('/view_election', [VotingController::class, 'viewElection']);
+Route::middleware(['auth:sanctum', 'abilities:access-voter'])->group(function () {
+    //election render if voter is already voted or not/ finding elections in his college
+    Route::post('/view_election', [VotingController::class, 'viewElection']);
 
-        Route::get('/voter/user', [VoterAuthController::class, 'getVoterSession']);
-        Route::post('/voterLogout', [VoterAuthController::class, 'voterLogout']);
-    });
+    Route::get('/voter/user', [VoterAuthController::class, 'getVoterSession']);
+    Route::post('/voterLogout', [VoterAuthController::class, 'voterLogout']);
+
+    //vote casting
+    Route::post('/cast_vote', [VotingController::class, 'castVote']);
+});
+
