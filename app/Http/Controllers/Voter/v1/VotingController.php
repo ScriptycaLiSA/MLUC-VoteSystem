@@ -25,11 +25,10 @@ class VotingController extends Controller
             $ballotList = DB::table('candidate_models')
                 ->where('college_init',$voterAcct['college_init'])
                 ->join('position_models','candidate_models.position_id','=','position_models.id')
-                ->select('candidate_models.*','position_models.pos_name')
+                ->join('partylist_models','candidate_models.partylist_id', '=', 'partylist_models.id')
+                ->select('candidate_models.*','position_models.pos_name','partylist_models.party_name')
                 ->orderBy('position_id')
                 ->get();
-
-            $ballotPosition = DB::table('position_models')->get();
 
             return response([
                 'message'=>$ballotList,

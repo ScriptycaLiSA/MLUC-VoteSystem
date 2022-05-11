@@ -88,12 +88,9 @@ function getCandidateInfo() {
 }
 
 function getImgInfo(string) {
-
-
   if (candData.length < 1) {
     this.error = true
   }
-
   return "http://localhost:8000/api/image_search/" + string
 }
 

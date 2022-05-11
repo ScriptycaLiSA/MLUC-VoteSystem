@@ -7,99 +7,73 @@
       <div class="hidden" v-if="getUserVerify()"></div>
 
       <div class="text-4xl sm:text-sm md:text-sm px-16 " v-if="ballotData.length > 1">
+        <div class="border border-slate-100 text-4xl sm:text-md px-16 uppercase">election</div>
+        <form>
+          <div id="table1" class="flex flex-col mx-4" v-for="(i, k) in ballotPositions" :key="k">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                  <div class="bg-grey-50 dark:bg-gray-400 px-2 py-3 border-solid border-grey-light border-b">
+                    {{ i.pos_name }}
+                  </div>
+                  <table class="min-w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th scope="col"
+                          class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                        Select
+                      </th>
+                      <th scope="col"
+                          class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                        Profile
+                      </th>
+                      <th scope="col"
+                          class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                        Name
+                      </th>
+                      <th scope="col"
+                          class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                        Partylist
+                      </th>
+                    </tr>
+                    </thead>
 
-        <div id="table1" class="flex flex-col mx-4">
-          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8" v-for="(i, k) in ballotPositions" :key="k">
-              <div class="overflow-hidden shadow-md sm:rounded-lg">
-                <div class="bg-grey-50 dark:bg-gray-400 px-2 py-3 border-solid border-grey-light border-b">
-                  {{ i.pos_name }}
+                    <tbody v-for="(index, key) in ballotData">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" v-if="index.position_id==i.id">
+                      <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="radio" :value="index.id" :id="i.id" :name="i.pos_name">
+                        </div>
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        <div class="relative w-12 h-12">
+                          <img class="rounded-full border border-gray-100 shadow-sm"
+                               :src="getImgInfo(index.image)" alt="user image"/>
+                          <div
+                            class="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400"></div>
+                        </div>
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        <label class="form-check-label text-white mb-12">
+                          {{ index.cand_name }}
+                        </label>
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ index.party_name }}
+                      </td>
+                      <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      </td>
+                    </tr>
+                    </tbody>
+
+                  </table>
                 </div>
-                <table class="min-w-full">
-                  <thead class="bg-gray-50 dark:bg-gray-700">
-                  <tr>
-                    <th scope="col"
-                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                      Select
-                    </th>
-                    <th scope="col"
-                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                      Profile
-                    </th>
-                    <th scope="col"
-                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                      Name
-                    </th>
-                    <th scope="col"
-                        class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
-                      Partylist
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-
-                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                          type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                      </div>
-                    </td>
-                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      <div class="relative w-12 h-12">
-                        <img class="rounded-full border border-gray-100 shadow-sm"
-                             src="https://randomuser.me/api/portraits/women/81.jpg" alt="user image"/>
-                        <div
-                          class="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-                      </div>
-                    </td>
-                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      <label class="form-check-label text-white mb-12">
-                        %MOMO%
-                      </label>
-                    </td>
-                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      %Manyak%
-                    </td>
-                    <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    </td>
-                  </tr>
-                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                          type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                      </div>
-                    </td>
-                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      <div class="relative w-12 h-12">
-                        <img class="rounded-full border w-12 h-12 border-gray-100 shadow-sm"
-                             src="https://www.bongbongmarcos.com/wp-content/uploads/2022/04/bongbong-marcos.jpeg"
-                             alt="user image"/>
-                        <div
-                          class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-                      </div>
-                    </td>
-                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      <label class="form-check-label text-white mb-12">
-                        %Bong Bong Marcos%
-                      </label>
-                    </td>
-                    <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      %UniTeam%
-                    </td>
-                    <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
-        </div>
-
+        </form>
       </div>
 
       <div v-else>
@@ -116,6 +90,10 @@ import store from '../../../store'
 let userSpec = {
   id: '',
   college_init: ''
+}
+
+function getImgInfo(string) {
+  return "http://localhost:8000/api/image_search/" + string
 }
 
 let ballotData = []
@@ -154,7 +132,8 @@ export default {
       userSpec,
       getUserVerify,
       ballotData,
-      ballotPositions
+      ballotPositions,
+      getImgInfo
     }
   },
   data() {
