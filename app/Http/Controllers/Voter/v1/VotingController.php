@@ -45,16 +45,20 @@ class VotingController extends Controller
     //sending arrays of votes?
     public function castVote(Request $request)
     {
-        if (!$request == null) {
-            DB::table('voting_results')->insert([
-                'voter_id' => Auth::id(),
-                'position_id' => UtilityElection::getPositionInElections($request['candidate_id']),
-                'candidate_id' => $request['candidate_id'],
-                'election_id' => UtilityElection::getCurrentElections($request['candidate_id'])
-            ]);
+        $data = $request->all();
+
+        if (!$data == null) {
+            foreach($data as $data1) {
+                DB::table('voting_results')->updateOrInsert([
+                    'voter_id' => Auth::id(),
+                    'position_id' => UtilityElection::getPositionInElections($data1),
+                    'candidate_id' => $data1,
+                    'election_id' => UtilityElection::getCurrentElections($data1)
+                ]);
+            }
 
             return response([
-                'success' => 'Your vote has been casted!'
+                'success' => 'Your vote has been casted. Please restart the page!'
             ], 201);
         }
 

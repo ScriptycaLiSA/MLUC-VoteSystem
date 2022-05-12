@@ -2,7 +2,6 @@
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
     <div class="bg-slate-100 shadow-xl min-h-screen">
-      <div class="hidden" v-if="getUserVerify()"></div>
 
       <div class="text-4xl sm:text-sm md:text-sm px-16 " v-if="ballotData.length > 1">
         <div class="border border-slate-100 text-4xl sm:text-md px-16 uppercase">election ballot</div>
@@ -36,14 +35,15 @@
                     </tr>
                     </thead>
 
-                    <tbody v-for="(index, key) in ballotData">
+                    <tbody v-for="(index, key) in ballotData" :key="key">
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" v-if="index.position_id==i.id">
                       <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div class="form-check">
                           <input
-                            v-model="selected.candidate_id"
+                            v-model="selected[k]"
                             class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                            type="radio" :value="index.id" :id="i.id" :name="i.pos_name">
+                            type="radio" :value="index.id" :id="i.id" :name="i.pos_name"
+                            :disabled="success">
                         </div>
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
@@ -70,6 +70,7 @@
               </div>
             </div>
           </div>
+          <span>Selected candidates: {{selected}}</span>
           <!--selected field here /casted vote-->
           <button
             type="submit"
@@ -90,13 +91,12 @@
 
 <script>
 import store from '../../../store'
+import router from '../../../router'
 
 let userSpec = {
   id: '',
   college_init: ''
 }
-
-let selected = []
 
 function getImgInfo(string) {
   return "http://localhost:8000/api/image_search/" + string
@@ -104,6 +104,7 @@ function getImgInfo(string) {
 
 let ballotData = []
 let ballotPositions = []
+let selected = []
 
 function getUserVerify() {
   this.loading = true
@@ -120,13 +121,26 @@ function getUserVerify() {
           data.map(function (obj, i) {
             ballotPositions.push(obj)
           })
-          ballotPositions = []
 
+          ballotPositions = []
           this.loading = false
         })
       this.getBallot2()
     })
     .catch((error) => {
+    })
+}
+
+function getBallot2() {
+  store.dispatch('voterViewBallot', userSpec)
+    .then((response) => {
+      let data = response.data
+
+      this.voterMessage.message = data.message
+      data.message.map(function (obj, i) {
+        ballotData.push(obj)
+      })
+      ballotData = []
     })
 }
 
@@ -140,7 +154,8 @@ export default {
       ballotData,
       ballotPositions,
       getImgInfo,
-      selected
+      selected,
+      getBallot2
     }
   },
   data() {
@@ -152,29 +167,18 @@ export default {
       loadingBtn: false,
       voterMessage: [],
       checkedValue: '',
+      selected
     }
   },
   methods: {
-    //as a validator for rendering ballot
-    getBallot2() {
-      store.dispatch('voterViewBallot', userSpec)
-        .then((response) => {
-          let data = response.data
-
-          this.voterMessage.message = data.message
-          data.message.map(function (obj, i) {
-            ballotData.push(obj)
-          })
-          ballotData = []
-
-        })
-    },
     castVote(){
       this.loading = true
 
       store.dispatch('castVoteFromBallot', selected)
         .then((response)=>{
-          console.log(response)
+          this.success = true
+          alert(response.data.success)
+
         })
         .catch((error)=>{
 
@@ -183,7 +187,6 @@ export default {
   },
   mounted() {
     this.getUserVerify()
-    this.checkedValue = '1'
   },
 }
 </script>

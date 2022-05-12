@@ -34,7 +34,7 @@ INSERT INTO `colleges_models` (`id`, `coll_name`, `initials`) VALUES
 	(13, 'College of Management', 'COM'),
 	(14, 'Institute of Criminal Justice Education', 'ICJE'),
 	(15, 'College of Arts And Sciences', 'CAS'),
-	(16, 'College of Arts And Law', 'CLAW');
+	(16, 'College of Law', 'CLAW');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
