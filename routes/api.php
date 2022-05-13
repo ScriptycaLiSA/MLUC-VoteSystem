@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\v1\CampaignSiteController;
 use App\Http\Controllers\Admin\v1\Candidates\CandidateControllers;
 use App\Http\Controllers\Admin\v1\CollegeController;
 use App\Http\Controllers\Admin\v1\Election\ElectionController;
+use App\Http\Controllers\Admin\v1\Election\ElectionResultController;
 use App\Http\Controllers\Admin\v1\Partylist\PartylistController;
 use App\Http\Controllers\Admin\v1\Position\PositionController;
 use App\Http\Controllers\AuthController;
@@ -34,7 +35,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 //Admin Login
 Route::post('/adminLogin', [AuthController::class, 'adminLogin']); //working
-Route::post('/make_admin', [AuthController::class, 'register']); //working
+
 
 Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function () {
     /*  Administration Control
@@ -50,10 +51,9 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     Route::post('/delete_position', [PositionController::class, 'deletePosition']);
 
     //Election
+    Route::post('/election_results', [ElectionResultController::class, 'searchElectionResults']);
     Route::post('/create_election', [ElectionController::class, 'createElection']);
     Route::get('/election_data', [ElectionController::class, 'search']);
-    Route::get('/start_election', 'App\Http\Controllers\Admin\v1\Election\StartElectionController');
-    Route::get('/election_info', 'App\Http\Controllers\Admin\v1\Election\ElectionInfoController');
     Route::post('/delete_election', [ElectionController::class, 'deleteElection']);
 
     //Colleges
@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     Route::get('/partylist_data', [PartylistController::class, 'index']);
     Route::post('/create_partylist', [PartylistController::class, 'createPartylist']);
     Route::post('/delete_partylist', [PartylistController::class, 'deletePartylist']);
-
+    Route::post('/make_admin', [AuthController::class, 'register']); //working
 
     /*
      *  An area consists of display functions and updating records
@@ -72,6 +72,18 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     Route::get('/mstr_dash', [SystemServerRecordController::class, 'mstrUpdtDash']); //working
 
     Route::post('/logout', [AuthController::class, 'logout']); //working
+});
+
+// voter endpoints
+Route::middleware(['auth:sanctum', 'abilities:access-voter'])->group(function () {
+    //election render if voter is already voted or not/ finding elections in his college
+    Route::post('/view_election', [VotingController::class, 'viewElection']);
+
+    Route::get('/voter/user', [VoterAuthController::class, 'getVoterSession']);
+    Route::post('/voterLogout', [VoterAuthController::class, 'voterLogout']);
+
+    //vote casting
+    Route::post('/cast_vote', [VotingController::class, 'castVote']);
 });
 
 //fetching data from database to requesting destination
@@ -89,16 +101,3 @@ Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
 Route::post('/voter_create', [VoterAuthController::class, 'voterCreateAcct']);
 Route::get('/colleges_data', [CollegeController::class, 'index']);
 Route::get('/get_positions', [PositionController::class, 'index']);
-
-// voter endpoints
-Route::middleware(['auth:sanctum', 'abilities:access-voter'])->group(function () {
-    //election render if voter is already voted or not/ finding elections in his college
-    Route::post('/view_election', [VotingController::class, 'viewElection']);
-
-    Route::get('/voter/user', [VoterAuthController::class, 'getVoterSession']);
-    Route::post('/voterLogout', [VoterAuthController::class, 'voterLogout']);
-
-    //vote casting
-    Route::post('/cast_vote', [VotingController::class, 'castVote']);
-});
-

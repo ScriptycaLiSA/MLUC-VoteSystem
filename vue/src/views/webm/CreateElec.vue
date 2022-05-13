@@ -70,6 +70,7 @@
                 </option>
               </select>
             </div>
+
             <div class="flex flex-wrap -mx-3 mb-2">
               <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <button type="submit"
@@ -104,7 +105,7 @@
                       </th>
                       <th scope="col"
                           class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                        ended in
+                        status
                       </th>
                       <th scope="col"
                           class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
@@ -126,7 +127,22 @@
                         {{ index.start }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{ index.end }}
+                        <!-- Toggle B -->
+                        <div class="">
+
+                          <label class="flex items-center cursor-pointer">
+                            <!-- toggle -->
+                            <div class="relative">
+                              <!-- input -->
+                              <input type="checkbox" class="sr-only" :id="index.id" :name="index.elec_name" :checked="index.status === 1">
+                              <!-- line -->
+                              <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                              <!-- dot -->
+                              <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                            </div>
+                          </label>
+
+                        </div>
                       </td>
                       <td class="hidden">
                         {{ index.id }}
@@ -282,5 +298,10 @@ export default {
   z-index: 10000000;
   opacity: 0.6;
   filter: alpha(opacity=60);
+}
+
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
 }
 </style>

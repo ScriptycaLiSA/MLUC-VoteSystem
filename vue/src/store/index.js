@@ -189,6 +189,13 @@ const adminModule = {
           return data;
         })
     },
+    //election send election_id to get result if there are any data
+    getElectionResult({commit}, id){
+      return axiosClient.post('/election_results', id)
+        .then(({data}) => {
+          return data;
+        })
+    }
   },
   mutations: {
     logout: (state) => {
@@ -275,7 +282,6 @@ const voterModule = {
         .then(response => {
           return response;
         })
-
     },
   },
   mutations: {

@@ -36,4 +36,35 @@ class UtilityElection extends Controller
             ->where('candidate_models.id', $candidateId)
             ->value('position_models.id');
     }
+
+    public static function getActiveElection($electionId){
+        return DB::table('election_models')
+            ->where('id',$electionId)
+            ->value('status');
+    }
+
+    private static function getCandidatesInElection($electionId): \Illuminate\Support\Collection
+    {
+        return DB::table('voting_results')
+            ->select(DB::raw('position_id,candidate_id,count(*) as votes'))
+            ->groupBy('position_id', 'candidate_id')
+            ->where('election_id', $electionId)
+            ->orderBy('votes', 'desc')
+            ->get();
+    }
+
+    public static function getFinalResult($elecId){
+        $result = self::getCandidatesInElection($elecId);
+        $position = DB::table('position_models')
+            ->where('election_id', $elecId)->get();
+        $candidate = DB::table('candidate_models')
+            ->where('election_id', $elecId)
+            ->get();
+
+        return response([
+            'result'=>$result,
+            'position'=>$position,
+            'candidate'=>$candidate,
+        ], 200);
+    }
 }

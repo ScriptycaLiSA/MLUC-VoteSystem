@@ -25,7 +25,7 @@
                 <MenuButton
                   class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                   <span class="sr-only">Open user menu</span>
-                  <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
+                  <img class="h-8 w-8 rounded-full" :src="getMyImg(user.image)" alt="adminImage"/>
                 </MenuButton>
               </div>
               <transition enter-active-class="transition ease-out duration-100"
@@ -67,7 +67,7 @@
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5">
           <div class="flex-auto grow-0">
-            <img class="h-10 w-10 rounded-full" alt=""/>
+            <img class="h-10 w-10 rounded-full" :src="getMyImg(user.image)" alt="admin" loading="eager"/>
           </div>
           <div class="flex-auto">
             <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
@@ -106,7 +106,6 @@
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
 import {BellIcon, LogoutIcon, MenuIcon, XIcon} from '@heroicons/vue/outline'
 import {useStore} from 'vuex'
-import {computed} from 'vue'
 import {useRouter} from 'vue-router';
 import SideNavLayout from "./SideNavLayout.vue";
 import store from '../store'
@@ -122,12 +121,17 @@ const navigation = [
   {name: 'Update Master List', to: {name: 'UpdtMasterList'}, current: false},
 ]
 
+function getMyImg(string){
+  return "http://localhost:8000/api/image_search/"+string
+}
+
 function getAdminData(){
   store.dispatch('getSession')
     .then((response)=>{
       this.user.name = response.name;
       this.user.role = response.role;
       this.user.email = response.email;
+      this.user.image = response.image
     })
     .catch((error)=>{
       console.log(error)
@@ -166,7 +170,8 @@ export default {
     return {
       navigation,
       logout,
-      getAdminData
+      getAdminData,
+      getMyImg
     }
   },
   data(){

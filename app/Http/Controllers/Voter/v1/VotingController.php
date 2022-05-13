@@ -56,7 +56,6 @@ class VotingController extends Controller
                     'election_id' => UtilityElection::getCurrentElections($data1)
                 ]);
             }
-
             return response([
                 'success' => 'Your vote has been casted. Please restart the page!'
             ], 201);
