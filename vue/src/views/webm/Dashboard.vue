@@ -9,13 +9,13 @@
       <div class="grid 2xl:grid-cols-2 px-2 py-4 gap-16">
         <div class="bg-slate-100 px-2">
           <form @submit.prevent="getElectionFinalData">
-            <div class="flex flex-wrap -mx-4 mb-6">
+            <div class="flex flex-wrap -mx-2 mb-6">
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                      for="grid-election">
                 ELECTION:
               </label>
               <select v-model="electionId.election_id"
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      class="appearance-none block w-full rounded-md bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-election">
                 <option disabled value="" class="uppercase">-- SELECT ELECTION --</option>
                 <option v-for="(infoCol, index) in elections" :key="index" v-bind:value="infoCol.id">
