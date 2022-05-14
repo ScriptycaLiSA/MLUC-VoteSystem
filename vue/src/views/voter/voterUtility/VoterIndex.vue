@@ -171,6 +171,52 @@
               <div class="border border-slate-100 text-4xl sm:text-md md:text-8xl px-16">
                 {{ voterMessage.message }}
               </div>
+              <!--table of voted list here -->
+              <div class="flex justify-center text-2xl sm:text-md mb-2 text-left py-4 uppercase">You have voted:</div>
+              <div id="table2" class="flex flex-col mx-4" v-for="(i, k) in ballotPositions" :key="k">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                  <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8">
+                    <div class="overflow-hidden shadow-md sm:rounded-lg">
+                      <div class="bg-grey-50 dark:bg-gray-400 px-2 py-3 border-solid border-grey-light border-b">
+                        {{ i.pos_name }}
+                      </div>
+                      <table class="min-w-full">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                          <th scope="col"
+                              class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                          </th>
+                          <th scope="col"
+                              class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                            Name
+                          </th>
+                        </tr>
+                        </thead>
+
+                        <tbody v-for="(index, key) in votedLists" :key="key">
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                            v-if="index.position_id===i.id">
+                          <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            <div class="flex w-12 h-12">
+                              <img class="rounded-full border border-gray-100 shadow-sm"
+                                   :src="getImgInfo(index.image)" alt="user image"/>
+                            </div>
+                          </td>
+                          <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            <label class="form-check-label text-white mb-12">
+                              {{ index.cand_name }}
+                            </label>
+                          </td>
+                          <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </form>
         </div>
@@ -195,6 +241,7 @@ function getImgInfo(string) {
 let ballotData = []
 let ballotPositions = []
 let selected = []
+let votedLists = []
 
 function getUserVerify() {
   this.loading = true
@@ -216,6 +263,7 @@ function getUserVerify() {
           this.loading = false
         })
       this.getBallot2()
+      this.getVotedList()
     })
     .catch((error) => {
     })
@@ -226,11 +274,30 @@ function getBallot2() {
     .then((response) => {
       let data = response.data
 
-      this.voterMessage.message = data.message
-      data.message.map(function (obj, i) {
-        ballotData.push(obj)
-      })
+      if(data.message.length > 1){
+        data.message.map(function (obj, i) {
+          ballotData.push(obj)
+        })
+      }
+
       ballotData = []
+    })
+}
+
+function getVotedList(){
+  store.dispatch('voterViewBallot', userSpec)
+    .then((response) => {
+      let data = response.data
+
+      this.voterMessage.message = data.message
+
+      if(data.votes.length > 0){
+        data.votes.map(function (obj, i) {
+          votedLists.push(obj)
+        })
+      }
+
+      votedLists = []
     })
 }
 
@@ -245,7 +312,9 @@ export default {
       ballotPositions,
       getImgInfo,
       selected,
-      getBallot2
+      getBallot2,
+      getVotedList,
+      votedLists
     }
   },
   data() {

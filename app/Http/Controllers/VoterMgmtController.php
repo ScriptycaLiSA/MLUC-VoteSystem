@@ -11,19 +11,18 @@ use Illuminate\Support\Facades\DB;
 
 class VoterMgmtController extends Controller
 {
-    use HasFactory;
-
     //single search of voter record (optional feature)
     public function getVoterInfo($idNum)
     {
-        $voter = DB::table('voter_models')->where('idNum', $idNum)->first();
+        $voter = VoterAcctModel::where('idNum',$idNum)->first();
+
         if ($voter == null) {
             return response([
-                'error' => 'This student ID is not existing from the origin server!'
+                'errors' => 'This student ID is not existing from the origin server!'
             ], 422);
         }
         return response([
-            'studentId' => $voter
+            'student' => $voter
         ], 200);
     }
 
@@ -32,7 +31,7 @@ class VoterMgmtController extends Controller
     {
         $voterInfo = VoterAcctModel::all();
 
-        if($voterInfo==null){
+        if ($voterInfo == null) {
             return response([
                 'error' => 'No registered voters!'
             ], 422);
@@ -42,33 +41,45 @@ class VoterMgmtController extends Controller
         ], 200);
     }
 
-    //registration endpoint from pre-registered table
-    public function registerVoterFromStud(Request $request){
-        $voterCred = $request->validate([
-            'fname'=>'required|string|max:20',
-            'lname'=>'required|string|max:20',
-            'email'=>'required|string|email|unique:voter_acct_models,email',
-            'college'=>'required|string',
-            'password'=>['required']
+    //updating voter's data (tool)
+    public function updateVoterData(Request $request)
+    {
+        $data = $request->validate([
+            'idNum'=>['required'],
+            'fname' => ['required'],
+            'lname' => ['required'],
+            'email' => ['required'],
+            'college_init' => ['required'],
+            'password' => ['required']
         ]);
 
-        $voterAcctCreation = VoterAcctModel::create([
-            'fname' => $voterCred['fname'],
-            'lname' => $voterCred['lname'],
-            'email' => $voterCred['email'],
-            'college' => $voterCred['college'],
-            'password' => bcrypt($voterCred['password'])
-        ]);
+        if (!$data == null) {
+            if(!UtilityElection::findVoter($data['idNum']) == null){
+                DB::table('voter_acct_models')
+                    ->upsert([
+                        [
+                            'idNum'=> $data['idNum'],
+                            'fname' => $data['fname'],
+                            'lname' => $data['lname'],
+                            'email' => $data['email'],
+                            'college_init' => $data['college_init'],
+                            'password' => bcrypt($data['password'])]
+                    ], ['idNum'], ['fname','lname','email','college_init','password']);
 
-        if($voterAcctCreation==null){
-            return response([
-                'error' => 'Voter account cannot being created. Try again later.'
-            ], 422);
+                return response([
+                    'success'=>'The voter`s data has been updated. Please restart the page...'
+                ],201);
+            }
+            else{
+                return response([
+                    'error'=>'The voter`s is not existing in the system!'
+                ],404);
+            }
         }
+
         return response([
-            'success'=>'Voter Account successfully created',
-            'data' => $voterAcctCreation
-        ]);
+            'error'=>'Something went wrong. Please try again later!'
+        ], 500);
     }
 
 }

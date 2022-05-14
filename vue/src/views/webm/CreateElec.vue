@@ -134,7 +134,7 @@
                             <!-- toggle -->
                             <div class="relative">
                               <!-- input -->
-                              <input type="checkbox" class="sr-only" :id="index.id" :name="index.elec_name" :checked="index.status === 1">
+                              <input type="checkbox" class="sr-only" :name="index.elec_name" :checked="index.status === 1">
                               <!-- line -->
                               <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
                               <!-- dot -->
@@ -148,8 +148,12 @@
                         {{ index.id }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        <button @click="deleteElection(index)"
+                        <button @click="updateElectionStatus(index)"
                                 class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
+                          update status
+                        </button>
+                        <button @click="deleteElection(index)"
+                                class="uppercase text-white bg-slate-500 hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
                           delete
                         </button>
                       </td>
@@ -269,6 +273,19 @@ export default {
 
           alert(error.response.data.message)
           errorMsg.message = error.response.data.message
+        })
+    },
+    updateElectionStatus(id){
+      this.loading = true
+
+      store.dispatch('switchElectionStatus', id)
+        .then((response)=>{
+          this.success = true
+          this.loading = false
+          serverResponse.message = response.success
+
+          alert(response.success)
+          serverResponse.message = response.success
         })
     }
   },

@@ -20,8 +20,17 @@ class VotingController extends Controller
         ]);
 
         if (UtilityElection::hasVoted($voterAcct['id'])) {
+            $votes = DB::table('voting_results')
+                ->where('voter_id',$voterAcct['id'])
+                ->join('candidate_models','voting_results.candidate_id','=','candidate_models.id')
+                ->join('position_models','voting_results.position_id','=','position_models.id')
+                ->select('voting_results.*','candidate_models.cand_name','candidate_models.image','position_models.pos_name')
+                ->orderBy('voter_id')
+                ->get();
+
             return response([
-                'message' => 'You have already voted!'
+                'message' => 'You have already voted!',
+                'votes'=>$votes,
             ], 202);
         } elseif (UtilityElection::getCollege($voterAcct['college_init'])) {
             $ballotList = DB::table('candidate_models')

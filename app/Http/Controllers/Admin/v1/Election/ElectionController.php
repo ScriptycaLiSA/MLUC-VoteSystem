@@ -31,12 +31,12 @@ class ElectionController extends Controller
     public function createElection(Request $request)
     {
         $data = $request->validate([
-            'name'=>['required','string'],
-            'college_init'=>['required']
+            'name' => ['required', 'string'],
+            'college_init' => ['required']
         ]);
 
         if (!$data == null) {
-            try{
+            try {
                 DB::table('election_models')->insert([
                     'elec_name' => $data['name'],
                     'college_init' => $data['college_init']
@@ -44,9 +44,9 @@ class ElectionController extends Controller
                 return response([
                     'success' => 'Election has been inserted! Please refresh the page!',
                 ], 201);
-            }catch(\Throwable $exception){
+            } catch (\Throwable $exception) {
                 return response()->json([
-                    'error'=>'Something went wrong. Please try again later!'
+                    'error' => 'Something went wrong. Please try again later!'
                 ], 500);
             }
         }
@@ -55,25 +55,51 @@ class ElectionController extends Controller
         ], 500);
     }
 
-    public function deleteElection(Request $request){
+    public function deleteElection(Request $request)
+    {
         $data = $request->only('id');
 
-        if(!$data==null){
-            try{
+        if (!$data == null) {
+            try {
                 DB::table('election_models')
-                    ->where('id',$data['id'])
+                    ->where('id', $data['id'])
                     ->delete();
                 return response([
                     'success' => 'Election has been deleted! Please refresh the page later',
                 ], 200);
-            }catch(\Throwable $exception){
+            } catch (\Throwable $exception) {
                 return response()->json([
-                    'error'=>'Something went wrong. Please refresh the page later'
+                    'error' => 'Something went wrong. Please refresh the page later'
                 ], 500);
             }
         }
         return response([
-            'error'=>'Something went wrong. Please restart the page'
+            'error' => 'Something went wrong. Please restart the page'
         ], 500);
     }
+
+    public function electionStatusUpdate(Request $request)
+    {
+        $data = $request->all();
+
+        if (UtilityElection::getActiveElection($data['id']) === 1) {
+            DB::table('election_models')
+                ->where('id', $data['id'])
+                ->update(['status' => 0]);
+            return response([
+                'success'=>'Status set to inactive. Please restart the page.'
+            ],201);
+        } elseif (UtilityElection::getActiveElection($data['id']) === 0) {
+            DB::table('election_models')
+                ->where('id', $data['id'])
+                ->update(['status' => 1]);return response([
+                'success'=>'Status set to active. Please restart the page.'
+            ],201);
+        }
+
+        return response([
+            'error'=>'Something went wrong. Please try again later'
+        ],500);
+    }
+
 }

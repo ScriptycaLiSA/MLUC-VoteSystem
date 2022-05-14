@@ -90,4 +90,19 @@ class VoterAuthController extends Controller
 
         return response()->json($voterInfo,200);
     }
+
+    //single search of voter record (optional feature)
+    public function getVoterInfo($idNum)
+    {
+        $voter = DB::table('voter_acct_models')->where('idNum', $idNum)->first();
+
+        if ($voter == null) {
+            return response([
+                'error' => 'This student ID is not existing from the origin server!'
+            ], 422);
+        }
+        return response([
+            'student' => $voter
+        ], 200);
+    }
 }

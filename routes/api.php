@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     Route::post('/delete_position', [PositionController::class, 'deletePosition']);
 
     //Election
+    Route::post('/elecstatus_change', [ElectionController::class, 'electionStatusUpdate']);
     Route::post('/election_results', [ElectionResultController::class, 'searchElectionResults']);
     Route::post('/create_election', [ElectionController::class, 'createElection']);
     Route::get('/election_data', [ElectionController::class, 'search']);
@@ -58,12 +59,17 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
 
     //Colleges
     Route::get('/colleges', [CollegeController::class, 'index']);
+    Route::get('/colleges_sorted', [CollegeController::class, 'sortedDataForColleges']);
 
     //Partylist
     Route::get('/partylist_data', [PartylistController::class, 'index']);
     Route::post('/create_partylist', [PartylistController::class, 'createPartylist']);
     Route::post('/delete_partylist', [PartylistController::class, 'deletePartylist']);
     Route::post('/make_admin', [AuthController::class, 'register']); //working
+
+    //voter function
+    Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
+    Route::post('/update_voter', [VoterMgmtController::class, 'updateVoterData']);
 
     /*
      *  An area consists of display functions and updating records
@@ -87,7 +93,6 @@ Route::middleware(['auth:sanctum', 'abilities:access-voter'])->group(function ()
 });
 
 //fetching data from database to requesting destination
-Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
 Route::get('/voterget_all', [VoterMgmtController::class, 'getVoterInfoAll']);
 
 //Campaign Site

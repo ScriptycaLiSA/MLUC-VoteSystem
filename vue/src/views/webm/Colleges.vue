@@ -7,9 +7,56 @@
       </div>
 
       <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2">
+        <div class="">
+          <label for="table2" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table
+            left to right</label>
+          <label class="font-semibold text-black">PRE-REGISTERED DATA</label>
+          <div id="table2" class="flex flex-col px-4">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                  <table class="min-w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th scope="col"
+                          class="py-3 px-6 text-xs font-semibold tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        college
+                      </th>
+                      <th scope="col"
+                          class="py-3 px-6 text-xs font-semibold tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        college initial
+                      </th>
+                      <th scope="col"
+                          class="py-3 px-6 text-xs font-semibold tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                        PRE-REGISTERED VOTER
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr v-for="(i, k) in preRegData" :key="k"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ i.college }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-gray-400">
+                        {{ i.initials }}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-gray-400">
+                        {{ i.prereg }}
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="bg-white-900 min-w-screen">
           <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table
             left to right</label>
+          <label class="font-semibold text-black">REGISTERED DATA</label>
           <div id="table" class="flex flex-col px-4">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -39,9 +86,10 @@
                         {{ collegeStats.coll_name }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-gray-400">
-                        {{ collegeStats.initials }}
+                        {{ collegeStats.college_init }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-gray-400">
+                        {{ collegeStats.registered }}
                       </td>
                     </tr>
                     </tbody>
@@ -50,10 +98,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="px-2 py-2">
-          <ViewStats/>
         </div>
       </div>
     </div>
@@ -65,6 +109,7 @@ import ViewStats from './toolComponents/ChartDoughnut.vue'
 import store from "../../store";
 
 let collegesData = []
+let preRegData = []
 
 
 export default {
@@ -75,6 +120,7 @@ export default {
   setup() {
     return {
       collegesData,
+      preRegData
     }
   },
   data() {
@@ -88,16 +134,19 @@ export default {
     getColleges() {
       this.loading = true
 
-      store.dispatch('getCollegesData')
+      store.dispatch('getCollegesSorted')
         .then((response) => {
+          response.success1.map(function (obj, i) {
+            preRegData.push(obj)
+          })
           response.success.map(function (obj, i) {
             collegesData.push(obj)
           })
-          console.log(collegesData)
 
           this.loading = false
 
           collegesData = []
+          preRegData =[]
         })
     }
   },

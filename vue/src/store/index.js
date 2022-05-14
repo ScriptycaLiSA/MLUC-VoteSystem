@@ -195,6 +195,27 @@ const adminModule = {
         .then(({data}) => {
           return data;
         })
+    },
+    //switch of the election status
+    switchElectionStatus({commit}, elecId){
+      return axiosClient.post('/elecstatus_change', elecId)
+        .then(({data})=>{
+          return data;
+        })
+    },
+    //update voter's data (tool)
+    updateVoter({commit}, data){
+      return axiosClient.post('/update_voter', data)
+        .then(({data})=>{
+          return data;
+        })
+    },
+    //get only sorted data of colleges
+    getCollegesSorted(){
+      return axiosClient.get('/colleges_sorted')
+        .then(({data})=>{
+          return data;
+        })
     }
   },
   mutations: {
@@ -218,6 +239,7 @@ const adminModule = {
   modules: {}
 }
 
+//voter functions
 const voterModule = {
   state: {
     user: {
