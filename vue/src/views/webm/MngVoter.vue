@@ -155,6 +155,7 @@
                       </td>
                       <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                         <button type="button"
+                                @click="deleteVoterAccount(table)"
                                 class="text-white bg-slate-500 hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
                           DELETE
                         </button>
@@ -288,7 +289,15 @@ export default {
       fillFields.lname = ''
       fillFields.email = ''
       fillFields.password = ''
-    }
+    },
+    deleteVoterAccount(id){
+      this.loading = true
+
+      store.dispatch('deleteVoterAccount', id)
+        .then((response)=>{
+          alert(response.success)
+        })
+    },
   },
   mounted() {
     this.getTableData();

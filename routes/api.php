@@ -70,6 +70,7 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     //voter function
     Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);
     Route::post('/update_voter', [VoterMgmtController::class, 'updateVoterData']);
+    Route::post('/delete_voter', [VoterMgmtController::class, 'deleteVoterData']);
 
     /*
      *  An area consists of display functions and updating records

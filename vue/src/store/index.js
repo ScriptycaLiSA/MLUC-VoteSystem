@@ -216,6 +216,13 @@ const adminModule = {
         .then(({data})=>{
           return data;
         })
+    },
+    //delete voter account
+    deleteVoterAccount({commit}, deleteId){
+      return axiosClient.post('/delete_voter', deleteId)
+        .then(({data})=>{
+          return data;
+        })
     }
   },
   mutations: {

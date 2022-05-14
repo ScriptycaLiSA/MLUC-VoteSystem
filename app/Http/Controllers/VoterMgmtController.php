@@ -82,4 +82,21 @@ class VoterMgmtController extends Controller
         ], 500);
     }
 
+    public function deleteVoterData(Request $request){
+        $data = $request->all();
+
+        if(!$data==null){
+            DB::table('voter_acct_models')
+                ->where('id',$data['id'])
+                ->delete();
+
+            return response([
+                'success'=>'Voter`s data has been deleted. Please refresh the page!'
+            ], 200);
+        }
+
+        return response([
+            'error'=>'Something went wrong. Please try again later'
+        ]);
+    }
 }
