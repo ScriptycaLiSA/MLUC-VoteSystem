@@ -47,11 +47,6 @@
                     type="button" data-modal-toggle="defaultModal">
                     PRINT RESULTS
                   </button>
-                  <button
-                    class="flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button" data-modal-toggle="defaultModal">
-                    SEND THE RESULTS
-                  </button>
                 </div>
               </div>
               <div id="dataTable" class="flex w-full mb-10 overflow-hidden rounded-lg shadow-xl my-4"
