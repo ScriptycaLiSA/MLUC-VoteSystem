@@ -2,7 +2,7 @@
   <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
-        <img src="https://upload.wikimedia.org/wikipedia/en/d/d2/La_Union_State_University.png" alt="dmmmsu_logo"
+        <img src="https://www.dmmmsu.edu.ph/wp-content/uploads/2020/01/DMMMSU-Logo-white-small.png"
              class="mx-auto h-40 w-auto">
         <p class="mt-2 text-center text-sm text-gray-600">
 

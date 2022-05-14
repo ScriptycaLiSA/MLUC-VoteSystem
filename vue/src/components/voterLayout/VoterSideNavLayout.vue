@@ -5,12 +5,12 @@
       <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
            class="fixed z-20 inset-0 bg-slate-200 opacity-50 transition-opacity lg:hidden"></div>
       <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-           class="fixed flex-none z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-slate-200 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
+           class="fixed flex-none z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-slate-100 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
 
         <div class="flex flex-row items-center justify-center mt-10">
           <div class="flex items-left">
             <div class="mt-8 text-center">
-              <img src="https://upload.wikimedia.org/wikipedia/en/d/d2/La_Union_State_University.png" alt=""
+              <img src="https://www.dmmmsu.edu.ph/wp-content/uploads/2020/01/DMMMSU-Logo-white-small.png" alt=""
                    class="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28">
               <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.fname }} {{user.lname}}</h5>
               <span class="hidden text-gray-400 lg:block uppercase">{{user.idNum}} | {{user.college}}</span>

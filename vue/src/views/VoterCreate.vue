@@ -5,7 +5,7 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <img class="mx-auto h-24 w-auto"
-               src="https://www.dmmmsu.edu.ph/wp-content/uploads/2019/06/DMMMSU-Logo-Final.png"
+               src="https://www.dmmmsu.edu.ph/wp-content/uploads/2020/01/DMMMSU-Logo-white-small.png"
                alt="Workflow"/>
           <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">VOTER ACCOUNT UTILITY</h2>
         </div>

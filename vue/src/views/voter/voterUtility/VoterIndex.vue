@@ -1,7 +1,7 @@
 <template>
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
-    <div class="bg-slate-100 shadow-xl min-h-screen">
+    <div class="min-h-screen">
       <!--
             <div class="" v-if="ballotData.length > 1">
               <div class="text-2xl sm:text-md mb-2 text-left py-4 uppercase">election ballot</div>
@@ -84,7 +84,7 @@
       <!--BOBOBOMOMOO-->
 
       <div
-        class="bg-white-50 rounded-lg shadow-xl grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1 px-2 min-w-screen">
+        class=" grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1 px-2 min-w-screen">
         <div class="py-4 px-4 max-w-lg"></div>
         <div>
           <form @submit.prevent="castVote">
@@ -168,12 +168,12 @@
             </div>
 
             <div v-else>
-              <div class="border border-slate-100 text-4xl sm:text-md md:text-8xl px-16">
+              <div class=" text-4xl sm:text-md md:text-8xl px-16">
                 {{ voterMessage.message }}
               </div>
               <!--table of voted list here -->
               <div class="flex justify-center text-2xl sm:text-md mb-2 text-left py-4 uppercase">You have voted:</div>
-              <div id="table2" class="flex flex-col mx-4" v-for="(i, k) in ballotPositions" :key="k">
+              <div id="table2" class="flex flex-col mx-4 xl:mx-64 2xl:mx-2" v-for="(i, k) in ballotPositions" :key="k">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden shadow-md sm:rounded-lg">
@@ -181,33 +181,33 @@
                         {{ i.pos_name }}
                       </div>
                       <table class="min-w-full">
-                        <thead class="bg-gray-50 dark:bg-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-300">
                         <tr>
                           <th scope="col"
                               class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
                           </th>
                           <th scope="col"
-                              class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                              class="py-3 px-6 text-md font-medium tracking-wider text-center text-gray-700 uppercase dark:text-black-500">
                             Name
                           </th>
                         </tr>
                         </thead>
 
                         <tbody v-for="(index, key) in votedLists" :key="key">
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        <tr class=" bg-gray-50 dark:bg-gray-200"
                             v-if="index.position_id===i.id">
-                          <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          <td class="py-4 px-1 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                             <div class="flex w-12 h-12">
                               <img class="rounded-full border border-gray-100 shadow-sm"
                                    :src="getImgInfo(index.image)" alt="user image"/>
                             </div>
                           </td>
-                          <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                            <label class="form-check-label text-white mb-12">
+                          <td class="py-4 px-1 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            <label class="form-check-label text-black text-lg mb-12">
                               {{ index.cand_name }}
                             </label>
                           </td>
-                          <td class="hidden py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          <td class="hidden py-4 px-2 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                           </td>
                         </tr>
                         </tbody>

@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="https://upload.wikimedia.org/wikipedia/en/d/d2/La_Union_State_University.png"
+            <img class="h-8 w-8" src="https://www.dmmmsu.edu.ph/wp-content/uploads/2020/01/DMMMSU-Logo-white-small.png"
                  alt="DMMMSULogo"/>
           </div>
           <div class="hidden md:block">
