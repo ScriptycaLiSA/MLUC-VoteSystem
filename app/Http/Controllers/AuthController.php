@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AdminAcctModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 
@@ -44,44 +45,21 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'fname' => 'required|string',
-            'lname' => 'required|string',
-            'imageUrl' => 'required|string',
-            'email' => 'required|email|string|unique:admin_acct_models,email',
-            'password' => [
-                'required',
-            ],
-            'role' => 'required|string',
-            'organization' => 'required|string',
-            'canMngStd' => 'required|string',
-            'canMngCand' => 'required|string',
-            'canMngRtt' => 'required|string',
-            'canVvto' => 'required|string',
-            'canMngRtmt' => 'required|string',
-            'canMngUsers' => 'required|string',
+            'name' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+            'role' => ['required'],
         ]);
 
-        $adminCreateAcct = AdminAcctModel::create([
-            'fname' => $data['fname'],
-            'lname' => $data['lname'],
-            'imageUrl' => $data['imageUrl'],
+        $adminCreateAcct = DB::table('users')->insert([
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => $data['role'],
-            'organization' => $data['organization'],
-            'canMngStd' => $data['canMngStd'],
-            'canMngCand' => $data['canMngCand'],
-            'canMngRtt' => $data['canMngRtt'],
-            'canVvto' => $data['canVvto'],
-            'canMngRtmt' => $data['canMngRtmt'],
-            'canMngUsers' => $data['canMngUsers']
         ]);
-
-        $token = $adminCreateAcct->createToken('main',['access-admin'])->accessToken;
-
         return response([
+            'success'=>'An admin account has been created!',
             'account' => $adminCreateAcct,
-            'token' => $token
         ]);
     }
 

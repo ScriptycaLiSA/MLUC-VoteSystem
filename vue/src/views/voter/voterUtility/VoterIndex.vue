@@ -2,87 +2,6 @@
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
     <div class="min-h-screen">
-      <!--
-            <div class="" v-if="ballotData.length > 1">
-              <div class="text-2xl sm:text-md mb-2 text-left py-4 uppercase">election ballot</div>
-              <form @submit.prevent="castVote">
-                <div id="table1" class="relative overflow-x-auto shadow-md sm:rounded-lg" v-for="(i, k) in ballotPositions" :key="k">
-                  <div class="">
-                    <div class="py-4 ">
-                      <div class="">
-                        <div class=" ">
-                          {{ i.pos_name }}
-                        </div>
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-700">
-                          <thead class="text-center text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                          <tr>
-                            <th scope="col"
-                                class="text-center py-4 px-2 text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                              Select
-                            </th>
-                            <th scope="col"
-                                class="text-center px-2 py-2 text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                              Profile
-                            </th>
-                            <th scope="col"
-                                class="">
-                              Name
-                            </th>
-                            <th scope="col"
-                                class="">
-                              Partylist
-                            </th>
-                          </tr>
-                          </thead>
-
-                          <tbody v-for="(index, key) in ballotData" :key="key">
-                          <tr class="dark:bg-gray-700 dark:text-gray-400" v-if="index.position_id==i.id">
-                            <td class="px-3 py-3">
-                              <div class="form-check">
-                                <input
-                                  v-model="selected[k]"
-                                  class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                  type="radio" :value="index.id" :id="i.id" :name="i.pos_name"
-                                  :disabled="success">
-                              </div>
-                            </td>
-                            <td class="px-2 py-2">
-                              <div class="flex w-12 h-12">
-                                <img class="rounded-full border border-gray-100 shadow-sm"
-                                     :src="getImgInfo(index.image)" alt="user image"/>
-                              </div>
-                            </td>
-                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                              <label class="form-check-label text-white mb-12">
-                                {{ index.cand_name }}
-                              </label>
-                            </td>
-                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                              <label class="form-check-label text-black mb-12">
-                              {{ index.party_name }}
-                              </label>
-                            </td>
-                          </tr>
-                          </tbody>
-
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <span>Selected candidates: {{selected}}</span>
-
-                <button
-                  type="submit"
-                  class="my-2 uppercase flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  cast vote
-                </button>
-              </form>
-            </div>
-          -->
-      <!--BOBOBOMOMOO-->
-
       <div
         class=" grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1 px-2 min-w-screen">
         <div class="py-4 px-4 max-w-lg"></div>
@@ -235,7 +154,7 @@ let userSpec = {
 }
 
 function getImgInfo(string) {
-  return "http://localhost:8000/api/image_search/" + string
+  return "https://new-eagles-trade-49-150-106-188.loca.lt/api/image_search/" + string
 }
 
 let ballotData = []

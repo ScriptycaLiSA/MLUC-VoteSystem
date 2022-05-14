@@ -1,4 +1,6 @@
 <template>
+  <div id="axiosForm">
+    <div class="loader" v-if="loading"></div>
   <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
@@ -22,70 +24,17 @@
                    placeholder="Password"/>
           </div>
           <div>
-            <label for="first-name" class="sr-only">Email address</label>
-            <input v-model="userRegister.fname" id="first-name" name="first-name" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="First Name"/>
-          </div>
-          <div>
             <label for="last-name" class="sr-only">Email address</label>
-            <input v-model="userRegister.lname" id="last-name" name="last-name" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Last Name"/>
+            <input v-model="userRegister.name" id="last-name" name="last-name" type="text" autoComplete="none" required=""
+                   class="uppercase appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Full Name"/>
           </div>
-          <div>
-            <label for="imageUrl" class="sr-only">Email address</label>
-            <input v-model="userRegister.imageUrl" id="imageUrl" name="imageUrl" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Image URL"/>
-          </div>
+
           <div>
             <label for="role" class="sr-only">Email address</label>
             <input v-model="userRegister.role" id="role" name="role" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Role"/>
-          </div>
-          <div>
-            <label for="organization" class="sr-only">Email address</label>
-            <input v-model="userRegister.organization" id="organization" name="organization" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Organization"/>
-          </div>
-          <div>
-            <label for="can-mng-students" class="sr-only">Email address</label>
-            <input v-model="userRegister.canMngStd" id="can-mng-students" name="can-mng-students" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Can Manage Students? true and false answers only (admin permissions)"/>
-          </div>
-          <div>
-            <label for="can-mng-candidates" class="sr-only">Email address</label>
-            <input v-model="userRegister.canMngCand" id="can-mng-candidates" name="can-mng-students" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Can Manage Candidates? true and false answers only (admin permissions)"/>
-          </div>
-          <div>
-            <label for="can-mng-real-time" class="sr-only">Email address</label>
-            <input v-model="userRegister.canMngRtt" id="can-mng-real-time" name="can-mng-real-time" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Can Manage Real Time Tally? true and false answers only (admin permissions)"/>
-          </div>
-          <div>
-            <label for="can-view-voters-turn-out" class="sr-only">Email address</label>
-            <input v-model="userRegister.canVvto" id="can-view-voters-turn-out" name="can-view-voters-turn-out" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Can View Voters Turn Out? true and false answers only (admin permissions)"/>
-          </div>
-          <div>
-            <label for="real-time-notif" class="sr-only">Email address</label>
-            <input v-model="userRegister.canMngRtmt" id="real-time-notif" name="real-time-notif" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Real Time Notification? true and false answers only (admin permissions)"/>
-          </div>
-          <div>
-            <label for="can-mng-users" class="sr-only">Email address</label>
-            <input v-model="userRegister.canMngUsers" id="can-mng-users" name="can-mng-users" type="text" autoComplete="none" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Can Manage Users? true and false answers only (admin permissions)"/>
+                   class="lowercase appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Please type 'superadmin' or 'admin'"/>
           </div>
         </div>
         <div>
@@ -100,35 +49,57 @@
       </form>
     </div>
   </div>
+  </div>
 </template>
 
 <script setup>
 import {LockClosedIcon} from '@heroicons/vue/solid'
 import store from '../store'
 import {useRouter} from 'vue-router';
+import {ref} from 'vue'
 
 const router = useRouter();
+const loading = ref(false)
 
 const userRegister  = {
-  fname: '',
-  lname: '',
-  imageUrl: '',
+  name: '',
   email: '',
   password: '',
   role: '',
-  organization: '',
-  canMngStd: '',
-  canMngCand: '',
-  canMngRtt: '',
-  canVvto: '',
-  canMngRtmt: '',
-  canMngUsers: '',
 }
 
 function register(ev){
   ev.preventDefault();
+  loading.value = true
 
-  store.dispatch('register', userRegister);
+  store.dispatch('register', userRegister)
+    .then((response)=>{
+      alert(response.success)
+      loading.value = false
+    }).catch((error)=>{
+      alert('Something went wrong. Please try again later!')
+  });
 }
 
 </script>
+
+<style scoped>
+#axiosForm { /* Components Root Element ID */
+  position: relative;
+}
+
+.loader { /* Loader Div Class */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #eceaea;
+  background-image: url('../assets/assets.gif');
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 10000000;
+  opacity: 0.6;
+}
+</style>

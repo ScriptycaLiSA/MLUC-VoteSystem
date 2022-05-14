@@ -10,7 +10,7 @@
         <div class="flex flex-row items-center justify-center mt-10">
           <div class="flex items-left">
             <div class="mt-8 text-center">
-              <img :src="getMyImg(user.image)" alt="admin"
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="admin"
                    class="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28" loading="eager">
               <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.name }}</h5>
               <span class="hidden text-gray-400 lg:block uppercase">{{ user.role }}</span>
@@ -26,10 +26,12 @@
               <span class="mx-3">Dashboard</span>
             </router-link>
 
-            <router-link :to="{name: 'RegVoter'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
-              <span class="mx-3">Manage Voter</span>
-            </router-link>
+            <div v-if="user.role === 'superadmin'">
+              <router-link :to="{name: 'RegVoter'}"
+                           class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                <span class="mx-3">Manage Voter</span>
+              </router-link>
+            </div>
 
             <router-link :to="{name: 'CreateElec'}"
                          class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
@@ -58,12 +60,14 @@
           </nav>
         </div>
         <div class="flex items-center justify-right mt-2">
-          <nav class="mt-6">
-            <router-link :to="{name: 'UpdtMasterList'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
-              <span class="mx-1">Update Master List</span>
-            </router-link>
-          </nav>
+          <div v-if="user.role === 'superadmin'">
+            <nav class="mt-6">
+              <router-link :to="{name: 'UpdtMasterList'}"
+                           class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                <span class="mx-1">Update Master List</span>
+              </router-link>
+            </nav>
+          </div>
         </div>
         <div
           class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
@@ -79,12 +83,12 @@
       </div>
       <div class="xl:mx-6 xl:my-6">
         <Warning v-if="error">
-          {{errorMsg}}
+          {{ errorMsg }}
         </Warning>
         <!-- children view from /router/index.js -->
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
-            <component :is="Component" />
+            <component :is="Component"/>
           </transition>
         </router-view>
       </div>
@@ -99,8 +103,8 @@ import Warning from "./Warning.vue";
 
 let errorMsg = ''
 
-function getMyImg(string){
-  return "http://localhost:8000/api/image_search/"+string
+function getMyImg(string) {
+  return "http://localhost:8000/api/image_search/" + string
 }
 
 function getAdminData() {

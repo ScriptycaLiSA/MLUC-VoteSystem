@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\v1\Election\ElectionResultController;
 use App\Http\Controllers\Admin\v1\Partylist\PartylistController;
 use App\Http\Controllers\Admin\v1\Position\PositionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\SystemServerRecordController;
 use App\Http\Controllers\UtilityElection;
@@ -37,6 +38,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::post('/adminLogin', [AuthController::class, 'adminLogin']); //working
 
 
+Route::post('/make_admin', [AuthController::class, 'register']); //working
 Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function () {
     /*  Administration Control
     *  This part contains get methods for elections
@@ -65,7 +67,6 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     Route::get('/partylist_data', [PartylistController::class, 'index']);
     Route::post('/create_partylist', [PartylistController::class, 'createPartylist']);
     Route::post('/delete_partylist', [PartylistController::class, 'deletePartylist']);
-    Route::post('/make_admin', [AuthController::class, 'register']); //working
 
     //voter function
     Route::get('/voterinfo/{idNum}', [VoterMgmtController::class, 'getVoterInfo']);

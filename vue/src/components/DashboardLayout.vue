@@ -62,7 +62,7 @@
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5">
           <div class="flex-auto grow-0">
-            <img class="h-10 w-10 rounded-full" :src="getMyImg(user.image)" alt="admin" loading="eager"/>
+            <img class="h-10 w-10 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="admin" loading="eager"/>
           </div>
           <div class="flex-auto">
             <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
