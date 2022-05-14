@@ -1,15 +1,15 @@
 <template>
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
-    <div class="bg-slate-100 shadow-xl min-h-screen ">
+    <div class=" min-h-screen ">
       <div class="flex font-bold pl-2 text-5xl">
         <p>DASHBOARD</p>
       </div>
 
-      <div class="grid 2xl:grid-cols-2 px-2 py-4 gap-16">
-        <div class="bg-slate-100 px-2">
+      <div class="grid 2xl:grid-cols-2 px-8 py-4 gap-16 xl:mb-8">
+        <div class="px-2 ">
           <form @submit.prevent="getElectionFinalData">
-            <div class="flex flex-wrap -mx-2 mb-6">
+            <div class="flex flex-wrap text-4xl sm:text-md md:text-8xl  mx-2 mb-6">
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                      for="grid-election">
                 ELECTION:
@@ -59,7 +59,7 @@
                 <table class="w-full flex-auto">
                   <thead>
                   <tr
-                    class="flex justify-center text-md font-medium tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-gray-600">
+                    class="flex justify-center text-md font-medium tracking-wide text-left text-gray-900 uppercase ">
                     <th class="px-4 py-3">{{ i1.pos_name }}</th>
                   </tr>
                   </thead>

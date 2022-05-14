@@ -65,22 +65,22 @@
           <div class="">
             <input
               v-model="fillFields.idNum"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-slate-400 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-idNum" type="number" placeholder="Enter ID Number (disabled auto-fill by API):" required
               disabled>
             <input
               v-model="fillFields.fname"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-slate-400 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-firstname" type="text" placeholder="Enter Firstname (disabled auto-fill by API):" required
               disabled>
             <input
               v-model="fillFields.lname"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-slate-400 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-lastname" type="text" placeholder="Enter Lastname (disabled auto-fill by API):" required
               disabled>
             <input
               v-model="fillFields.email"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-gray-100 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               type="email" placeholder="Enter Email:" required>
 
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -88,7 +88,7 @@
             </label>
             <select
               v-model="fillFields.college_init"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-gray-100 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-College">
               <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
               <option v-for="(infoCol, index) in colleges" :key="index" v-bind:value="infoCol.initials">
@@ -102,7 +102,7 @@
             </label>
             <input
               v-model="fillFields.password"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-gray-100 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-password" type="password" placeholder="Enter Password:">
           </div>
 
