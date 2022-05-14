@@ -39,7 +39,7 @@
             </Menu>
           </div>
         </div>
-        <div class="-mr-2 flex md:hidden">
+        <div class="-mr-2 flex lg:hidden xl:hidden 2xl:hidden">
           <!-- Mobile menu button -->
           <DisclosureButton
             class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <DisclosurePanel class="md:hidden">
+    <DisclosurePanel class="lg:hidden xl:hidden 2xl:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <router-link v-for="item in navigation" :key="item.name" as="a" :to="item.to"
                      active-class="bg-gray-900 text-white"
@@ -72,7 +72,6 @@
           <button type="button"
                   class="ml-auto bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
             <span class="sr-only">View notifications</span>
-            <BellIcon class="h-6 w-6" aria-hidden="true"/>
           </button>
         </div>
         <DisclosureButton

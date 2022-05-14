@@ -123,6 +123,7 @@ function login(ev) {
   store.dispatch('voterLogin', userLogin)
     .then(() => {
       loading.value = false;
+      alert('You are successfully logged in. Redirecting...')
       router.push({
         name: 'VoterIndex'
       });
