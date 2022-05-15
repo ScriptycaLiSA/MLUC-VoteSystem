@@ -312,6 +312,20 @@ const voterModule = {
           return response;
         })
     },
+    //get sample of user for pushing the election_id for display
+    voterGetSample({commit}, id){
+      return axiosClientVoter.post('/get_idsample', id)
+        .then(response=>{
+          return response;
+        })
+    },
+    //voter leaderboard
+    voterLeaderboard({commit}, elecId){
+      return axiosClientVoter.post('/voting_leaderboard', elecId)
+        .then(response=>{
+          return response;
+        })
+    }
   },
   mutations: {
     voterLogout: (state) => {

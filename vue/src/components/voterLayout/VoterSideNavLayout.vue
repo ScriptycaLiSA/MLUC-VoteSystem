@@ -12,11 +12,21 @@
             <div class="mt-8 text-center">
               <img src="https://www.dmmmsu.edu.ph/wp-content/uploads/2020/01/DMMMSU-Logo-white-small.png" alt=""
                    class="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28">
-              <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.fname }} {{user.lname}}</h5>
-              <span class="hidden text-gray-400 lg:block uppercase">{{user.idNum}} | {{user.college}}</span>
-              <span class="hidden text-gray-400 lg:block lowercase">{{user.email}}</span>
+              <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.fname }}
+                {{ user.lname }}</h5>
+              <span class="hidden text-gray-400 lg:block uppercase">{{ user.idNum }} | {{ user.college }}</span>
+              <span class="hidden text-gray-400 lg:block lowercase">{{ user.email }}</span>
             </div>
           </div>
+        </div>
+
+        <div class="items-left mt-2 md:items-right lg:items:right">
+          <nav class="mt-10">
+            <router-link :to="{name: 'VoterLeaderboardTally'}"
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+              <span class="mx-3">Leaderboard</span>
+            </router-link>
+          </nav>
         </div>
 
         <div

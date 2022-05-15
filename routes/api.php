@@ -13,6 +13,7 @@ use App\Http\Controllers\ImgController;
 use App\Http\Controllers\SystemServerRecordController;
 use App\Http\Controllers\UtilityElection;
 use App\Http\Controllers\Voter\v1\VotingController;
+use App\Http\Controllers\Voter\v1\VotingLeaderboardController;
 use App\Http\Controllers\VoterAuthController;
 use App\Http\Controllers\VoterMgmtController;
 use Illuminate\Http\Request;
@@ -56,7 +57,6 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
     Route::post('/elecstatus_change', [ElectionController::class, 'electionStatusUpdate']);
     Route::post('/election_results', [ElectionResultController::class, 'searchElectionResults']);
     Route::post('/create_election', [ElectionController::class, 'createElection']);
-    Route::get('/election_data', [ElectionController::class, 'search']);
     Route::post('/delete_election', [ElectionController::class, 'deleteElection']);
 
     //Colleges
@@ -92,10 +92,15 @@ Route::middleware(['auth:sanctum', 'abilities:access-voter'])->group(function ()
 
     //vote casting
     Route::post('/cast_vote', [VotingController::class, 'castVote']);
+
+    //voter leaderboard
+    Route::post('/voting_leaderboard', [VotingLeaderboardController::class, 'voterLeaderboard']);
 });
+
 
 //fetching data from database to requesting destination
 Route::get('/voterget_all', [VoterMgmtController::class, 'getVoterInfoAll']);
+Route::get('/election_data', [ElectionController::class, 'search']);
 
 //Campaign Site
 Route::get('/image_search/{filename}', [ImgController::class, 'search']);
@@ -108,3 +113,5 @@ Route::post('/voterLogin', [VoterAuthController::class, 'voterLogin']);
 Route::post('/voter_create', [VoterAuthController::class, 'voterCreateAcct']);
 Route::get('/colleges_data', [CollegeController::class, 'index']);
 Route::get('/get_positions', [PositionController::class, 'index']);
+
+Route::post('/get_idsample', [VotingLeaderboardController::class, 'getVotingResultSchema']);

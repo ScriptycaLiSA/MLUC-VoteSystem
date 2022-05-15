@@ -154,7 +154,7 @@ let userSpec = {
 }
 
 function getImgInfo(string) {
-  return "https://new-eagles-trade-49-150-106-188.loca.lt/api/image_search/" + string
+  return "http://localhost:8000/api/image_search/" + string
 }
 
 let ballotData = []

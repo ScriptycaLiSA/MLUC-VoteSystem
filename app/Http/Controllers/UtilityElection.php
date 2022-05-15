@@ -15,31 +15,42 @@ class UtilityElection extends Controller
             ->value('isVoted');
     }
 
-    public static function getCollege($voterCollege){
+    public static function getCollege($voterCollege)
+    {
         return DB::table('election_models')
             ->where('college_init', $voterCollege)
             ->value('status');
     }
 
-    public static function getCurrentElections($currentElection){
+    public static function getCollegeTally($voterCollege): \Illuminate\Support\Collection
+    {
+        return DB::table('election_models')
+            ->where('college_init', $voterCollege)
+            ->get();
+    }
+
+    public static function getCurrentElections($currentElection)
+    {
         return DB::table('candidate_models')
-            ->join('election_models','candidate_models.election_id','=','election_models.id')
-            ->select('candidate_models.*','election_models.id')
+            ->join('election_models', 'candidate_models.election_id', '=', 'election_models.id')
+            ->select('candidate_models.*', 'election_models.id')
             ->where('candidate_models.id', $currentElection)
             ->value('election_models.id');
     }
 
-    public static function getPositionInElections($candidateId){
+    public static function getPositionInElections($candidateId)
+    {
         return DB::table('candidate_models')
-            ->join('position_models','candidate_models.position_id','=','position_models.id')
-            ->select('candidate_models.*','position_models.id')
+            ->join('position_models', 'candidate_models.position_id', '=', 'position_models.id')
+            ->select('candidate_models.*', 'position_models.id')
             ->where('candidate_models.id', $candidateId)
             ->value('position_models.id');
     }
 
-    public static function getActiveElection($electionId){
+    public static function getActiveElection($electionId)
+    {
         return DB::table('election_models')
-            ->where('id',$electionId)
+            ->where('id', $electionId)
             ->value('status');
     }
 
@@ -53,7 +64,8 @@ class UtilityElection extends Controller
             ->get();
     }
 
-    public static function getFinalResult($elecId){
+    public static function getFinalResult($elecId)
+    {
         $result = self::getCandidatesInElection($elecId);
         $position = DB::table('position_models')
             ->where('election_id', $elecId)->get();
@@ -62,13 +74,14 @@ class UtilityElection extends Controller
             ->get();
 
         return response([
-            'result'=>$result,
-            'position'=>$position,
-            'candidate'=>$candidate,
+            'result' => $result,
+            'position' => $position,
+            'candidate' => $candidate,
         ], 200);
     }
 
-    public static function findVoter($voterId){
+    public static function findVoter($voterId)
+    {
         return DB::table('voter_acct_models')
             ->where('idNum', $voterId)
             ->first();
