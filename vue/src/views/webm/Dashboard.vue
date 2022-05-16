@@ -123,7 +123,7 @@ let resTemp = []
 let candTemp = []
 
 function getImgInfo(string) {
-  return "http://localhost:8000/api/image_search" + string
+  return "http://localhost:8000/api/image_search/" + string
 }
 
 function getElectionResults() {

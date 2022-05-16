@@ -62,9 +62,6 @@
             class="uppercase flex-auto mx-10 block text-white bg-slate-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             @click="downloadMasterListFile">Download the Master List File Here!
           </button>
-        </div>
-
-        <div>
           <h1 class="text-2xl pr-20 py-6">Step 2:</h1>
           <div>
             <div>
@@ -104,6 +101,50 @@
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                   update database server (system db)
+                </button>
+              </form>
+            </div>
+          </div>
+          <h1 class="text-2xl pr-20 py-6">Archive Data</h1>
+          <p class="text-black text-sm">After the election, please upload the file to archive the data into storage</p>
+          <div>
+            <div>
+              <form @submit="updateServer2" enctype="multipart/form-data">
+                <div class="mb-3">
+                  <input
+                    class="form-control
+                block
+                w-full
+                px-2
+                py-1
+                text-sm
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    id="archiveData"
+                    type="file"
+                    v-on:change="onChange"
+                  >
+                </div>
+                <button
+                  :disabled="loadingUpdt"
+                  type="submit"
+                  class="uppercase flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  <svg v-if="loadingUpdt" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                       xmlns="http://www.w3.org/2000/svg"
+                       fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                    archive this file
                 </button>
               </form>
             </div>
@@ -188,6 +229,23 @@ function updateServer(ev) {
     })
 }
 
+function updateServer2(ev) {
+  ev.preventDefault();
+
+  this.loading = true
+  let data = new FormData();
+  data.append('file', this.file);
+
+  store.dispatch('systemRecordUpdate2', data)
+    .then(function (res) {
+      alert('The file has been archived!')
+
+    })
+    .catch((error) => {
+      this.loading = false
+    })
+}
+
 function onChange(e) {
   this.file = e.target.files[0];
 }
@@ -205,7 +263,8 @@ export default {
       mstrLoad,
       downloadMasterListFile,
       onChange,
-      status
+      status,
+      updateServer2
     }
   },
   data() {

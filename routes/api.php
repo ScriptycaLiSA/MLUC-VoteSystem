@@ -77,6 +77,8 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
      *  An area consists of display functions and updating records
      */
     Route::post('/update_records', [SystemServerRecordController::class, 'saveRecordsFromOrigin']); //working
+    Route::post('/archive_data', [SystemServerRecordController::class, 'archiveData']); //working
+    Route::get('/archive_lists', [SystemServerRecordController::class, 'getAllFiles']);
     Route::get('/mstr_dash', [SystemServerRecordController::class, 'mstrUpdtDash']); //working
 
     Route::post('/logout', [AuthController::class, 'logout']); //working

@@ -84,6 +84,13 @@ const adminModule = {
           return data;
         });
     },
+    //sending a .PDF to archives data
+    systemRecordUpdate2({commit}, dataArray) {
+      return axiosClient.post('/archive_data', dataArray)
+        .then(({data}) => {
+          return data;
+        });
+    },
     //geting data for update master dashboard
     getMstrDash() {
       return axiosClient.get('/mstr_dash')

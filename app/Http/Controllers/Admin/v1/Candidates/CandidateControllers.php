@@ -57,7 +57,6 @@ class CandidateControllers extends Controller
         Image::make($image)->save(public_path('img/profile/') . $name);
         $request->merge(['image' => $name]);
 
-
         try {
             if (!$request == null) {
                 DB::table('candidate_models')->insert([
