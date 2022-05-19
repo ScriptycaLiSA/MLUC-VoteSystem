@@ -23,8 +23,7 @@ CREATE TABLE IF NOT EXISTS `colleges_models` (
   KEY `initials` (`initials`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.colleges_models: ~0 rows (approximately)
-DELETE FROM `colleges_models`;
+-- Dumping data for table votesys-mluc.colleges_models: ~8 rows (approximately)
 INSERT INTO `colleges_models` (`id`, `coll_name`, `initials`) VALUES
 	(1, 'College of Information Technology', 'CIT'),
 	(2, 'College of Technical Education', 'CTED'),
@@ -44,8 +43,7 @@ CREATE TABLE IF NOT EXISTS `position_models` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.position_models: ~0 rows (approximately)
-DELETE FROM `position_models`;
+-- Dumping data for table votesys-mluc.position_models: ~8 rows (approximately)
 INSERT INTO `position_models` (`id`, `pos_name`, `created_at`, `updated_at`) VALUES
 	(41, 'Governor', '2022-05-18 12:30:41', '2022-05-18 12:30:41'),
 	(42, 'Vice Governor', '2022-05-18 12:30:50', '2022-05-18 12:30:50'),
@@ -72,8 +70,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table votesys-mluc.users: ~0 rows (approximately)
-DELETE FROM `users`;
+-- Dumping data for table votesys-mluc.users: ~2 rows (approximately)
 INSERT INTO `users` (`id`, `name`, `image`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(6, 'SU Admin', 'user.png', 'su@email.com', NULL, '$2a$10$Y6QL4rCbFBoLE5QF2ZiI5e5g0szpkqDYmglx2lBjwBmcuUDk7c6ZW', 'superadmin', NULL, '2022-05-18 09:22:03', '2022-05-18 09:22:04'),
 	(7, 'Admin Name', 'user.png', 'admin@email.com', NULL, '$2a$10$Y6QL4rCbFBoLE5QF2ZiI5e5g0szpkqDYmglx2lBjwBmcuUDk7c6ZW', 'admin', NULL, NULL, NULL);
