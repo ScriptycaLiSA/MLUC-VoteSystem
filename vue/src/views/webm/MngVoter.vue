@@ -1,7 +1,7 @@
 <template>
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
-    <div class="bg-slate-100 shadow-xl min-h-full">
+    <div class="bg-slate-200 shadow-xl 2xl:min-w-full 2xl:px-4 2xl:py-2">
       <Warning v-if="success">
         {{ serverResponse.message }}
         <span
@@ -168,7 +168,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -177,6 +176,7 @@
 <script>
 import store from "../../store";
 import Warning from "../../components/Warning.vue";
+import VueTailwindPagination from '@ocrv/vue-tailwind-pagination'
 
 let students = []
 let colleges = []
@@ -204,7 +204,8 @@ let fillFields = {
 export default {
   name: 'RegVoter',
   components: {
-    Warning
+    Warning,
+    VueTailwindPagination
   },
   setup() {
     return {
@@ -214,6 +215,7 @@ export default {
       fillFields,
       students,
       colleges,
+      VueTailwindPagination,
     }
   },
   data() {
@@ -221,6 +223,9 @@ export default {
       loading: false,
       success: '',
       error: '',
+      currentPage: 1,
+      perPage: 5,
+      total: this.students.length
     }
   },
   methods: {

@@ -59,7 +59,7 @@ class UtilityElection extends Controller
         return DB::table('voting_results')
             ->select(DB::raw('position_id,candidate_id,count(*) as votes'))
             ->groupBy('position_id', 'candidate_id')
-            ->where('election_id', $electionId)
+            ->where('voting_results.election_id', $electionId)
             ->orderBy('votes', 'desc')
             ->get();
     }
@@ -67,10 +67,15 @@ class UtilityElection extends Controller
     public static function getFinalResult($elecId)
     {
         $result = self::getCandidatesInElection($elecId);
-        $position = DB::table('position_models')
-            ->where('election_id', $elecId)->get();
+        $position = DB::table('candidate_models')
+            ->join('position_models','candidate_models.position_id','=','position_models.id')
+            ->select(DB::raw('candidate_models.position_id,position_models.pos_name,count(*) as positions'))
+            ->where('candidate_models.election_id', $elecId)
+            ->get();
         $candidate = DB::table('candidate_models')
-            ->where('election_id', $elecId)
+            ->join('position_models','candidate_models.position_id','=','position_models.id')
+            ->select('candidate_models.*','position_models.pos_name')
+            ->where('candidate_models.election_id', $elecId)
             ->get();
 
         return response([

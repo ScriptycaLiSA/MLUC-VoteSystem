@@ -26,13 +26,10 @@ class SystemServerRecordController extends Controller
         if(!$csvValidate==null){
             Excel::import(new VoterMgmtImport, $request->file('file'));
 
-            $dataLoaded = DB::table('voter_models')->count();
-            $preRegisteredVoters = DB::table('voter_models')->count();
-            $registeredVoters = DB::table('voter_acct_models')->count();
+            $registeredVoters = DB::table('voter_models')->count();
             DB::table('mstr_updts')->upsert([
-                ['id' => 1, 'eventName' => 'data loaded', 'value' => $dataLoaded],
-                ['id' => 2, 'eventName' => 'pre-registered voters', 'value' => $preRegisteredVoters],
-                ['id' => 3, 'eventName' => 'registered voters', 'value' => $registeredVoters]
+                ['id' => 1, 'eventName' => 'data loaded', 'value' => $registeredVoters],
+                ['id' => 2, 'eventName' => 'registered voters', 'value' => $registeredVoters]
             ], ['eventName', 'id'], ['value']
             );
             return response([
@@ -45,16 +42,12 @@ class SystemServerRecordController extends Controller
         ], 200);
     }
 
-
     public function mstrUpdtDash()
     {
-        $dataLoaded = DB::table('voter_models')->count();
-        $preRegisteredVoters = DB::table('voter_models')->count();
-        $registeredVoters = DB::table('voter_acct_models')->count();
+        $registeredVoters = DB::table('voter_models')->count();
         DB::table('mstr_updts')->upsert([
-            ['id' => 1, 'eventName' => 'data loaded', 'value' => $dataLoaded],
-            ['id' => 2, 'eventName' => 'pre-registered voters', 'value' => $preRegisteredVoters],
-            ['id' => 3, 'eventName' => 'registered voters', 'value' => $registeredVoters]
+            ['id' => 1, 'eventName' => 'data loaded', 'value' => $registeredVoters],
+            ['id' => 2, 'eventName' => 'registered voters', 'value' => $registeredVoters]
         ], ['eventName', 'id'], ['value']
         );
 

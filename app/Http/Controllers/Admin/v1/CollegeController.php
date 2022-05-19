@@ -9,44 +9,76 @@ use Illuminate\Support\Facades\DB;
 
 class CollegeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = CollegesModel::all();
 
-        if(!$data==null){
+        if (!$data == null) {
             return response([
-                'success'=>$data,
+                'success' => $data,
             ], 200);
         }
 
         return response([
-            'success'=>'Something went wrong. Please try again later!'
+            'success' => 'Something went wrong. Please try again later!'
         ], 500);
     }
 
-    public function sortedDataForColleges(){
-        $data = DB::table('colleges_models')
-            ->join('voter_acct_models','colleges_models.initials','=','voter_acct_models.college_init')
-            ->select(DB::raw('voter_acct_models.college_init,colleges_models.coll_name,count(*) as registered'))
-            ->groupBy('voter_acct_models.college_init','colleges_models.coll_name')
-            ->orderBy('registered')
-            ->get();
+    public function createCollege(Request $request)
+    {
+        $data = $request->all();
 
-        $data2 = DB::table('colleges_models')
-            ->join('voter_models','colleges_models.coll_name','=','voter_models.college')
-            ->select(DB::raw('voter_models.college,colleges_models.initials,count(*) as prereg'))
-            ->groupBy('voter_models.college','colleges_models.initials')
-            ->orderBy('prereg')
-            ->get();
+        if (!$data == null) {
+            DB::table('colleges_models')->insert([
+                'coll_name' => $data['coll_name'],
+                'initials' => $data['initials']
+            ]);
 
-        if(!$data==null&&!$data2==null){
             return response([
-                'success'=>$data,
-                'success1'=>$data2
+                'success' => 'College has been inserted!'
+            ], 201);
+        }
+
+        return response([
+            'error' => 'Something went wrong. Please try again later!'
+        ]);
+    }
+
+    public function sortedDataForColleges()
+    {
+        $data = DB::table('colleges_models')
+            ->join('voter_models', 'colleges_models.initials', '=', 'voter_models.college_init')
+            ->select(DB::raw('voter_models.college_init,colleges_models.id,colleges_models.coll_name,colleges_models.initials,count(*) as registered'))
+            ->groupBy('voter_models.college_init', 'colleges_models.coll_name')
+            ->orderBy('registered', 'asc')
+            ->get();
+
+        if (!$data == null) {
+            return response([
+                'success' => $data,
             ], 200);
         }
 
         return response([
-            'success'=>'Something went wrong. Please try again later!'
+            'success' => 'Something went wrong. Please try again later!'
         ], 500);
+    }
+
+    public function deleteCollegeRecord(Request $request){
+        $data = $request->all();
+
+        if(!$data == null){
+            DB::table('colleges_models')
+                ->where('id',$data['id'])
+                ->delete();
+
+            return response([
+                'success'=>'The college record has been deleted!'
+            ]);
+        }
+
+        return response([
+            'error'=>'Something went wrong. Please try again later!'
+        ]);
     }
 }

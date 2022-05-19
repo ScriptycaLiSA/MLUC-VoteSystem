@@ -2,7 +2,6 @@ import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import Campaign from '../views/Campaign.vue';
 import AdminLogin from '../views/AdminLogin.vue';
 import VoterLogin from '../views/VoterLogin.vue';
-import mainOTP from '../views/mainOTP.vue';
 import Dashboard from '../views/webm/Dashboard.vue';
 import Votes from '../views/webm/Votes.vue';
 import RegVoter from '../views/webm/MngVoter.vue';
@@ -12,7 +11,6 @@ import Colleges from '../views/webm/Colleges.vue';
 import UpdtMasterList from '../views/webm/UpdtMasterList.vue';
 import MngPosition from "../views/webm/MngPosition.vue";
 import MngPartylist from "../views/webm/MngPartylist.vue";
-import VoterView from '../views/voter/VoterView.vue';
 import DashboardLayout from '../components/DashboardLayout.vue';
 import NotFound from '../views/NotFound.vue';
 import store from '../store';
@@ -21,10 +19,15 @@ import VoterCreate from "../views/VoterCreate.vue";
 import VoterDashboardLayout from "../components/voterLayout/VoterDashboardLayout.vue";
 import VoterIndex from "../views/voter/voterUtility/VoterIndex.vue";
 import VoterLeaderboardTally from "../views/voter/voterUtility/VoterLeaderboardTally.vue";
+import TestPlugin from '../views/webm/TestPlugin.vue'
 
 
 const routes = [
   {
+    path: '/testplugin',
+    name: 'TestPlugin',
+    component: TestPlugin
+  },{
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound
@@ -43,11 +46,6 @@ const routes = [
     path: '/admin_login',
     name: 'AdminLogin',
     component: AdminLogin
-  },
-  {
-    path: '/login/otp',
-    name: 'mainOTP',
-    component: mainOTP
   },
   {
     path: '/',

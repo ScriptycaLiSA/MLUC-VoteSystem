@@ -1,7 +1,7 @@
 <template>
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
-    <div class=" min-h-screen ">
+    <div class="">
       <div class="flex font-bold pl-2 text-5xl">
         <p>DASHBOARD</p>
       </div>
@@ -35,60 +35,77 @@
           <!-- div v-if wrap -->
           <div v-if="candTemp.length > 1" class="grid-cols-1 2xl:grid-cols-2 px-2 py-4 gap-2">
             <label class="mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex items-right"
-                   for="dataTable">
+                   >
               showing the data voting results from current voting event:
             </label>
             <div>
-              <div class="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 items-center">
+              <div class="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 items-center mb-4">
                 <div class="flex flex-cols">
                   <button
                     @click="printData()"
-                    class="flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    class="flex-auto mx-12 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-20  sm:px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button" data-modal-toggle="defaultModal">
                     PRINT RESULTS
                   </button>
                 </div>
               </div>
-              <div id="dataTable" class="flex w-full mb-10 overflow-hidden rounded-lg shadow-xl my-4"
-                   v-for="(i1, k1) in posTemp" :key="k1">
-                <table class="w-full flex-auto">
-                  <thead>
-                  <tr
-                    class="flex justify-center text-md font-medium tracking-wide text-left text-gray-900 uppercase ">
-                    <th class="px-4 py-3">{{ i1.pos_name }}</th>
-                  </tr>
-                  </thead>
+              <!--Table Stubents-->
+              <div class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
+                <div id="table" class="flex flex-col px-2 sm:px-0.1">
+                  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                      <div class="overflow-hidden shadow-md sm:rounded-lg">
+                        <table class="min-w-full">
+                          <thead class="border-gray-600 dark:bg-gray-300">
+                          <tr>
+                            <th scope="col"
+                                class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                              image
+                            </th>
+                            <th scope="col"
+                                class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                              name
+                            </th>
+                            <th scope="col"
+                                class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                              position
+                            </th>
+                            <th scope="col"
+                                class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                              votes
+                            </th>
+                          </tr>
+                          </thead>
+                          <tbody v-for="(i2, k2) in candTemp" :key="k2">
 
-                  <thead>
-                  <tr
-                    class="text-xs font-medium tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-gray-600">
-                    <th class="px-4 py-3">Name</th>
-                    <th class="px-4 py-3">Votes</th>
-                  </tr>
-                  </thead>
-                  <tbody class="bg-white" v-for="(i2, k2) in candTemp" :key="k2">
-                  <tr class="text-gray-700" v-if="i2.position_id===i1.id">
-                    <td class="px-4 py-3 border">
-                      <div class="flex items-center text-sm">
-                        <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full"
-                               :src="getImgInfo(i2.image)" alt="" loading="eager"/>
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
-                        <div>
-                          <p class="font-semibold text-2xl text-black">{{ i2.cand_name }}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <div class="" v-for="(i3, k3) in resTemp" :key="k3">
-                      <div class="px-4 py-3 text-sm border font-bold text-3xl justify-center"
-                           v-if="i3.candidate_id===i2.id">
-                        <td class="">{{ i3.votes }}</td>
+                          <tr
+                              class="bg-white border-b dark:bg-gray-200 dark:border-gray-100">
+                            <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-white">
+                              <img class="object-cover w-12 h-12 rounded-full"
+                                   :src="getImgInfo(i2.image)" alt=""/>
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap ">
+                              {{ i2.lname }}, {{ i2.fname }} {{ i2.mname }}
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap ">
+                              {{ i2.pos_name }}
+                            </td>
+                            <td class="px-4 py-3 text-sm font-bold text-3xl justify-center text-gray-500 text-gray-900">
+                              <div v-for="(i3, k3) in resTemp" :key="k3">
+                                <div v-if="i3.candidate_id===i2.id">
+                                {{ i3.votes }}
+                                </div>
+                                <div v-else-if="i2.position_id!==i3.position_id&&i3.candidate_id===i2.id" class="px-4 py-3 text-sm font-bold text-3xl justify-center text-gray-500 text-gray-900">0
+                              </div>
+                              </div>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
-                  </tr>
-                  </tbody>
-                </table>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -133,9 +150,11 @@ function getElectionResults() {
       response.success.map(function (obj, i) {
         elections.push(obj)
       })
+
       elections = []
       this.loading = false
     })
+
 }
 
 export default {
@@ -190,6 +209,7 @@ export default {
       this.loading = true
       window.print()
       this.loading = false
+      window.location.reload()
     }
   },
   mounted() {
@@ -199,6 +219,39 @@ export default {
 </script>
 
 <style scoped>
+@media print {
+  #grid-election {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    /* needed for Firefox: */
+    color: red;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  button {
+    display: none;
+  }
+
+  label {
+    display: none;
+  }
+
+  template {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
 #axiosForm { /* Components Root Element ID */
   position: relative;
 }

@@ -19,73 +19,58 @@
           </div>
         </div>
 
-        <div class="items-left mt-2 md:items-right lg:items:right">
+        <div class="items-center mt-2 md:items-right lg:items:right">
           <nav class="mt-10">
             <router-link :to="{name: 'Dashboard'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
+
               <span class="mx-3">Dashboard</span>
             </router-link>
 
             <div v-if="user.role === 'superadmin'">
               <router-link :to="{name: 'RegVoter'}"
-                           class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                           class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
                 <span class="mx-3">Manage Voter</span>
               </router-link>
             </div>
 
             <router-link :to="{name: 'CreateElec'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
               <span class="mx-3">Create Elections</span>
             </router-link>
 
             <router-link :to="{name: 'Colleges'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
               <span class="mx-3">Colleges</span>
             </router-link>
 
             <router-link :to="{name: 'MngCandidates'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
               <span class="mx-3">Manage Candidates</span>
             </router-link>
 
             <router-link :to="{name: 'MngPosition'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
               <span class="mx-3">Manage Position</span>
             </router-link>
 
             <router-link :to="{name: 'MngPartylist'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
               <span class="mx-3">Manage Partylist</span>
             </router-link>
-          </nav>
-        </div>
-        <div class="flex items-center justify-right mt-2">
-          <div v-if="user.role === 'superadmin'">
-            <nav class="mt-6">
+            <div v-if="user.role === 'superadmin'">
               <router-link :to="{name: 'UpdtMasterList'}"
-                           class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                           class="relative px-6 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
                 <span class="mx-1">Update Master List</span>
               </router-link>
-            </nav>
-          </div>
-        </div>
-        <div
-          class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
-          <button @click="logout" class="px-4 py-3 flex items-center space-x-4 rounded-md text-white group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-            </svg>
-            <span class="group-hover:text-gray-700">Logout</span>
-          </button>
+            </div>
+            <a @click="logout" class="relative px-8 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
+              <span class="text-white">Logout</span>
+            </a>
+          </nav>
         </div>
       </div>
       <div class="xl:mx-6 xl:my-6">
-        <Warning v-if="error">
-          {{ errorMsg }}
-        </Warning>
-        <!-- children view from /router/index.js -->
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component"/>
@@ -134,7 +119,9 @@ function logout() {
       });
 
       alert('Successfully logged out!')
+
       this.loading = false
+
     });
 }
 

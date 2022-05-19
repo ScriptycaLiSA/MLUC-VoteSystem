@@ -62,7 +62,7 @@
                           </td>
                           <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                             <label class="form-check-label text-white mb-12">
-                              {{ index.cand_name }}
+                              {{ index.lname }}, {{ index.fname}} {{index.mname}}
                             </label>
                           </td>
                           <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
@@ -86,47 +86,47 @@
               </button>
             </div>
 
-            <div v-else>
-              <div class=" text-4xl sm:text-md md:text-8xl px-16">
-                {{ voterMessage.message }}
-              </div>
+            <div v-else-if="votedLists.length > 0">
+              <div class="sm:text-md md:text-4xl px-2">You have already voted!</div>
               <!--table of voted list here -->
-              <div class="flex justify-center text-2xl sm:text-md mb-2 text-left py-4 uppercase">You have voted:</div>
-              <div id="table2" class="flex flex-col mx-4 xl:mx-64 2xl:mx-2" v-for="(i, k) in ballotPositions" :key="k">
+              <div class="flex flex-col text-2xl sm:text-md mb-2 text-left py-4 uppercase">You have voted:</div>
+              <div id="table2" class="grid grid-cols-1 w-full rounded-md mx-4 xl:mx-64 2xl:mx-2">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div class="inline-block py-4 min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden shadow-md sm:rounded-lg">
-                      <div class="bg-grey-50 dark:bg-gray-400 px-2 py-3 border-solid border-grey-light border-b">
-                        {{ i.pos_name }}
-                      </div>
                       <table class="min-w-full">
                         <thead class="bg-gray-50 dark:bg-gray-300">
                         <tr>
                           <th scope="col"
-                              class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase dark:text-gray-400">
+                              class="py-3 px-6 text-md font-medium tracking-wider text-center text-gray-700 uppercase dark:text-black-500">
+                            Profile
                           </th>
                           <th scope="col"
                               class="py-3 px-6 text-md font-medium tracking-wider text-center text-gray-700 uppercase dark:text-black-500">
                             Name
                           </th>
+                          <th scope="col"
+                              class="py-3 px-6 text-md font-medium tracking-wider text-center text-gray-700 uppercase dark:text-black-500">
+                            POSITION
+                          </th>
                         </tr>
                         </thead>
 
                         <tbody v-for="(index, key) in votedLists" :key="key">
-                        <tr class=" bg-gray-50 dark:bg-gray-200"
-                            v-if="index.position_id===i.id">
-                          <td class="py-4 px-1 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                            <div class="flex w-12 h-12">
+                        <tr class=" bg-gray-50 dark:bg-gray-200">
+                          <td class="">
+                            <div class="mx-auto w-12 h-12">
                               <img class="rounded-full border border-gray-100 shadow-sm"
                                    :src="getImgInfo(index.image)" alt="user image"/>
                             </div>
                           </td>
                           <td class="py-4 px-1 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                             <label class="form-check-label text-black text-lg mb-12">
-                              {{ index.cand_name }}
+                              {{ index.lname }}, {{ index.fname }} {{ index.mname }}
                             </label>
                           </td>
-                          <td class="hidden py-4 px-2 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          <td class="">
+                              {{index.pos_name}}
                           </td>
                         </tr>
                         </tbody>
@@ -135,7 +135,12 @@
                   </div>
                 </div>
               </div>
+            </div>
 
+            <div v-else>
+              <div class=" text-4xl sm:text-md md:text-8xl px-16">
+                {{ voterMessage.message }}
+              </div>
             </div>
           </form>
         </div>
@@ -257,6 +262,7 @@ export default {
           this.success = true
           alert(response.data.success)
 
+          window.location.reload()
         })
         .catch((error) => {
 

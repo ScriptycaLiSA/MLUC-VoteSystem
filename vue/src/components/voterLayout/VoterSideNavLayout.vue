@@ -12,10 +12,8 @@
             <div class="mt-8 text-center">
               <img src="https://www.dmmmsu.edu.ph/wp-content/uploads/2020/01/DMMMSU-Logo-white-small.png" alt=""
                    class="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28">
-              <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.fname }}
-                {{ user.lname }}</h5>
+              <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{{ user.lname }}, {{ user.fname }} {{user.mname}}</h5>
               <span class="hidden text-gray-400 lg:block uppercase">{{ user.idNum }} | {{ user.college }}</span>
-              <span class="hidden text-gray-400 lg:block lowercase">{{ user.email }}</span>
             </div>
           </div>
         </div>
@@ -23,22 +21,13 @@
         <div class="items-left mt-2 md:items-right lg:items:right">
           <nav class="mt-10">
             <router-link :to="{name: 'VoterLeaderboardTally'}"
-                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
+                         class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
               <span class="mx-3">Leaderboard</span>
             </router-link>
+            <a @click="voterLogout" class="relative px-8 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-[#1da1f2]">
+              <span class="text-white">Logout</span>
+            </a>
           </nav>
-        </div>
-
-        <div
-          class="relative px-4 py-3 mx-2 my-2 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-slate-600 to-cyan-400">
-          <button @click="voterLogout" class="px-4 py-3 flex items-center space-x-4 rounded-md text-white group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-            </svg>
-            <span class="group-hover:text-gray-700">Logout</span>
-          </button>
         </div>
       </div>
       <div class="xl:mx-6 xl:my-6 2xl:md-8">
@@ -71,8 +60,8 @@ function getVoterData() {
     .then((response) => {
       this.user.fname = response.fname
       this.user.lname = response.lname
+      this.user.mname = response.mname
       this.user.idNum = response.idNum
-      this.user.email = response.email
       this.user.college = response.college_init
 
       this.loading = false

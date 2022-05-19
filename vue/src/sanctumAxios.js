@@ -1,12 +1,13 @@
 import axios from 'axios'
 import store from './store'
 
-const axiosClient = axios.create({
+let axiosClient = axios.create({
   baseURL: 'http://localhost:8000/',
   withCredentials: true
 })
 
 axiosClient.interceptors.request.use(request => {
+  request.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:8000';
   request.headers.common['Accept'] = 'application/json';
   request.headers.common['Content-Type'] = 'application/json';
   request.headers.Authorization = `Bearer ${store.state.a.user.token}`

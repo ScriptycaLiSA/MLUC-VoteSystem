@@ -12,8 +12,6 @@ class PositionController extends Controller
     public function index()
     {
         $data = DB::table('position_models')
-            ->join('election_models', 'position_models.election_id', '=', 'election_models.id')
-            ->select('position_models.*', 'election_models.elec_name')
             ->get();
 
         if (!$data == null) {

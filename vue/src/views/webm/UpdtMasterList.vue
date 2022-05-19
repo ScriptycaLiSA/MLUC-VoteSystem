@@ -65,7 +65,7 @@
           <h1 class="text-2xl pr-20 py-6">Step 2:</h1>
           <div>
             <div>
-              <form @submit="updateServer" enctype="multipart/form-data">
+              <form @submit.prevent="updateServer" enctype="multipart/form-data">
                 <div class="mb-3">
                   <input
                     class="form-control
@@ -175,7 +175,6 @@ function parseFromOriginal() {
       this.loadContData2.map(function (obj, i) {
         systemPushServer.push(obj);
       })
-      systemPushServer = []
     })
     .catch((error) => {
       console.log(error);
@@ -189,8 +188,7 @@ function parseFromOriginal() {
 }
 
 //making a function to compile systemPushServer into a json file
-function downloadMasterListFile(ev) {
-  ev.preventDefault();
+function downloadMasterListFile() {
 
   let json = systemPushServer;
   let fields = Object.keys(json[0])
@@ -212,9 +210,7 @@ function downloadMasterListFile(ev) {
   hiddenElement.click();
 }
 
-function updateServer(ev) {
-  ev.preventDefault();
-
+function updateServer() {
   loadingUpdt.value = true;
   let data = new FormData();
   data.append('file', this.file);
@@ -223,9 +219,11 @@ function updateServer(ev) {
     .then(function (res) {
       alert('The file has been uploaded')
       loadingUpdt.value = false;
+      window.location.reload()
     })
     .catch((error) => {
-
+      alert('Please check the file size of your file.')
+      loadingUpdt.value = false;
     })
 }
 
@@ -239,7 +237,7 @@ function updateServer2(ev) {
   store.dispatch('systemRecordUpdate2', data)
     .then(function (res) {
       alert('The file has been archived!')
-
+      window.location.reload()
     })
     .catch((error) => {
       this.loading = false

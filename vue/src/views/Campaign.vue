@@ -9,7 +9,7 @@
     </div>
     <div class="w-full ">
       <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
-        <div v-for="(index, key) in candData" :key="key" class="mb-10 md:mb-8 bg-amber-200 rounded-xl">
+        <div v-for="(index, key) in candData" :key="key" class="mb-10 md:mb-8 bg-[#1da1f2] rounded-xl">
           <h2
             class="
         mb-4
@@ -25,7 +25,7 @@
             In Election: {{ index.elec_name }}
           </h2>
 
-          <p class="max-w-screen-md mx-auto text-center text-gray-500 md:text-lg uppercase">
+          <p class="max-w-screen-md mx-auto text-center text-white md:text-lg uppercase ">
             These candidates is running for {{ index.college_init }} elections
           </p>
           <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 py-2">
@@ -35,8 +35,8 @@
                      alt="photo">
               </div>
               <div class="w-full md:w-3/5 text-left p-6 md:p-4 space-y-2">
-                <p class="text-2xl text-white font-bold">Name: {{ index.cand_name }}</p>
-                <p class="text-m text-white font-bold">College: {{ index.coll_name }} | ({{ index.college_init }}) </p>
+                <p class="text-2xl text-black font-bold">Name: {{ index.cand_name }}</p>
+                <p class="text-m text-black font-bold">College: {{ index.coll_name }} | ({{ index.college_init }}) </p>
                 <p class="text-base leading-relaxed text-gray-900 font-normal font-bold">Running for:
                   {{ index.pos_name }}</p>
                 <p class="text-base leading-relaxed text-gray-900 font-normal font-bold">Partylist:

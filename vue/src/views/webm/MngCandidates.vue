@@ -47,6 +47,19 @@
         </span>
         </Warning>
 
+        <form class="px-2 py-2" @submit.prevent="searchIdNum">
+          <div class="grid grid-cols-2 gap-2">
+            <input v-model="searchId.idNum" id="idNum" name="idNum" type="number" required=""
+                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   placeholder="Enter ID"/>
+            <button type="submit"
+                    :disabled="loading"
+                    class="text-gray-900 bg-white w-40 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">
+              Find & Show ID
+            </button>
+          </div>
+        </form>
+
         <form class="w-full max-w-lg" @submit.prevent="createCandidate">
           <div class="flex justify-center">
             <img class="h-24 w-24 rounded-full mx-2 my-2" :src="this.imagePreview" alt="img"/>
@@ -58,15 +71,34 @@
              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="formFileLg" type="file">
             </div>
           </div>
+
           <div class="flex flex-wrap -mx-4 mb-6">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
-              Name:
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-lastname">
+              Last Name:
             </label>
             <input
-              v-model="name"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-first-lastname" type="text" placeholder="Full Name (First Name, Middle Initial, Last Name)"
+              v-model="lname"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              disabled id="grid-first-lastname" type="text" placeholder="Last Name (disabled, auto-filled by API)"
               required>
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                   for="grid-first-firstname">
+              First Name:
+            </label>
+            <input
+              v-model="fname"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              disabled id="grid-first-firstname" type="text" placeholder="First Name (disabled, auto-filled by API)"
+              required>
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-middlename">
+              Middle Name:
+            </label>
+            <input
+              v-model="mname"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              disabled id="grid-middlename" type="text" placeholder="Middle Name (disabled, auto-filled by API)"
+              required>
+
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-elections">
               Election:
             </label>
@@ -78,17 +110,16 @@
                 {{ infoCol.elec_name }}
               </option>
             </select>
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-College">
-              College:
+
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-college">
+              College (Initials):
             </label>
-            <select v-model="college_init"
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-College">
-              <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
-              <option v-for="(infoCol, index) in colleges" :key="index" v-bind:value="infoCol.initials">
-                {{ infoCol.coll_name }}
-              </option>
-            </select>
+            <input
+              v-model="college_init"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              disabled id="grid-college" type="text" placeholder="College (disabled, auto-filled by API)"
+              required>
+
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-party">
               Partylist:
             </label>
@@ -140,7 +171,8 @@
         </form>
       </div>
       <!--Table-->
-      <div class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
+      <div v-if="savedCandidates.length > 0"
+           class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
         <div>
           <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table
             left to right</label>
@@ -182,7 +214,7 @@
                     <tr v-for="(index, key) in savedCandidates" :key="index.id"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ index.cand_name }}
+                        {{ index.lname }}, {{ index.fname }} {{ index.mname }}
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         {{ index.college_init }}
@@ -201,7 +233,7 @@
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         <button @click="deleteCandidate(index)"
-                                class="uppercase text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
+                                class="uppercase text-white bg-red-500 hover:bg-gray-500 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
                           delete
                         </button>
                       </td>
@@ -214,6 +246,9 @@
           </div>
         </div>
       </div>
+      <div class="my-24" v-else>
+        <div class="font-bold text-2xl text-black uppercase">There's No election as for now...</div>
+      </div>
     </div>
   </div>
 </template>
@@ -221,7 +256,6 @@
 <script>
 import store from "../../store";
 import Warning from "../../components/Warning.vue";
-
 
 let colleges = [];
 let partylist = [];
@@ -237,56 +271,41 @@ let errorMsg = {
   message: ''
 }
 
-let people = {
-  name: '',
-  college_init: '',
-  election_id: '',
-  partylist_id: '',
-  position_id: '',
-  image: null,
-  description: '',
+function getImgInfo(string) {
+  return "http://localhost:8000/api/image_search/" + string
 }
 
 function getSelectData() {
   this.loading = true;
-  store.dispatch('getCollegesData')
+
+  store.dispatch('getPartylistData')
     .then((response) => {
       response.success.map(function (obj, i) {
-        colleges.push(obj);
+        partylist.push(obj);
       })
-      colleges = []
-      store.dispatch('getPartylistData')
+      partylist = []
+      store.dispatch('getElectionData')
         .then((response) => {
           response.success.map(function (obj, i) {
-            partylist.push(obj);
+            elections.push(obj);
           })
-          partylist = []
-          store.dispatch('getElectionData')
+          elections = []
+          store.dispatch('getPositionData')
             .then((response) => {
               response.success.map(function (obj, i) {
-                elections.push(obj);
+                positions.push(obj);
               })
-              elections = []
-              store.dispatch('getPositionData')
+              positions = []
+              store.dispatch('getSavedCandidates')
                 .then((response) => {
-                  response.success.map(function (obj, i) {
-                    positions.push(obj);
-                  })
-                  positions = []
-                  store.dispatch('getSavedCandidates')
-                    .then((response) => {
-                      response.success.map((function (obj, i) {
-                        savedCandidates.push(obj)
-                      }))
-                      savedCandidates = []
-                      this.loading = false
-                    })
-                    .catch((error) => {
-                      errorMsg.message = error.error
-                    })
+                  response.success.map((function (obj, i) {
+                    savedCandidates.push(obj)
+                  }))
+                  savedCandidates = []
+                  this.loading = false
                 })
                 .catch((error) => {
-                  console.log(error)
+                  errorMsg.message = error.error
                 })
             })
             .catch((error) => {
@@ -294,7 +313,7 @@ function getSelectData() {
             })
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error)
         })
     })
     .catch((error) => {
@@ -307,7 +326,6 @@ export default {
   components: {Warning},
   setup() {
     return {
-      people,
       colleges,
       getSelectData,
       partylist,
@@ -316,6 +334,7 @@ export default {
       serverResponse,
       errorMsg,
       savedCandidates,
+      getImgInfo
     }
   },
   data() {
@@ -324,16 +343,42 @@ export default {
       success: false,
       error: false,
       imagePreview: null,
-      name: '',
+      lname: '',
+      fname: '',
+      mname: '',
       college_init: '',
       election_id: '',
       partylist_id: '',
       position_id: '',
       image: {},
       description: '',
+      searchId: {
+        idNum: ''
+      }
     }
   },
   methods: {
+    searchIdNum() {
+      this.loading = true
+
+      store.dispatch('loadStudentSearch', this.searchId)
+        .then((response) => {
+
+          let studentsData = response.student
+
+          alert(response.success)
+          this.lname = studentsData.lname
+          this.fname = studentsData.fname
+          this.mname = studentsData.mname
+          this.college_init = studentsData.college_init
+
+          this.loading = false
+        })
+        .catch((error)=>{
+          alert('This student ID is not existing from the origin server')
+          this.loading = false
+        })
+    },
     fileHandle(e) {
       this.image = e.target.files[0]
       let reader = new FileReader()
@@ -354,7 +399,9 @@ export default {
       this.loading = true
       let data = new FormData()
 
-      data.append('name', this.name)
+      data.append('lname', this.lname)
+      data.append('fname', this.fname)
+      data.append('mname', this.mname)
       data.append('college_init', this.college_init)
       data.append('election_id', this.election_id)
       data.append('partylist_id', this.partylist_id)
@@ -368,6 +415,7 @@ export default {
           this.success = true
 
           alert(response.success)
+          window.location.reload()
           serverResponse.message = response.success
 
         })
@@ -388,8 +436,8 @@ export default {
           this.success = true
 
           alert(response.success)
+          window.location.reload()
           serverResponse.message = response.success
-
         }).catch((error) => {
         this.loading = false
         this.error = true

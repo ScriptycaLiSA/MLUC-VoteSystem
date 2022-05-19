@@ -10,9 +10,6 @@
       </div>
       <Warning v-if="errorMsg">
         {{ errorMsg }}
-        <router-link :to="{name: 'VoterCreate'}" class=" text-white text-md hover:text-blue-500">
-          Verify/Register here!
-        </router-link>
         <span
           @click="errorMsg=''"
           class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">

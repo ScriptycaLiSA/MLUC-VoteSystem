@@ -74,7 +74,7 @@ return [
         ],
         'voters' => [
             'driver' => 'eloquent',
-            'model' => App\Models\VoterAcctModel::class,
+            'model' => App\Models\VoterModel::class,
         ]
         // 'users' => [
         //     'driver' => 'database',

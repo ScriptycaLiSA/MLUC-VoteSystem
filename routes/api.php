@@ -61,6 +61,8 @@ Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function ()
 
     //Colleges
     Route::get('/colleges', [CollegeController::class, 'index']);
+    Route::post('/create_college', [CollegeController::class, 'createCollege']);
+    Route::post('/delete_college', [CollegeController::class, 'deleteCollegeRecord']);
     Route::get('/colleges_sorted', [CollegeController::class, 'sortedDataForColleges']);
 
     //Partylist

@@ -43,7 +43,9 @@ class CandidateControllers extends Controller
     public function createCandidate(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string',
+            'lname' => 'required|string',
+            'fname' => 'required|string',
+            'mname' => 'required|string',
             'college_init' => 'required|string',
             'election_id' => 'required',
             'partylist_id' => 'required',
@@ -60,7 +62,9 @@ class CandidateControllers extends Controller
         try {
             if (!$request == null) {
                 DB::table('candidate_models')->insert([
-                    'cand_name' => $request->name,
+                    'lname' => $request->lname,
+                    'fname' => $request->fname,
+                    'mname' => $request->mname,
                     'college_init' => $request->college_init,
                     'election_id' => $request->election_id,
                     'partylist_id' => $request->partylist_id,

@@ -24,7 +24,7 @@ class VotingController extends Controller
                 ->where('voter_id',$voterAcct['id'])
                 ->join('candidate_models','voting_results.candidate_id','=','candidate_models.id')
                 ->join('position_models','voting_results.position_id','=','position_models.id')
-                ->select('voting_results.*','candidate_models.cand_name','candidate_models.image','position_models.pos_name')
+                ->select('voting_results.*','candidate_models.lname','candidate_models.fname','candidate_models.mname','candidate_models.image','position_models.pos_name')
                 ->orderBy('voter_id')
                 ->get();
 

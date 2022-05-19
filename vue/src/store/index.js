@@ -230,6 +230,18 @@ const adminModule = {
         .then(({data})=>{
           return data;
         })
+    },
+    createCollegeData({commit}, collegeInfo){
+      return axiosClient.post('/create_college', collegeInfo)
+        .then(({data})=>{
+          return data;
+        })
+    },
+    deleteCollegeData({commit}, deleteInfo){
+      return axiosClient.post('/delete_college',deleteInfo)
+        .then(({data})=>{
+          return data;
+        })
     }
   },
   mutations: {

@@ -14,16 +14,14 @@ class CreatePositionController extends Controller
     public function __invoke(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'election_id' => 'required'
+            'name' => ['required']
         ]);
 
         if (!$data == null) {
             try {
                 DB::table('position_models')
                     ->insert([
-                        'pos_name' => $data['name'],
-                        'election_id' => $data['election_id']
+                        'pos_name' => $data['name']
                     ]);
                 return response([
                     'success' => 'Position has been inserted. Please restart the page!'

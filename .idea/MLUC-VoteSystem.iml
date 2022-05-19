@@ -139,5 +139,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="DMMMSU-VoteSystem" />
     <orderEntry type="module" module-name="MLUC-VoteSys-SingleLang" />
+    <orderEntry type="module" module-name="dmmmsu-voter-api" />
   </component>
 </module>

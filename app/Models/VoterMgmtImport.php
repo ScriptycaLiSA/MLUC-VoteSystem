@@ -14,9 +14,11 @@ class VoterMgmtImport implements ToModel, WithUpserts, WithUpsertColumns
     {
         return new VoterModel([
             'idNum'=>$row[0],
-            'fname'=>$row[1],
-            'lname'=>$row[2],
-            'college'=>$row[3]
+            'lname'=>$row[1],
+            'fname'=>$row[2],
+            'mname'=>$row[3],
+            'password'=>$row[4],
+            'college_init'=>$row[5],
         ]);
     }
 
@@ -25,7 +27,7 @@ class VoterMgmtImport implements ToModel, WithUpserts, WithUpsertColumns
      */
     public function upsertColumns(): array
     {
-        return ['fname','lname','college'];
+        return ['idNum','lname','fname','mname','college_init','password'];
     }
 
     public function uniqueBy()

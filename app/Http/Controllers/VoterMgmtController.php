@@ -14,14 +14,15 @@ class VoterMgmtController extends Controller
     //single search of voter record (optional feature)
     public function getVoterInfo($idNum)
     {
-        $voter = VoterAcctModel::where('idNum',$idNum)->first();
+        $voter = DB::table('voter_models')->where('idNum',$idNum)->first();
 
         if ($voter == null) {
             return response([
                 'errors' => 'This student ID is not existing from the origin server!'
-            ], 422);
+            ],404);
         }
         return response([
+            'success'=>'Data Loaded!',
             'student' => $voter
         ], 200);
     }
