@@ -65,17 +65,17 @@
           <div class="">
             <input
               v-model="fillFields.idNum"
-              class="appearance-none block w-full bg-slate-400 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-idNum" type="number" placeholder="Enter ID Number (disabled auto-fill by API):" required
               disabled>
             <input
               v-model="fillFields.fname"
-              class="appearance-none block w-full bg-slate-400 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-firstname" type="text" placeholder="Enter Firstname (disabled auto-fill by API):" required
               disabled>
             <input
               v-model="fillFields.lname"
-              class="appearance-none block w-full bg-slate-400 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-lastname" type="text" placeholder="Enter Lastname (disabled auto-fill by API):" required
               disabled>
             <input
