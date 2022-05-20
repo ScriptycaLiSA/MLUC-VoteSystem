@@ -76,6 +76,7 @@ class UtilityElection extends Controller
             ->join('position_models','candidate_models.position_id','=','position_models.id')
             ->select('candidate_models.*','position_models.pos_name')
             ->where('candidate_models.election_id', $elecId)
+            ->orderBy('position_models.pos_name')
             ->get();
 
         return response([

@@ -79,7 +79,7 @@
                           <tbody v-for="(i2, k2) in candTemp" :key="k2">
 
                           <tr
-                              class="bg-white border-b dark:bg-gray-200 dark:border-gray-100">
+                              class="bg-white border-b dark:bg-gray-200 dark:border-gray-100" v-for="(i1, k1) in posTemp" :key="k1">
                             <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-white">
                               <img class="object-cover w-12 h-12 rounded-full"
                                    :src="getImgInfo(i2.image)" alt=""/>
@@ -95,8 +95,6 @@
                                 <div v-if="i3.candidate_id===i2.id">
                                 {{ i3.votes }}
                                 </div>
-                                <div v-else-if="i2.position_id!==i3.position_id&&i3.candidate_id===i2.id" class="px-4 py-3 text-sm font-bold text-3xl justify-center text-gray-500 text-gray-900">0
-                              </div>
                               </div>
                             </td>
                           </tr>
