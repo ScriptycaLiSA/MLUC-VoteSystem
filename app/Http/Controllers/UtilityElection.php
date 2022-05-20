@@ -88,7 +88,7 @@ class UtilityElection extends Controller
 
     public static function findVoter($voterId)
     {
-        return DB::table('voter_acct_models')
+        return DB::table('voter_models')
             ->where('idNum', $voterId)
             ->first();
     }

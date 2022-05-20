@@ -78,23 +78,16 @@
               class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-lastname" type="text" placeholder="Enter Lastname (disabled auto-fill by API):" required
               disabled>
-            <input
-              v-model="fillFields.email"
-              class="appearance-none block w-full bg-gray-100 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              type="email" placeholder="Enter Email:" required>
 
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Select College:
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-college">
+            College (Initials):
             </label>
-            <select
+            <input
               v-model="fillFields.college_init"
-              class="appearance-none block w-full bg-gray-100 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-College">
-              <option disabled value="" class="uppercase">-- SELECT COLLEGE --</option>
-              <option v-for="(infoCol, index) in colleges" :key="index" v-bind:value="infoCol.initials">
-                {{ infoCol.coll_name }}
-              </option>
-            </select>
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              disabled id="grid-college" type="text" placeholder="College (disabled, auto-filled by API)"
+              required>
+
           </div>
           <div class="">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
@@ -140,7 +133,6 @@ let fillFields = {
   idNum: '',
   fname: '',
   lname: '',
-  email: '',
   college_init: '',
   password: ''
 }
@@ -204,6 +196,7 @@ export default {
           fillFields.fname = response.student.fname
           fillFields.lname = response.student.lname
           fillFields.email = response.student.email
+          fillFields.college_init = response.student.college_init
 
           this.loading = false
         })
@@ -223,6 +216,7 @@ export default {
 
           this.resetData()
           this.loading = false
+          window.location.reload()
         })
       .catch((error)=>{
         this.error = true

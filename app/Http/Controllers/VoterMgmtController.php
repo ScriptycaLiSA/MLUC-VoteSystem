@@ -49,23 +49,21 @@ class VoterMgmtController extends Controller
             'idNum'=>['required'],
             'fname' => ['required'],
             'lname' => ['required'],
-            'email' => ['required'],
             'college_init' => ['required'],
             'password' => ['required']
         ]);
 
         if (!$data == null) {
             if(!UtilityElection::findVoter($data['idNum']) == null){
-                DB::table('voter_acct_models')
+                DB::table('voter_models')
                     ->upsert([
                         [
                             'idNum'=> $data['idNum'],
                             'fname' => $data['fname'],
                             'lname' => $data['lname'],
-                            'email' => $data['email'],
                             'college_init' => $data['college_init'],
                             'password' => bcrypt($data['password'])]
-                    ], ['idNum'], ['fname','lname','email','college_init','password']);
+                    ], ['idNum'], ['fname','lname','college_init','password']);
 
                 return response([
                     'success'=>'The voter`s data has been updated. Please restart the page...'
