@@ -1,7 +1,7 @@
 <template>
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
-    <div class="bg-slate-200 shadow-xl 2xl:min-w-full 2xl:px-4 2xl:py-2">
+    <div class="bg-slate-100 2xl:min-w-full 2xl:px-4 2xl:py-2">
       <Warning v-if="success">
         {{ serverResponse.message }}
         <span
@@ -49,7 +49,7 @@
       <form class="px-2 py-2" @submit.prevent="searchStudent">
         <div class="grid grid-cols-2 gap-2  ">
           <input v-model="searchId.idNum" id="idNum" name="idNum" type="number" required=""
-                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                 class="appearance-none rounded-none relative block w-full px-4 xl:px-16 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                  placeholder="Enter ID"/>
           <button type="submit"
                   :disabled="loading"
@@ -59,13 +59,13 @@
         </div>
       </form>
 
-      <div class="grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-2">
+      <div class="px-1">
         <!-- -->
-        <form class="px-2 py-2" @submit.prevent="updateVoter">
+        <form class="px-1 py-1" @submit.prevent="updateVoter">
           <div class="">
             <input
               v-model="fillFields.idNum"
-              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-blue-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-idNum" type="number" placeholder="Enter ID Number (disabled auto-fill by API):" required
               disabled>
             <input
@@ -112,62 +112,6 @@
           </button>
         </form>
 
-        <div>
-          <label for="table" class="font-semibold text-black md:hidden lg:hidden xl:hidden 2xl:hidden">Slide the table
-            left to right</label>
-          <div id="table" class="flex flex-col mx-2">
-            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-                <div class="overflow-hidden shadow-md sm:rounded-lg">
-                  <table class="min-w-full">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
-                    <tr>
-                      <th scope="col"
-                          class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                        VOTER
-                      </th>
-                      <th scope="col"
-                          class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                        COLLEGE
-                      </th>
-                      <th scope="col"
-                          class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                        email
-                      </th>
-                      <th scope="col"
-                          class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                        action
-                      </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr v-for="(table, index) in students" :key="index"
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                      <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ table.fname }} {{ table.lname }}
-                      </td>
-                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{ table.college_init }}
-                      </td>
-                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{ table.email }}
-                      </td>
-                      <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                        <button type="button"
-                                @click="deleteVoterAccount(table)"
-                                class="text-white bg-red-500 hover:bg-gray-500 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2">
-                          DELETE
-                        </button>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
