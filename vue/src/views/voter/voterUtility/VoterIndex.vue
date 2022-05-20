@@ -90,7 +90,7 @@
               <div class="sm:text-md md:text-4xl px-2">You have already voted!</div>
               <!--table of voted list here -->
               <div class="flex flex-col text-2xl sm:text-md mb-2 text-left py-4 uppercase">You have voted:</div>
-              <div id="table2" class="grid grid-cols-1 w-full rounded-md mx-2 xl:mx-4 2xl:mx-2">
+              <div id="table2" class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
                 <div class="overflow-x-auto sm:mx-6 lg:mx-4 xl:mx-16">
                   <div class="inline-block py-4 min-w-full sm:px-6 lg:px-2">
                     <div class="overflow-hidden shadow-md sm:rounded-lg">
