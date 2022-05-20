@@ -11,60 +11,62 @@
 
           <!-- div v-if wrap -->
           <div v-if="candTemp.length > 1" class="grid-cols-1 2xl:grid-cols-2 px-2 py-4 gap-2">
-            <label class="mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex items-right"
-                   for="dataTable">
+            <label class="mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex items-right">
               showing the data active voting results from your college:
             </label>
-            <div>
-              <div id="dataTable" class="flex flex-cols flex-auto w-full mb-10 overflow-hidden rounded-lg shadow-xl my-4"
-                   v-for="(i1, k1) in posTemp" :key="k1">
-                <table class="w-full flex-auto">
-                  <thead>
-                  <tr
-                    class="flex justify-center text-md font-medium tracking-wide text-left text-gray-900 uppercase ">
-                    <th class="px-4 py-3"></th>
-                  </tr>
-                  </thead>
+            <div class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
+              <div id="table" class="flex flex-col px-2 sm:px-0.1">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                  <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                    <div class="overflow-hidden shadow-md sm:rounded-lg">
+                      <table class="min-w-full">
+                        <thead class="border-gray-600 shadow-2xl">
+                        <tr>
+                          <th scope="col"
+                              class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                            image
+                          </th>
+                          <th scope="col"
+                              class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                            name
+                          </th>
+                          <th scope="col"
+                              class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                            position
+                          </th>
+                          <th scope="col"
+                              class="py-3 px-6 text-xs font-semibold tracking-wider text-center text-gray-800 uppercase dark:text-gray-700">
+                            votes
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody v-for="(i2, k2) in candTemp" :key="k2">
 
-                  <thead>
-                  <tr
-                    class="text-xs font-medium tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-gray-600">
-                    <th class="px-4 py-3">Name</th>
-                    <th class="px-4 py-3">Position</th>
-                    <th class="px-4 py-3">Votes</th>
-                  </tr>
-                  </thead>
-                  <tbody class="bg-white" v-for="(i2, k2) in candTemp" :key="k2">
-                  <tr class="text-gray-700">
-                    <td class="px-4 py-3 border">
-                      <div class="flex items-center text-sm">
-                        <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full"
-                               :src="getImgInfo(i2.image)" alt="" loading="lazy"/>
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
-                        <div>
-                          <p class="font-semibold text-2xl text-black">{{ i2.lname }}, {{i2.fname}} {{i2.mname}}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 border">
-                      <div class="flex items-center text-sm">
-                        <div>
-                          <p class="font-semibold text-2xl text-black">{{i2.pos_name}}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <div class="" v-for="(i3, k3) in resTemp" :key="i3.id">
-                      <div class="px-4 py-3 text-sm border font-bold text-3xl justify-center"
-                           v-if="i3.candidate_id===i2.id">
-                        {{ i3.votes }}
-                      </div>
-                      <div class="px-4 py-3 text-sm border font-bold text-3xl justify-center" v-else-if="i2.position_id===i3.position_id&&i3.candidate_id===i2.id">0</div>
+                        <tr
+                          class="border-b dark:bg-gray-100 dark:border-gray-100" v-for="(i1, k1) in posTemp" :key="k1">
+                          <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap dark:text-white">
+                            <img class="object-cover w-12 h-12 rounded-full"
+                                 :src="getImgInfo(i2.image)" alt=""/>
+                          </td>
+                          <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap ">
+                            {{ i2.lname }}, {{ i2.fname }} {{ i2.mname }}
+                          </td>
+                          <td class="py-4 px-6 text-sm text-gray-500 text-gray-900 whitespace-nowrap ">
+                            {{ i2.pos_name }}
+                          </td>
+                          <td class="px-4 py-3 text-sm font-bold text-3xl justify-center text-gray-500 text-gray-900">
+                            <div v-for="(i3, k3) in resTemp" :key="k3">
+                              <div v-if="i3.candidate_id===i2.id">
+                                {{ i3.votes }}
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
                     </div>
-                  </tr>
-                  </tbody>
-                </table>
+                  </div>
+                </div>
               </div>
             </div>
 

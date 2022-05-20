@@ -2,7 +2,7 @@
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
     <div class="">
-      <div class="flex font-bold pl-2 text-5xl">
+      <div id="headings" class="flex font-bold pl-2 text-5xl">
         <p>DASHBOARD</p>
       </div>
 
@@ -18,7 +18,7 @@
                       class="appearance-none block w-full rounded-md bg-gray-200 text-gray-700 border border-grey-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-election">
                 <option disabled value="" class="uppercase">-- SELECT ELECTION --</option>
-                <option v-for="(infoCol, index) in elections" :key="index" v-bind:value="infoCol.id">
+                <option v-for="(infoCol, index) in elections" :key="index" v-bind:value="infoCol">
                   {{ infoCol.elec_name }}
                 </option>
               </select>
@@ -48,6 +48,10 @@
                     PRINT RESULTS
                   </button>
                 </div>
+              </div>
+
+              <div id="banner_name" class="flex font-bold pl-2 text-5xl">
+                <p>{{electionId.election_id.elec_name}}</p>
               </div>
               <!--Table Stubents-->
               <div class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
@@ -186,7 +190,6 @@ export default {
 
       store.dispatch('getElectionResult', electionId)
         .then((response) => {
-          this.errorMessage.error = ''
           this.posTemp = []
           this.resTemp = []
           this.candTemp = []
@@ -198,6 +201,7 @@ export default {
           this.candTemp = response.success.original.candidate
 
           this.loading = false
+          this.errorMessage.error = ''
         })
         .catch((error) => {
           this.loading = false
@@ -228,7 +232,15 @@ export default {
     font-family: Helvetica, Arial, sans-serif;
   }
 
+  #headings {
+    display: none;
+  }
+
   button {
+    display: none;
+  }
+
+  select {
     display: none;
   }
 
@@ -274,7 +286,6 @@ export default {
 .fade-leave-active {
   transition: opacity 0.5s ease;
 }
-
 
 .fade-enter-from,
 .fade-leave-to {
