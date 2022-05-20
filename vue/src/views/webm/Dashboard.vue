@@ -54,7 +54,7 @@
                 <p>{{electionId.election_id.elec_name}}</p>
               </div>
               <!--Table Stubents-->
-              <div class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 min-w-screen gap-2">
+              <div class="bg-white-50 rounded-lg grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 min-w-screen gap-2">
                 <div id="table" class="flex flex-col px-2 sm:px-0.1">
                   <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
