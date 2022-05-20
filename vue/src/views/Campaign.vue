@@ -35,7 +35,7 @@
                      alt="photo">
               </div>
               <div class="w-full md:w-3/5 text-left p-6 md:p-4 space-y-2">
-                <p class="text-2xl text-black font-bold">Name: {{ index.cand_name }}</p>
+                <p class="text-2xl text-black font-bold">Name: {{ index.lname }}, {{index.fname}} {{index.mname}}</p>
                 <p class="text-m text-black font-bold">College: {{ index.coll_name }} | ({{ index.college_init }}) </p>
                 <p class="text-base leading-relaxed text-gray-900 font-normal font-bold">Running for:
                   {{ index.pos_name }}</p>
