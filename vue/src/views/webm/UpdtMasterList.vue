@@ -59,7 +59,7 @@
         <div>
           <h1 class="text-2xl pr-20 py-6">Step 1:</h1>
           <button
-            class="uppercase flex-auto mx-10 block text-white bg-slate-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="uppercase flex-auto mx-10 block text-white bg-[#1da1f2]/90 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             @click="downloadMasterListFile">Download the Master List File Here!
           </button>
           <h1 class="text-2xl pr-20 py-6">Step 2:</h1>
@@ -91,7 +91,7 @@
                 <button
                   :disabled="loadingUpdt"
                   type="submit"
-                  class="uppercase flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  class="uppercase flex-auto mx-10 block text-white bg-[#1da1f2]/90 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   <svg v-if="loadingUpdt" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                        xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,7 @@
                 <button
                   :disabled="loadingUpdt"
                   type="submit"
-                  class="uppercase flex-auto mx-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  class="uppercase flex-auto mx-10 block text-white bg-[#1da1f2]/90 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   <svg v-if="loadingUpdt" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                        xmlns="http://www.w3.org/2000/svg"

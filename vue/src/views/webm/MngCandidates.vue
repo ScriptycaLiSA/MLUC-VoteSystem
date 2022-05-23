@@ -233,7 +233,7 @@
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         <button @click="deleteCandidate(index)"
-                                class="uppercase text-white bg-red-500 hover:bg-gray-500 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center items-center dark:focus:ring-[#1da1f2]/55">
+                                class="uppercase text-white bg-red-500 hover:bg-[#1da1f2]/90 focus:ring-4 focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center items-center dark:focus:ring-[#1da1f2]/55">
                           delete
                         </button>
                       </td>
