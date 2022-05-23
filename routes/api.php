@@ -39,11 +39,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::post('/adminLogin', [AuthController::class, 'adminLogin']); //working
 
 
-Route::post('/make_admin', [AuthController::class, 'register']); //working
+
 Route::middleware(['auth:sanctum', 'abilities:access-admin'])->group(function () {
     /*  Administration Control
     *  This part contains get methods for elections
     */
+    Route::post('/make_admin', [AuthController::class, 'register']); //working
     //Candidate functions
     Route::get('/get_candidates', [CandidateControllers::class, 'getRecords']);
     Route::post('/create_candidate', [CandidateControllers::class, 'createCandidate']);

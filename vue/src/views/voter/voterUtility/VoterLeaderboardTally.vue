@@ -2,7 +2,7 @@
   <div id="axiosForm">
     <div class="loader" v-if="loading"></div>
     <div class=" min-h-screen ">
-      <div class="flex font-bold pl-2 text-5xl">
+      <div class="flex font-bold pl-2 text-4xl">
         <p>LEADERBOARD</p>
       </div>
 
